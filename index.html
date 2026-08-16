@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Flow Therapy, trio musical martégual. Musique originale, actualités, réseaux sociaux et dossier de presse.">
+  <meta name="description" content="Flow Therapy, trio musical martégual. Musique originale, actualités, galerie média et réseaux sociaux.">
   <meta name="theme-color" content="#fbf8f2">
   <title>Flow Therapy</title>
   <link rel="icon" href="assets/logo_transparent.png" type="image/png">
-  <link rel="stylesheet" href="styles.css?v=20260816-social-spacing">
+  <link rel="stylesheet" href="styles.css?v=20260816-media-gallery">
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js" defer></script>
   <script type="module" src="app.js"></script>
 </head>
@@ -15,6 +15,36 @@
   <main id="app" class="page" aria-live="polite">
     <p class="loading">Chargement de Flow Therapy…</p>
   </main>
+
+  <dialog id="media-dialog" class="media-dialog" aria-labelledby="media-viewer-title">
+    <div class="media-viewer">
+      <header class="media-viewer-header">
+        <div>
+          <p id="media-counter" class="media-counter" aria-live="polite"></p>
+          <h2 id="media-viewer-title"></h2>
+        </div>
+        <div class="media-viewer-tools">
+          <button id="media-info" class="media-tool" type="button" aria-expanded="false" aria-controls="media-meta">Infos</button>
+          <button id="media-close" class="media-close" type="button" aria-label="Fermer la galerie">×</button>
+        </div>
+      </header>
+      <div class="media-stage">
+        <button id="media-prev" class="media-arrow media-prev" type="button" aria-label="Média précédent">‹</button>
+        <div id="media-visual" class="media-viewer-visual"></div>
+        <button id="media-next" class="media-arrow media-next" type="button" aria-label="Média suivant">›</button>
+      </div>
+      <div id="media-meta" class="media-meta" hidden>
+        <dl>
+          <div><dt>Type</dt><dd id="media-type"></dd></div>
+          <div><dt>Format</dt><dd id="media-ratio"></dd></div>
+          <div><dt>Date</dt><dd id="media-date"></dd></div>
+          <div><dt>Crédit</dt><dd id="media-credit"></dd></div>
+        </dl>
+        <p id="media-description"></p>
+      </div>
+    </div>
+  </dialog>
+
   <dialog id="qr-dialog" class="qr-dialog" aria-labelledby="qr-title">
     <button id="qr-close" class="qr-close" type="button" aria-label="Fermer le QR code">×</button>
     <div class="qr-content">
