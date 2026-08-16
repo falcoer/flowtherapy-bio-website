@@ -2,6 +2,16 @@
 
 Site public de type « link in bio » / one-page website pour Flow Therapy.
 
+## Roadmap
+
+La convergence vers le design cible Light / Dark est suivie dans :
+
+```text
+ROADMAP.md
+```
+
+La roadmap détaille les jalons, la checklist d'implémentation, les critères de sortie et la définition de Done globale.
+
 ## Modifier le contenu
 
 Tous les textes, liens sociaux, liens presse et l'URL publique sont centralisés dans :
@@ -19,6 +29,7 @@ Le HTML ne contient pas de contenu éditorial statique. `app.js` charge la confi
 ├── .github/workflows/pages.yml
 ├── assets/logo.svg
 ├── config/site.json
+├── ROADMAP.md
 ├── app.js
 ├── index.html
 └── styles.css
