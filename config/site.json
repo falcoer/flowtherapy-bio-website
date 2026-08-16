@@ -1,8 +1,81 @@
 {
-  "site":{"name":"Flow Therapy","tagline":"Flow Therapy, trio martégual, compose une musique qui fait voyager, rassemble et touche.","url":"https://falcoer.github.io/flowtherapy-bio-website/","location":"Martigues, France","copyright":"© 2026 Flow Therapy. Tous droits réservés."},
-  "hero":{"lines":["SENSIBLE.","INTENSE.","VIVANT."],"signature":"Musique · Énergie · Émotion"},
-  "navigation":[{"label":"Accueil","href":"#accueil"},{"label":"Le groupe","href":"#groupe"},{"label":"Presse","href":"#presse"},{"label":"Contact","href":"#contact"}],
-  "socials":[{"label":"Instagram","url":"https://www.instagram.com/flowtherapymusic/","icon":"instagram"},{"label":"YouTube","url":"https://www.youtube.com/@FlowTherapyMusic","icon":"youtube"}],
-  "about":{"title":"Le groupe","paragraphs":["Né de la rencontre entre Betty, Jennifer et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.","Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.","À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.","En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."]},
-  "press":{"title":"Dossier de presse","items":[{"title":"Lancement de la saison","source":"Facebook","url":"https://www.facebook.com/reel/1030974076268187"},{"title":"Annonce de la victoire au Tremplin Music’al","source":"Facebook","url":"https://www.facebook.com/watch/?v=1572388711273184"},{"title":"Flow Therapy remporte le prix intergénérationnel","source":"La Provence","url":"https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]}
+  "site": {
+    "name": "Flow Therapy",
+    "tagline": "Flow Therapy, trio martégual, compose une musique qui fait voyager, rassemble et touche.",
+    "url": "https://falcoer.github.io/flowtherapy-bio-website/",
+    "location": "Martigues, France",
+    "copyright": "© 2026 Flow Therapy. Tous droits réservés."
+  },
+  "hero": {
+    "lines": [
+      "SENSIBLE.",
+      "INTENSE.",
+      "VIVANT."
+    ],
+    "signature": "Musique · Énergie · Émotion"
+  },
+  "navigation": [
+    {
+      "label": "Accueil",
+      "href": "#accueil"
+    },
+    {
+      "label": "Le groupe",
+      "href": "#groupe"
+    },
+    {
+      "label": "Presse",
+      "href": "#presse"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
+  ],
+  "socials": [
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/flowtherapymusic/",
+      "icon": "instagram"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@FlowTherapyMusic",
+      "icon": "youtube"
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/reel/1030974076268187",
+      "icon": "facebook"
+    }
+  ],
+  "about": {
+    "title": "Le groupe",
+    "paragraphs": [
+      "Né de la rencontre entre Betty, Jennifer et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
+      "Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.",
+      "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.",
+      "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
+    ]
+  },
+  "press": {
+    "title": "Dossier de presse",
+    "items": [
+      {
+        "title": "Lancement de la saison",
+        "source": "Facebook",
+        "url": "https://www.facebook.com/reel/1030974076268187"
+      },
+      {
+        "title": "Annonce de la victoire au Tremplin Music’al",
+        "source": "Facebook",
+        "url": "https://www.facebook.com/watch/?v=1572388711273184"
+      },
+      {
+        "title": "Flow Therapy remporte le prix intergénérationnel",
+        "source": "La Provence",
+        "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"
+      }
+    ]
+  }
 }
