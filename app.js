@@ -1,123 +1,15 @@
-const iconSvg = {
-  instagram: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
-  youtube: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8.2a3 3 0 0 0-2.1-2.1C17 5.6 12 5.6 12 5.6s-5 0-6.9.5A3 3 0 0 0 3 8.2 31 31 0 0 0 2.5 12 31 31 0 0 0 3 15.8a3 3 0 0 0 2.1 2.1c1.9.5 6.9.5 6.9.5s5 0 6.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-3.8 31 31 0 0 0-.5-3.8Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m10 9 5 3-5 3Z" fill="currentColor"/></svg>'
-};
-
-function externalLink(url, label, className = '') {
-  return `<a class="${className}" href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
-}
-
-function renderSocials(socials) {
-  return socials.map(({ label, url, icon }) => `
-    <a class="social-card" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${label}">
-      <span class="social-icon">${iconSvg[icon] ?? ''}</span>
-      <span>${label}</span>
-      <span class="arrow" aria-hidden="true">↗</span>
-    </a>`).join('');
-}
-
-function renderPress(items) {
-  return items.map(({ title, source, url }) => `
-    <article class="press-card">
-      <p class="press-source">${source}</p>
-      <h3>${title}</h3>
-      ${externalLink(url, 'Consulter', 'text-link')}
-    </article>`).join('');
-}
-
-function renderPage(config) {
-  const { site, hero, socials, about, press } = config;
-  document.title = `${site.name} — ${site.tagline}`;
-
-  document.querySelector('#app').innerHTML = `
-    <header class="hero">
-      <div class="brand-row">
-        <img class="brand-logo" src="assets/logo.svg" alt="${site.name}">
-        <button id="qr-open" class="qr-trigger" type="button" aria-label="Afficher le QR code de partage" title="Partager par QR code">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zm10 0h6v6h-6zM4 14h6v6H4zm11 0h2v2h-2zm3 0h2v5h-2zm-3 4h2v2h-2zm-3-4h2v2h-2zm0 4h2v2h-2z" fill="currentColor"/></svg>
-        </button>
-      </div>
-      <div class="hero-copy">
-        <p class="eyebrow">${hero.eyebrow}</p>
-        <h1>${hero.title}</h1>
-        <p class="hero-subtitle">${hero.subtitle}</p>
-        <p class="tagline">${site.tagline}</p>
-      </div>
-      <div class="social-grid">${renderSocials(socials)}</div>
-    </header>
-
-    <section class="content-section about-section">
-      <p class="section-kicker">${site.location}</p>
-      <h2>${about.title}</h2>
-      <div class="prose">${about.paragraphs.map(paragraph => `<p>${paragraph}</p>`).join('')}</div>
-    </section>
-
-    <section class="content-section">
-      <p class="section-kicker">Actualités et reconnaissance</p>
-      <h2>${press.title}</h2>
-      <div class="press-grid">${renderPress(press.items)}</div>
-    </section>
-
-    <footer>
-      <img src="assets/logo.svg" alt="" class="footer-logo">
-      <p>${site.copyright}</p>
-    </footer>`;
-
-  setupQr(site.url);
-}
-
-function setupQr(url) {
-  const dialog = document.querySelector('#qr-dialog');
-  const openButton = document.querySelector('#qr-open');
-  const closeButton = document.querySelector('#qr-close');
-  const target = document.querySelector('#qr-code');
-  document.querySelector('#qr-url').textContent = url;
-
-  let generated = false;
-  const generateQr = () => {
-    if (generated || typeof QRCode === 'undefined') return;
-    target.innerHTML = '';
-    new QRCode(target, {
-      text: url,
-      width: 280,
-      height: 280,
-      colorDark: '#11131a',
-      colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.H
-    });
-    generated = true;
-  };
-
-  openButton.addEventListener('click', () => {
-    generateQr();
-    dialog.showModal();
-    requestAnimationFrame(() => dialog.classList.add('is-open'));
-  });
-
-  const close = () => {
-    dialog.classList.remove('is-open');
-    setTimeout(() => dialog.close(), 220);
-  };
-
-  closeButton.addEventListener('click', close);
-  dialog.addEventListener('click', event => {
-    if (event.target === dialog) close();
-  });
-  dialog.addEventListener('cancel', event => {
-    event.preventDefault();
-    close();
-  });
-}
-
-async function init() {
-  try {
-    const response = await fetch('config/site.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Configuration inaccessible (${response.status})`);
-    renderPage(await response.json());
-  } catch (error) {
-    console.error(error);
-    document.querySelector('#app').innerHTML = '<p class="error">Le contenu du site ne peut pas être chargé pour le moment.</p>';
-  }
-}
-
-init();
+const ASSET='https://raw.githubusercontent.com/falcoer/flowtherapy-animation-website/main/assets/';
+const icons={instagram:'◎',youtube:'▶'};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(config){const {site,hero,navigation,socials,about,press}=config;document.title=`${site.name} — ${hero.lines.join(' ')}`;document.querySelector('#app').innerHTML=`
+<header id="accueil" class="home">
+  <nav class="nav"><img class="logo" src="${ASSET}ChatGPT%20Image%2028%20mars%202026%20%C3%A0%2022_18_28.png" alt="Flow Therapy"><div class="links">${navigation.map(n=>`<a href="${n.href}">${esc(n.label)}</a>`).join('')}</div><div class="tools"><button id="qr-open" class="icon-btn" aria-label="Partager par QR code">▦</button><button id="theme" class="theme" aria-label="Changer de thème"><span>☀</span><span>☾</span></button></div></nav>
+  <div class="hero-grid"><div class="copy"><h1>${hero.lines.map((l,i)=>`<span class="line l${i+1}">${esc(l)}</span>`).join('')}</h1><p>${esc(site.tagline)}</p><div class="actions"><a class="primary" href="${socials[1].url}" target="_blank" rel="noopener">▶ ÉCOUTER</a><a class="secondary" href="#presse">PRESSE</a></div></div>
+  <div class="art"><div class="watermark"></div><div class="alpacas"><img src="${ASSET}alpaga1.png" alt=""><img src="${ASSET}alpaga2.png" alt=""><img src="${ASSET}alpaga3.png" alt=""></div><div class="brush">${esc(hero.signature)}</div><div class="socials">${socials.map(s=>`<a class="social ${s.icon}" href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}">${icons[s.icon]}</a>`).join('')}</div></div></div>
+</header>
+<section id="groupe" class="section"><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
+<section id="presse" class="section"><p class="kicker">Actualités & reconnaissance</p><h2>${esc(press.title)}</h2><div class="press-grid">${press.items.map(x=>`<a class="press-card" href="${x.url}" target="_blank" rel="noopener"><small>${esc(x.source)}</small><strong>${esc(x.title)}</strong><span>Consulter ↗</span></a>`).join('')}</div></section>
+<footer id="contact"><strong>Flow Therapy</strong><span>${esc(site.copyright)}</span>${socials.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${s.label}</a>`).join('')}</footer>`;setupTheme();setupQr(site.url)}
+function setupTheme(){const b=document.querySelector('#theme');const saved=localStorage.getItem('ft-theme');if(saved)document.documentElement.dataset.theme=saved;b.onclick=()=>{const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;localStorage.setItem('ft-theme',next)}}
+function setupQr(url){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close'),t=document.querySelector('#qr-code');document.querySelector('#qr-url').textContent=url;let done=false;o.onclick=()=>{if(!done&&window.QRCode){new QRCode(t,{text:url,width:280,height:280,correctLevel:QRCode.CorrectLevel.H});done=true}d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'))};const close=()=>{d.classList.remove('is-open');setTimeout(()=>d.close(),180)};c.onclick=close;d.onclick=e=>{if(e.target===d)close()}}
+fetch('config/site.json',{cache:'no-store'}).then(r=>r.json()).then(render).catch(e=>{console.error(e);document.querySelector('#app').innerHTML='<p class="error">Le contenu du site ne peut pas être chargé.</p>'});
