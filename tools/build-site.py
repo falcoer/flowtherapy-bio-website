@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
 import shutil
@@ -15,7 +16,7 @@ DIST = ROOT / "dist"
 
 FONT_OUTPUTS = {
     "fonts/bangers/Bangers-Regular.ttf": "bangers-regular.woff2",
-    "fonts/inter/Inter-Variable.ttf": "inter-variable.woff2",
+    "fonts/inter/Inter-Variable.ttf.gz": "inter-variable.woff2",
     "fonts/kalam/Kalam-Regular.ttf": "kalam-regular.woff2",
     "fonts/kalam/Kalam-Bold.ttf": "kalam-bold.woff2",
 }
@@ -65,7 +66,14 @@ def build_assets(manifest: dict) -> list[dict]:
     for source_name, output_name in FONT_OUTPUTS.items():
         source = SOURCE / source_name
         output = output_fonts / output_name
-        woff2.compress(str(source), str(output))
+        if source.suffix == ".gz":
+            unpacked = DIST / source.stem
+            with gzip.open(source, "rb") as compressed, unpacked.open("wb") as target:
+                shutil.copyfileobj(compressed, target)
+            woff2.compress(str(unpacked), str(output))
+            unpacked.unlink()
+        else:
+            woff2.compress(str(source), str(output))
         records.append({"source": source_name, "output": f"assets/fonts/{output_name}", "mode": "woff2", "sha256": sha256(output), "bytes": output.stat().st_size})
 
     for family in ("bangers", "inter", "kalam"):
