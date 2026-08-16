@@ -203,16 +203,57 @@ Objectif : passer d'un prototype graphique à une page publiable.
 
 Objectif : conserver une landing page légère malgré les illustrations.
 
-- [ ] Convertir les PNG lourds en WebP/AVIF lorsqu'approprié, en conservant les sources maîtres si nécessaire.
+### R11.1 — Périmètre de la première optimisation
+
+- [x] Établir la référence Lighthouse initiale : 17 requêtes, 19,76 Mo transférés, Performance 64 mobile / 65 desktop.
+- [ ] Retirer du chemin de chargement runtime les trois images `alpaga*-nu.png`.
+- [ ] Conserver les alpagas nus comme sources de travail, sans les convertir ni les optimiser dans ce premier lot.
+- [ ] Limiter le premier lot aux trois alpagas costumés, au logo, au watermark urbain et aux polices.
+- [ ] Fixer un budget de poids par asset et un budget global avant conversion.
+
+### R11.2 — Polices locales et chargement progressif
+
+- [ ] Remplacer l'import Google Fonts par des déclarations `@font-face` servies depuis le dépôt.
+- [ ] Vérifier les licences et conserver localement les fichiers sources nécessaires.
+- [ ] Générer des WOFF2 sous-ensemblés aux glyphes réellement utilisés, y compris les accents français.
+- [ ] Supprimer les graisses et variantes inutilisées ; évaluer une police variable lorsqu'elle est plus légère.
+- [ ] Utiliser `font-display: swap` avec une pile de polices système de repli métriquement proche.
+- [ ] Précharger uniquement la ou les faces indispensables au premier écran.
+- [ ] Charger les autres faces à la demande après le rendu critique, sans provoquer de déplacement visible.
+- [ ] Vérifier l'absence de requête vers `fonts.googleapis.com` et `fonts.gstatic.com`.
+
+### R11.3 — Compression et quantification des images
+
+- [ ] Appliquer d'abord une optimisation réellement sans perte aux PNG maîtres : suppression des métadonnées et recompression DEFLATE/Huffman.
+- [ ] Distinguer explicitement la compression sans perte de la quantification de palette, qui peut modifier les couleurs.
+- [ ] Tester une quantification perceptuelle contrôlée lorsque la réduction sans perte est insuffisante.
+- [ ] Tester WebP et AVIF avec transparence pour les assets publiés, en conservant un fallback approprié.
+- [ ] Considérer la transformée en cosinus discret comme une compression avec perte ; régler la qualité à partir de comparaisons visuelles et de métriques SSIM/Butteraugli.
+- [ ] Générer plusieurs dimensions et densités avec `srcset` / `sizes` pour éviter de transférer du 1536 × 1024 sur mobile.
+- [ ] Conserver les sources maîtres séparément des variantes optimisées utilisées par le site.
+- [ ] Vérifier les halos, aplats, dégradés, contours de détourage et transparence après conversion.
+
+### R11.4 — Stratégie de chargement
+
+- [ ] Ne pas appliquer `loading="lazy"` aux images critiques visibles dans le hero.
+- [ ] Rendre l'image LCP découvrable depuis le HTML et utiliser `fetchpriority="high"` seulement pour elle.
+- [ ] Utiliser `loading="lazy"` et `decoding="async"` pour les images réellement sous la ligne de flottaison.
+- [ ] Ne pas télécharger les états visuels cachés avant qu'ils soient nécessaires.
 - [ ] Fournir des dimensions intrinsèques aux images pour limiter le CLS.
 - [ ] Précharger uniquement les assets critiques du hero.
-- [ ] Charger paresseusement les médias sous la ligne de flottaison.
-- [ ] Héberger localement les polices nécessaires lorsque leur licence le permet.
+- [ ] Évaluer le chargement différé du script QR, actuellement inutile avant l'ouverture de la modale.
+
+### R11.5 — Validation et budgets
+
+- [ ] Mesurer le poids à froid et à chaud après chaque lot.
+- [ ] Rejouer Lighthouse mobile et desktop avec la skill `audit-web-runtime`.
+- [ ] Comparer le poids, FCP, LCP, TBT et CLS à la référence initiale.
+- [ ] Vérifier les variantes Light/Dark et les largeurs 320, 375, 390, 430, 768 et 1440 px.
+- [ ] Vérifier le comportement sur Safari/iOS avec les fallbacks PNG/WebP.
 - [ ] Supprimer les dépendances JavaScript inutiles.
-- [ ] Mesurer Lighthouse mobile et desktop.
 - [ ] Viser Performance ≥ 90 sur la page statique en conditions normales.
 
-**Critère de sortie :** hero affiché rapidement sans saut majeur de mise en page.
+**Critère de sortie :** réduction majeure du transfert initial sans perte visuelle perceptible, hero affiché rapidement sans saut de mise en page et aucune régression sur les navigateurs ciblés.
 
 ---
 
