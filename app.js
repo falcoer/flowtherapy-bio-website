@@ -13,7 +13,7 @@ function mediaVisual(item,index,viewer=false){
   const ratioStyle=/^\d+:\d+$/.test(String(item.ratio))?` style="--media-ratio:${item.ratio.replace(':','/')}"`:'';
   const content=item.src
     ? `<img src="${esc(item.src)}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async">`
-    : `<div class="media-placeholder tone-${index%3+1}" aria-hidden="true"><span>FLOW<br>THERAPY</span><small>${esc(item.ratio)}</small></div>`;
+    : `<div class="media-placeholder tone-${index%3+1}" aria-hidden="true"></div>`;
   return `<div class="media-frame ${ratio}"${ratioStyle}>${content}</div>`;
 }
 
@@ -29,7 +29,7 @@ function render(config){
   <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca"><img class="alpaca-nude" src="${ASSET}alpaga${n}-nu.png" alt=""><img class="alpaca-costumed" src="${ASSET}alpaga${n}.png" alt=""></div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
 </header>
 <section id="groupe" class="section"><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
-<section id="medias" class="section media-section"><p class="kicker">Photos & contenus</p><div class="media-heading"><h2>${esc(media?.title||'Médias')}</h2><p>${esc(media?.intro||'')}</p></div><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}<span class="media-card-copy"><small>${esc(item.type)} · ${esc(item.ratio)}</small><strong>${esc(item.title)}</strong><span>Voir en grand <b aria-hidden="true">↗</b></span></span></button>`).join('')}</div></section>
+<section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
 <footer id="contact"><strong>Flow Therapy</strong><span>${esc(site.copyright)}</span>${socials.map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${esc(s.label)}</a>`).join('')}</footer>`;
   setupTheme();
   setupQr(site.url);
