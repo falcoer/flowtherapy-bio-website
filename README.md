@@ -14,13 +14,13 @@ La roadmap détaille les jalons, la checklist d'implémentation, les critères d
 
 ## Modifier le contenu
 
-Tous les textes, liens sociaux, liens presse et l'URL publique sont centralisés dans :
+Tous les textes, liens sociaux, contenus médias et l'URL publique sont centralisés dans :
 
 ```text
 config/site.json
 ```
 
-Le HTML ne contient pas de contenu éditorial statique. `app.js` charge la configuration et construit la page.
+Le HTML ne contient pas de contenu éditorial statique. `app.js` charge la configuration et construit la page, la galerie média et sa visionneuse.
 
 ## Arborescence
 
