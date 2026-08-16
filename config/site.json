@@ -7,47 +7,19 @@
     "copyright": "© 2026 Flow Therapy. Tous droits réservés."
   },
   "hero": {
-    "lines": [
-      "SENSIBLE.",
-      "INTENSE.",
-      "VIVANT."
-    ],
+    "lines": ["SENSIBLE.", "INTENSE.", "VIVANT."],
     "signature": "Musique · Énergie · Émotion"
   },
   "navigation": [
-    {
-      "label": "Accueil",
-      "href": "#accueil"
-    },
-    {
-      "label": "Le groupe",
-      "href": "#groupe"
-    },
-    {
-      "label": "Presse",
-      "href": "#presse"
-    },
-    {
-      "label": "Contact",
-      "href": "#contact"
-    }
+    {"label": "Accueil", "href": "#accueil"},
+    {"label": "Le groupe", "href": "#groupe"},
+    {"label": "Médias", "href": "#medias"},
+    {"label": "Contact", "href": "#contact"}
   ],
   "socials": [
-    {
-      "label": "Instagram",
-      "url": "https://www.instagram.com/flowtherapymusic/",
-      "icon": "instagram"
-    },
-    {
-      "label": "YouTube",
-      "url": "https://www.youtube.com/@FlowTherapyMusic",
-      "icon": "youtube"
-    },
-    {
-      "label": "Facebook",
-      "url": "https://www.facebook.com/reel/1030974076268187",
-      "icon": "facebook"
-    }
+    {"label": "Instagram", "url": "https://www.instagram.com/flowtherapymusic/", "icon": "instagram"},
+    {"label": "YouTube", "url": "https://www.youtube.com/@FlowTherapyMusic", "icon": "youtube"},
+    {"label": "Facebook", "url": "https://www.facebook.com/reel/1030974076268187", "icon": "facebook"}
   ],
   "about": {
     "title": "Le groupe",
@@ -58,23 +30,63 @@
       "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
     ]
   },
-  "press": {
-    "title": "Dossier de presse",
+  "media": {
+    "title": "Médias",
+    "intro": "Photos de scène, portraits et contenus du groupe. Les visuels définitifs seront ajoutés prochainement.",
     "items": [
       {
-        "title": "Lancement de la saison",
-        "source": "Facebook",
-        "url": "https://www.facebook.com/reel/1030974076268187"
+        "title": "Live — scène",
+        "type": "Photo",
+        "orientation": "landscape",
+        "ratio": "16:9",
+        "date": "À renseigner",
+        "credit": "À renseigner",
+        "description": "Emplacement réservé à une photographie panoramique de Flow Therapy en concert."
       },
       {
-        "title": "Annonce de la victoire au Tremplin Music’al",
-        "source": "Facebook",
-        "url": "https://www.facebook.com/watch/?v=1572388711273184"
+        "title": "Portrait — Betty",
+        "type": "Portrait",
+        "orientation": "portrait",
+        "ratio": "4:5",
+        "date": "À renseigner",
+        "credit": "À renseigner",
+        "description": "Emplacement réservé à un portrait vertical de Betty."
       },
       {
-        "title": "Flow Therapy remporte le prix intergénérationnel",
-        "source": "La Provence",
-        "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"
+        "title": "Portrait — Jennifer",
+        "type": "Portrait",
+        "orientation": "portrait",
+        "ratio": "4:5",
+        "date": "À renseigner",
+        "credit": "À renseigner",
+        "description": "Emplacement réservé à un portrait vertical de Jennifer."
+      },
+      {
+        "title": "Portrait — Lauris",
+        "type": "Portrait",
+        "orientation": "portrait",
+        "ratio": "4:5",
+        "date": "À renseigner",
+        "credit": "À renseigner",
+        "description": "Emplacement réservé à un portrait vertical de Lauris."
+      },
+      {
+        "title": "Flow Therapy — groupe",
+        "type": "Photo de groupe",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "date": "À renseigner",
+        "credit": "À renseigner",
+        "description": "Emplacement réservé à une photographie paysage du trio."
+      },
+      {
+        "title": "Coulisses",
+        "type": "Photo",
+        "orientation": "portrait",
+        "ratio": "9:16",
+        "date": "À renseigner",
+        "credit": "À renseigner",
+        "description": "Emplacement réservé à un contenu vertical pris en coulisses."
       }
     ]
   }
