@@ -11,7 +11,6 @@
     "signature": "Musique · Énergie · Émotion"
   },
   "navigation": [
-    {"label": "Accueil", "href": "#accueil"},
     {"label": "Le groupe", "href": "#groupe"},
     {"label": "Médias", "href": "#medias"},
     {"label": "Contact", "href": "#contact"}
