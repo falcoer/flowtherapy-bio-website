@@ -1,0 +1,22 @@
+{
+  "schema": "flowtherapy.assets-sources/v1",
+  "policy": "immutable-sources-ci-generated-outputs",
+  "images": [
+    {"path": "images/alpaga1-nu.png", "sha256": "51ec2fe21a6a662649d109dc1fa4171550710654fa36fd64fa1b0900fa6a4fdb", "mode": "passthrough"},
+    {"path": "images/alpaga1.png", "sha256": "26808818ebc84b8440a76c0abaa3b1720dac764020b56862230707b2ef94b04c", "mode": "passthrough"},
+    {"path": "images/alpaga2-nu.png", "sha256": "6b54dcd9f26bb301636ab6b13a8be3149f197f0c89d4b16a758a61b41a62967f", "mode": "passthrough"},
+    {"path": "images/alpaga2.png", "sha256": "9db64274a6958145c7077ad3f9ded3247feb11bcd0b5ca0920035f3f55de1566", "mode": "passthrough"},
+    {"path": "images/alpaga3-nu.png", "sha256": "b9acff77178fb737a1d488f79982cd05cd4107520df75ccee57348e44a422471", "mode": "passthrough"},
+    {"path": "images/alpaga3.png", "sha256": "2110008d2df984f454a09a634d4528149e1ae48fb3652e7f3fab5d464672043c", "mode": "passthrough"},
+    {"path": "images/fond-urbain-transparent.png", "sha256": "c0c69523743c83332cff285b91087c7c107f338d2792d4b6bac45d0467451aff", "mode": "passthrough"},
+    {"path": "images/logo.jpg", "sha256": "dc52210cdd5439a85a1661b7ed6245b67f4ff478a8355ddd3f037c17264c95a8", "mode": "passthrough"},
+    {"path": "images/logo.svg", "sha256": "47cf1b69cae66ecee4817c9e7038b57eb97643157eb97e6c77794b8f609b5966", "mode": "passthrough"},
+    {"path": "images/logo_transparent.png", "sha256": "18b67ce67598a12c7142bd63f3851061bb449b73cffc16e5171e3eadbe99be6d", "mode": "passthrough"}
+  ],
+  "fonts": [
+    {"path": "fonts/bangers/Bangers-Regular.ttf", "sha256": "4160a7311de9342674cce9160cde9fcbb30f48190397d86ff1b70b455af65824", "upstream": "https://github.com/google/fonts/blob/main/ofl/bangers/Bangers-Regular.ttf", "license": "fonts/bangers/OFL.txt"},
+    {"path": "fonts/inter/Inter-Variable.ttf", "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031", "upstream": "https://github.com/google/fonts/blob/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf", "license": "fonts/inter/OFL.txt"},
+    {"path": "fonts/kalam/Kalam-Regular.ttf", "sha256": "57cecb63d4608019371954274ae1d8c397764debd5b19d4a33c1efa4dc923c0b", "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Regular.ttf", "license": "fonts/kalam/OFL.txt"},
+    {"path": "fonts/kalam/Kalam-Bold.ttf", "sha256": "2f6576601db015d4f6c08678120277fc8510b98c06e932ce7a6a9cbff4cbdded", "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Bold.ttf", "license": "fonts/kalam/OFL.txt"}
+  ]
+}
