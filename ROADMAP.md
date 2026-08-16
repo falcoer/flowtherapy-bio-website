@@ -58,7 +58,7 @@ Objectif : remplacer les couleurs dispersées par un système de thème cohéren
 Objectif : reproduire la structure supérieure du design cible.
 
 - [ ] Positionner le logo en haut à gauche.
-- [ ] Ajouter la navigation : Accueil, Le groupe, Musique, Actualités, Presse, Contact.
+- [x] Ajouter la navigation actuelle : Accueil, Le groupe, Médias, Contact.
 - [ ] Ajouter l'état actif violet avec soulignement discret.
 - [ ] Ajouter le switch Light / Dark en haut à droite.
 - [ ] Conserver le bouton QR discret à proximité de la marque ou du switch.
@@ -139,7 +139,7 @@ Objectif : conserver une séparation stricte entre rendu et contenu.
 - [ ] Étendre `config/site.json` avec `navigation`.
 - [ ] Ajouter les CTA du hero dans la configuration.
 - [ ] Ajouter Facebook aux réseaux sociaux si l'URL officielle est disponible.
-- [ ] Ajouter les champs `music`, `agenda`, `news`, `contact` de manière optionnelle.
+- [x] Ajouter le champ `media` et ses métadonnées configurables.\n- [ ] Ajouter les champs `music`, `agenda`, `news`, `contact` de manière optionnelle.
 - [ ] Ajouter les libellés du bandeau à la configuration.
 - [ ] Garder les textes hors de `index.html` et `styles.css`.
 - [ ] Fournir des valeurs de repli sûres en cas de champ optionnel absent.
