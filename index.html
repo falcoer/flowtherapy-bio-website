@@ -8,7 +8,6 @@
   <title>Flow Therapy</title>
   <link rel="icon" href="assets/generated/logo-transparent-320.png" type="image/png">
   <link rel="stylesheet" href="styles.css?v=20260817-responsive-assets">
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js" defer></script>
   <script type="module" src="app.js?v=20260817-responsive-assets"></script>
 </head>
 <body>
@@ -48,7 +47,7 @@
   <dialog id="qr-dialog" class="qr-dialog" aria-labelledby="qr-title">
     <button id="qr-close" class="qr-close" type="button" aria-label="Fermer le QR code">×</button>
     <div class="qr-content">
-      <img class="qr-logo" src="assets/generated/logo-transparent-320.webp" width="320" height="213" alt="Flow Therapy" decoding="async">
+      <img class="qr-logo" src="assets/generated/logo-transparent-320.webp" width="320" height="213" alt="Flow Therapy" loading="lazy" decoding="async">
       <h2 id="qr-title">Partager Flow Therapy</h2>
       <div id="qr-code" class="qr-code" aria-label="QR code du site"></div>
       <p id="qr-url" class="qr-url"></p>

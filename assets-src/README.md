@@ -14,6 +14,7 @@ Ce répertoire contient exclusivement les fichiers d'origine nécessaires à la 
 
 - `images/` : PNG, JPEG et SVG maîtres. Les entrées `responsive-ci` du manifeste produisent des tailles AVIF, WebP et PNG adaptées ; les entrées `passthrough` sont recopiées sans altération.
 - `fonts/` : fontes TTF officielles et licences OFL. La CI génère les WOFF2 utilisés par le navigateur.
+- `vendor/` : distributions tierces originales et licences ; elles sont publiées localement et peuvent être chargées à la demande.
 - `manifest.json` : provenance, empreintes SHA-256 et rôle de chaque source.
 
 Les alpagas nus restent archivés ici et sont recopiés sans optimisation. Les alpagas costumés, le logo transparent et le filigrane sont les seuls visuels transformés dans ce premier jalon.

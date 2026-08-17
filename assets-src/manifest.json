@@ -18,5 +18,9 @@
     {"path": "fonts/inter/Inter-Variable.ttf.gz", "sha256": "f70c5d2e6a784420e76aa12b7f81e9749c6583e42d7f2b7ce78d2ed38ca55b72", "upstream": "https://github.com/google/fonts/blob/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf", "license": "fonts/inter/OFL.txt"},
     {"path": "fonts/kalam/Kalam-Regular.ttf", "sha256": "57cecb63d4608019371954274ae1d8c397764debd5b19d4a33c1efa4dc923c0b", "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Regular.ttf", "license": "fonts/kalam/OFL.txt"},
     {"path": "fonts/kalam/Kalam-Bold.ttf", "sha256": "2f6576601db015d4f6c08678120277fc8510b98c06e932ce7a6a9cbff4cbdded", "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Bold.ttf", "license": "fonts/kalam/OFL.txt"}
+  ],
+  "vendor": [
+    {"path": "vendor/qrcodejs/qrcode.min.js", "sha256": "c541ef06327885a8415bca8df6071e14189b4855336def4f36db54bde8484f36", "mode": "lazy-passthrough", "upstream": "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js", "license": "vendor/qrcodejs/LICENSE"},
+    {"path": "vendor/qrcodejs/LICENSE", "sha256": "aaa1f349028a59432eb00222b8ddfe4d2ccebdce04cf8348dcb8d41b7068107b", "mode": "license", "upstream": "https://github.com/davidshimjs/qrcodejs/blob/master/LICENSE"}
   ]
 }

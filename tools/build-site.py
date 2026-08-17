@@ -9,7 +9,7 @@ from pathlib import Path
 import fontTools
 import PIL
 from PIL import Image
-from fontTools.ttLib import woff2
+from fontTools import subset
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -20,8 +20,9 @@ FONT_OUTPUTS = {
     "fonts/bangers/Bangers-Regular.ttf": "bangers-regular.woff2",
     "fonts/inter/Inter-Variable.ttf.gz": "inter-variable.woff2",
     "fonts/kalam/Kalam-Regular.ttf": "kalam-regular.woff2",
-    "fonts/kalam/Kalam-Bold.ttf": "kalam-bold.woff2",
 }
+
+FONT_UNICODES = tuple(range(0x20, 0x180)) + tuple(range(0x2000, 0x2070)) + (0x25A6, 0x25B6, 0x2600, 0x263E)
 
 IMAGE_VARIANTS = {
     "images/alpaga1.png": {"name": "alpaga1", "widths": (640, 1024), "quality": 78},
@@ -41,7 +42,7 @@ def sha256(path: Path) -> str:
 
 
 def verify_sources(manifest: dict) -> None:
-    for category in ("images", "fonts"):
+    for category in ("images", "fonts", "vendor"):
         for asset in manifest[category]:
             source = SOURCE / asset["path"]
             if not source.is_file():
@@ -99,14 +100,35 @@ def build_assets(manifest: dict) -> list[dict]:
             unpacked = DIST / source.stem
             with gzip.open(source, "rb") as compressed, unpacked.open("wb") as target:
                 shutil.copyfileobj(compressed, target)
-            woff2.compress(str(unpacked), str(output))
-            unpacked.unlink()
+            font_source = unpacked
         else:
-            woff2.compress(str(source), str(output))
-        records.append({"source": source_name, "output": f"assets/fonts/{output_name}", "mode": "woff2", "sha256": sha256(output), "bytes": output.stat().st_size})
+            font_source = source
+        options = subset.Options()
+        options.flavor = "woff2"
+        options.layout_features = ["*"]
+        options.name_IDs = ["*"]
+        options.name_legacy = True
+        options.name_languages = ["*"]
+        options.recalc_average_width = True
+        options.recalc_max_context = True
+        font = subset.load_font(str(font_source), options)
+        subsetter = subset.Subsetter(options=options)
+        subsetter.populate(unicodes=FONT_UNICODES)
+        subsetter.subset(font)
+        subset.save_font(font, str(output), options)
+        if font_source != source:
+            font_source.unlink()
+        records.append({"source": source_name, "output": f"assets/fonts/{output_name}", "mode": "woff2-subset", "unicode_ranges": ["U+0020-017F", "U+2000-206F", "U+25A6", "U+25B6", "U+2600", "U+263E"], "sha256": sha256(output), "bytes": output.stat().st_size})
 
     for family in ("bangers", "inter", "kalam"):
         shutil.copy2(SOURCE / "fonts" / family / "OFL.txt", output_fonts / "licenses" / f"{family}-OFL.txt")
+
+    for asset in manifest["vendor"]:
+        source = SOURCE / asset["path"]
+        output = output_assets / asset["path"]
+        output.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, output)
+        records.append({"source": asset["path"], "output": f"assets/{asset['path']}", "mode": asset["mode"], "sha256": sha256(output), "bytes": output.stat().st_size})
     return records
 
 
