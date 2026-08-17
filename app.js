@@ -27,7 +27,7 @@ function render(config){
 <header id="accueil" class="home">
   <nav class="nav" aria-label="Navigation principale"><a class="logo-link" href="#accueil" aria-label="Retour en haut de la page">${responsivePicture('logo-transparent',[320,480],'logo','Flow Therapy')}</a><div class="socials header-socials" aria-label="Réseaux sociaux">${socials.map(s=>`<a class="social ${s.icon}" href="${s.url}" target="_blank" rel="noopener" aria-label="${esc(s.label)}">${icons[s.icon]||esc(s.label[0])}</a>`).join('')}</div><div class="nav-side"><div class="links">${navigation.map(n=>`<a href="${n.href}">${esc(n.label)}</a>`).join('')}</div><div class="tools"><button id="qr-open" class="icon-btn" type="button" aria-label="Partager par QR code">▦</button><button id="theme" class="theme" type="button" aria-label="Activer le thème sombre" aria-pressed="false"><span aria-hidden="true">☀</span><span aria-hidden="true">☾</span></button></div></div></nav>
   <div class="hero-grid"><div class="copy"><h1>${hero.lines.map((l,i)=>`<span class="line l${i+1}">${esc(l)}</span>`).join('')}</h1><p>${esc(site.tagline)}</p><div class="actions"><a class="primary" href="${listen}" target="_blank" rel="noopener">▶ ÉCOUTER</a><a class="secondary" href="#medias">MÉDIAS</a></div></div>
-  <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca">${responsivePicture(`alpaga${n}-nu`,[640,1024],'alpaca-nude')}${responsivePicture(`alpaga${n}`,[640,1024],'alpaca-costumed')}</div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
+  <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca" data-alpaca="${n}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
 </header>
 <section id="groupe" class="section"><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
 <section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
@@ -94,15 +94,25 @@ function setupMediaViewer(items){
 }
 
 const ALPACA_NUDE_HOLD_MS=1800;
+const wait=duration=>new Promise(resolve=>window.setTimeout(resolve,duration));
+const decodeImage=image=>typeof image.decode==='function'?image.decode().catch(()=>undefined):image.complete?Promise.resolve():new Promise(resolve=>{image.addEventListener('load',resolve,{once:true});image.addEventListener('error',resolve,{once:true})});
+const mountCostumes=group=>{
+  if(!group.dataset.costumesMounted){
+    group.querySelectorAll('[data-alpaca]').forEach(alpaca=>alpaca.insertAdjacentHTML('beforeend',responsivePicture(`alpaga${alpaca.dataset.alpaca}`,[640,768,1024],'alpaca-costumed')));
+    group.dataset.costumesMounted='true';
+  }
+  return Promise.all([...group.querySelectorAll('.alpaca-costumed')].map(decodeImage));
+};
 function setupAlpacaReveal(){
   const group=document.querySelector('.alpacas');
   if(!group)return;
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches){group.classList.add('is-costumed');return}
-  const reveal=()=>{
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){mountCostumes(group);group.classList.add('is-costumed');return}
+  const reveal=async()=>{
     if(group.dataset.revealStarted)return;
     group.dataset.revealStarted='true';
     group.classList.add('is-nude-visible');
-    window.setTimeout(()=>group.classList.add('is-costumed'),ALPACA_NUDE_HOLD_MS);
+    await Promise.all([mountCostumes(group),wait(ALPACA_NUDE_HOLD_MS)]);
+    group.classList.add('is-costumed');
   };
   if(!matchMedia('(max-width: 790px)').matches||!('IntersectionObserver' in window)){
     requestAnimationFrame(reveal);
