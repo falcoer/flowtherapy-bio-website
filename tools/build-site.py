@@ -7,6 +7,8 @@ import shutil
 from pathlib import Path
 
 import fontTools
+import PIL
+from PIL import Image
 from fontTools.ttLib import woff2
 
 
@@ -19,6 +21,14 @@ FONT_OUTPUTS = {
     "fonts/inter/Inter-Variable.ttf.gz": "inter-variable.woff2",
     "fonts/kalam/Kalam-Regular.ttf": "kalam-regular.woff2",
     "fonts/kalam/Kalam-Bold.ttf": "kalam-bold.woff2",
+}
+
+IMAGE_VARIANTS = {
+    "images/alpaga1.png": {"name": "alpaga1", "widths": (640, 1024), "quality": 78},
+    "images/alpaga2.png": {"name": "alpaga2", "widths": (640, 1024), "quality": 78},
+    "images/alpaga3.png": {"name": "alpaga3", "widths": (640, 1024), "quality": 78},
+    "images/fond-urbain-transparent.png": {"name": "fond-urbain-transparent", "widths": (960, 1440), "quality": 65},
+    "images/logo_transparent.png": {"name": "logo-transparent", "widths": (320, 480), "quality": 82},
 }
 
 
@@ -56,11 +66,30 @@ def prepare_dist() -> None:
 def build_assets(manifest: dict) -> list[dict]:
     records: list[dict] = []
     output_assets = DIST / "assets"
+    generated_images = output_assets / "generated"
+    generated_images.mkdir(parents=True)
     for asset in manifest["images"]:
         source = SOURCE / asset["path"]
-        output = output_assets / source.name
-        shutil.copy2(source, output)
-        records.append({"source": asset["path"], "output": f"assets/{output.name}", "mode": "passthrough", "sha256": sha256(output), "bytes": output.stat().st_size})
+        if asset["mode"] == "passthrough":
+            output = output_assets / source.name
+            shutil.copy2(source, output)
+            records.append({"source": asset["path"], "output": f"assets/{output.name}", "mode": "passthrough", "sha256": sha256(output), "bytes": output.stat().st_size})
+            continue
+
+        variant = IMAGE_VARIANTS[asset["path"]]
+        with Image.open(source) as original:
+            for width in variant["widths"]:
+                height = round(original.height * width / original.width)
+                resized = original.resize((width, height), Image.Resampling.LANCZOS)
+                for extension in ("avif", "webp", "png"):
+                    output = generated_images / f"{variant['name']}-{width}.{extension}"
+                    if extension == "png":
+                        resized.save(output, optimize=True, compress_level=9)
+                    elif extension == "webp":
+                        resized.save(output, quality=variant["quality"], method=4)
+                    else:
+                        resized.save(output, quality=variant["quality"], speed=8)
+                    records.append({"source": asset["path"], "output": f"assets/generated/{output.name}", "mode": "responsive-ci", "width": width, "height": height, "format": extension, "sha256": sha256(output), "bytes": output.stat().st_size})
 
     output_fonts = output_assets / "fonts"
     for source_name, output_name in FONT_OUTPUTS.items():
@@ -86,7 +115,7 @@ def main() -> None:
     verify_sources(manifest)
     prepare_dist()
     records = build_assets(manifest)
-    generated = {"schema": "flowtherapy.generated-assets/v1", "fonttools": fontTools.__version__, "assets": records}
+    generated = {"schema": "flowtherapy.generated-assets/v1", "fonttools": fontTools.__version__, "pillow": PIL.__version__, "assets": records}
     (DIST / "assets-manifest.json").write_text(json.dumps(generated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Site construit dans {DIST} : {len(records)} assets générés.")
 

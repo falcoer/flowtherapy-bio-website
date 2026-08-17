@@ -18,16 +18,19 @@ for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(i
 
 const required = [
   'index.html', 'styles.css', 'app.js', 'assets-manifest.json',
-  'assets/logo.jpg', 'assets/logo_transparent.png',
-  'assets/alpaga1-nu.png', 'assets/alpaga1.png',
-  'assets/alpaga2-nu.png', 'assets/alpaga2.png',
-  'assets/alpaga3-nu.png', 'assets/alpaga3.png',
-  'assets/fond-urbain-transparent.png',
+  'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
+  'assets/alpaga1-nu.png', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-1024.webp',
+  'assets/alpaga2-nu.png', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-1024.webp',
+  'assets/alpaga3-nu.png', 'assets/generated/alpaga3-640.avif', 'assets/generated/alpaga3-1024.webp',
+  'assets/generated/fond-urbain-transparent-960.avif', 'assets/generated/fond-urbain-transparent-1440.png',
   'assets/fonts/bangers-regular.woff2', 'assets/fonts/inter-variable.woff2',
   'assets/fonts/kalam-regular.woff2', 'assets/fonts/kalam-bold.woff2'
 ];
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
+}
+for (const file of ['assets/alpaga1.png', 'assets/alpaga2.png', 'assets/alpaga3.png', 'assets/logo_transparent.png', 'assets/fond-urbain-transparent.png']) {
+  try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
 
 const [app, css, html] = await Promise.all(['app.js', 'styles.css', 'index.html'].map(file => readFile(fromRoot(file), 'utf8')));
@@ -36,8 +39,9 @@ for (const [file, source] of [['app.js', app], ['styles.css', css], ['index.html
 }
 expect(!css.includes('fonts.googleapis.com') && !css.includes('fonts.gstatic.com'), 'les polices doivent être servies localement');
 expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter générée doit être référencée');
-expect(app.includes("const ASSET='assets/';") && app.includes('alpaga${n}-nu.png') && app.includes('alpaga${n}.png') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas officiels nus puis costumés');
-expect(css.includes('assets/fond-urbain-transparent.png'), 'le watermark local officiel doit être utilisé');
+expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
+expect(app.includes("const ASSET='assets/';") && app.includes('alpaga${n}-nu.png') && app.includes('responsivePicture(`alpaga${n}`') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas officiels nus puis les sorties CI costumées');
+expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 
 if (problems.length) throw new Error(`Validation du site échouée:\n- ${problems.join('\n- ')}`);
 console.log(`Validation du site réussie : ${root}`);
