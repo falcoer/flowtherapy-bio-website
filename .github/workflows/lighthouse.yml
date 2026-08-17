@@ -1,0 +1,83 @@
+name: Lighthouse audit
+
+on:
+  workflow_run:
+    workflows: ["Build and deploy GitHub Pages"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SITE_URL: https://falcoer.github.io/flowtherapy-bio-website/
+      AUDIT_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+      REPORT_DIR: lighthouse-reports
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Locate Chrome
+        run: |
+          chrome_path="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser)"
+          test -n "$chrome_path"
+          echo "CHROME_PATH=$chrome_path" >> "$GITHUB_ENV"
+
+      - name: Run Lighthouse on the published site
+        run: |
+          mkdir -p "$REPORT_DIR"
+          npm_cache="$RUNNER_TEMP/lighthouse-npm"
+          npx --cache "$npm_cache" --yes lighthouse "$SITE_URL?lighthouse=$AUDIT_SHA-mobile" \
+            --output=json --output=html --output-path="$REPORT_DIR/mobile" \
+            --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --quiet
+          npx --cache "$npm_cache" --yes lighthouse "$SITE_URL?lighthouse=$AUDIT_SHA-desktop" \
+            --output=json --output=html --output-path="$REPORT_DIR/desktop" \
+            --only-categories=performance,accessibility,best-practices,seo --preset=desktop --quiet
+
+      - name: Publish a readable status
+        if: always()
+        run: |
+          node --input-type=module <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          import { readdirSync, readFileSync } from 'node:fs';
+
+          const reports = readdirSync(process.env.REPORT_DIR)
+            .filter(file => file.endsWith('.json'))
+            .map(file => ({ file, data: JSON.parse(readFileSync(`${process.env.REPORT_DIR}/${file}`, 'utf8')) }));
+          const score = value => value == null ? '—' : `${Math.round(value * 100)}`;
+          const state = value => value == null ? '⚪' : value >= .9 ? '🟢' : value >= .7 ? '🟡' : '🔴';
+          const metric = (audit, id) => audit[id]?.displayValue || '—';
+
+          console.log('## Lighthouse — site publié');
+          console.log('');
+          console.log(`Commit audité : \`${process.env.AUDIT_SHA}\` · rapport détaillé disponible dans l’artefact \`lighthouse-reports\`.`);
+          console.log('');
+          console.log('| Profil | Performance | Accessibilité | Bonnes pratiques | SEO | FCP | LCP | TBT | CLS |');
+          console.log('|---|---:|---:|---:|---:|---:|---:|---:|---:|');
+          for (const { file, data } of reports) {
+            const audit = data.audits;
+            const category = data.categories;
+            const profile = file.includes('mobile') ? 'Mobile' : 'Desktop';
+            console.log(`| ${profile} | ${state(category.performance?.score)} ${score(category.performance?.score)} | ${state(category.accessibility?.score)} ${score(category.accessibility?.score)} | ${state(category['best-practices']?.score)} ${score(category['best-practices']?.score)} | ${state(category.seo?.score)} ${score(category.seo?.score)} | ${metric(audit, 'first-contentful-paint')} | ${metric(audit, 'largest-contentful-paint')} | ${metric(audit, 'total-blocking-time')} | ${metric(audit, 'cumulative-layout-shift')} |`);
+          }
+          NODE
+
+      - name: Upload detailed Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: ${{ env.REPORT_DIR }}
+          if-no-files-found: warn
+          retention-days: 30
