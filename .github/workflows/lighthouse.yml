@@ -41,9 +41,11 @@ jobs:
           npm_cache="$RUNNER_TEMP/lighthouse-npm"
           npx --cache "$npm_cache" --yes lighthouse "$SITE_URL?lighthouse=$AUDIT_SHA-mobile" \
             --output=json --output=html --output-path="$REPORT_DIR/mobile" \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
             --only-categories=performance,accessibility,best-practices,seo --form-factor=mobile --quiet
           npx --cache "$npm_cache" --yes lighthouse "$SITE_URL?lighthouse=$AUDIT_SHA-desktop" \
             --output=json --output=html --output-path="$REPORT_DIR/desktop" \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
             --only-categories=performance,accessibility,best-practices,seo --preset=desktop --quiet
 
       - name: Publish a readable status
