@@ -25,8 +25,11 @@ FONT_OUTPUTS = {
 FONT_UNICODES = tuple(range(0x20, 0x180)) + tuple(range(0x2000, 0x2070)) + (0x25A6, 0x25B6, 0x2600, 0x263E)
 
 IMAGE_VARIANTS = {
+    "images/alpaga1-nu.png": {"name": "alpaga1-nu", "widths": (640, 1024), "quality": 78},
     "images/alpaga1.png": {"name": "alpaga1", "widths": (640, 1024), "quality": 78},
+    "images/alpaga2-nu.png": {"name": "alpaga2-nu", "widths": (640, 1024), "quality": 78},
     "images/alpaga2.png": {"name": "alpaga2", "widths": (640, 1024), "quality": 78},
+    "images/alpaga3-nu.png": {"name": "alpaga3-nu", "widths": (640, 1024), "quality": 78},
     "images/alpaga3.png": {"name": "alpaga3", "widths": (640, 1024), "quality": 78},
     "images/fond-urbain-transparent.png": {"name": "fond-urbain-transparent", "widths": (960, 1440), "quality": 65},
     "images/logo_transparent.png": {"name": "logo-transparent", "widths": (320, 480), "quality": 82},

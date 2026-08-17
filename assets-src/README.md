@@ -17,4 +17,4 @@ Ce répertoire contient exclusivement les fichiers d'origine nécessaires à la 
 - `vendor/` : distributions tierces originales et licences ; elles sont publiées localement et peuvent être chargées à la demande.
 - `manifest.json` : provenance, empreintes SHA-256 et rôle de chaque source.
 
-Les alpagas nus restent archivés ici et sont recopiés sans optimisation. Les alpagas costumés, le logo transparent et le filigrane sont les seuls visuels transformés dans ce premier jalon.
+Les alpagas nus et costumés, le logo transparent et le filigrane restent archivés ici dans leur format maître. La CI génère seule leurs variantes responsive ; aucune source n'est modifiée.

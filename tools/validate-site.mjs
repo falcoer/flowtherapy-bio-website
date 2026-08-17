@@ -19,9 +19,9 @@ for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(i
 const required = [
   'index.html', 'styles.css', 'app.js', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
-  'assets/alpaga1-nu.png', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-1024.webp',
-  'assets/alpaga2-nu.png', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-1024.webp',
-  'assets/alpaga3-nu.png', 'assets/generated/alpaga3-640.avif', 'assets/generated/alpaga3-1024.webp',
+  'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-1024.webp',
+  'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-1024.webp',
+  'assets/generated/alpaga3-nu-640.avif', 'assets/generated/alpaga3-nu-1024.webp', 'assets/generated/alpaga3-640.avif', 'assets/generated/alpaga3-1024.webp',
   'assets/generated/fond-urbain-transparent-960.avif', 'assets/generated/fond-urbain-transparent-1440.png',
   'assets/fonts/bangers-regular.woff2', 'assets/fonts/inter-variable.woff2',
   'assets/fonts/kalam-regular.woff2', 'assets/vendor/qrcodejs/qrcode.min.js',
@@ -30,7 +30,7 @@ const required = [
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
-for (const file of ['assets/alpaga1.png', 'assets/alpaga2.png', 'assets/alpaga3.png', 'assets/logo_transparent.png', 'assets/fond-urbain-transparent.png']) {
+for (const file of ['assets/alpaga1-nu.png', 'assets/alpaga2-nu.png', 'assets/alpaga3-nu.png', 'assets/alpaga1.png', 'assets/alpaga2.png', 'assets/alpaga3.png', 'assets/logo_transparent.png', 'assets/fond-urbain-transparent.png']) {
   try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
 
@@ -47,7 +47,7 @@ expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter gén�
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
 expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
-expect(app.includes("const ASSET='assets/';") && app.includes('alpaga${n}-nu.png') && app.includes('responsivePicture(`alpaga${n}`') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas officiels nus puis les sorties CI costumées');
+expect(app.includes("const ASSET='assets/';") && app.includes('responsivePicture(`alpaga${n}-nu`') && app.includes('responsivePicture(`alpaga${n}`') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et costumés produits par la CI, après un délai et à l’entrée dans le viewport sur mobile');
 expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'woff2-subset');
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
