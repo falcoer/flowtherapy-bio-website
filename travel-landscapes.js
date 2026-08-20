@@ -1,4 +1,5 @@
 const LANDSCAPES = [
+  { id: 'urban', label: 'Paysage urbain original' },
   { id: 'himalaya', label: 'Himalaya' },
   { id: 'city', label: 'Métropole' },
   { id: 'amazonia', label: 'Amazonie' },
@@ -34,6 +35,7 @@ function setupJourneyBackground() {
   background.setAttribute('aria-hidden', 'true');
   background.innerHTML = LANDSCAPES.map(pictureMarkup).join('');
   document.body.prepend(background);
+  document.documentElement.classList.add('journey-background-ready');
 
   const slides = [...background.querySelectorAll('.journey-landscape')];
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
