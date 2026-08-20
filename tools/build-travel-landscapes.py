@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 from pathlib import Path
 
 from PIL import Image
@@ -22,6 +23,9 @@ def sha256(path: Path) -> str:
 
 
 def main() -> None:
+    for filename in ("travel-landscapes.css", "travel-landscapes.js"):
+        shutil.copy2(ROOT / filename, DIST / filename)
+
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     source_dir = SOURCE / config["sourceDirectory"]
     expected = [(item, source_dir / item["source"]) for item in config["landscapes"]]
