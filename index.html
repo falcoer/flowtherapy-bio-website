@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#fbf8f2">
   <title>Flow Therapy</title>
   <link rel="icon" href="assets/generated/logo-transparent-320.png" type="image/png">
-  <link rel="stylesheet" href="styles.css?v=20260820-media-hover-stable">
+  <link rel="stylesheet" href="styles.css?v=20260820-contact-modal">
   <link rel="stylesheet" href="travel-landscapes.css?v=20260820-travel-wheel">
-  <script type="module" src="app.js?v=20260820-media-gallery"></script>
+  <script type="module" src="app.js?v=20260820-contact-modal"></script>
   <script type="module" src="travel-landscapes.js?v=20260820-travel-wheel"></script>
 </head>
 <body>
@@ -51,6 +51,38 @@
     <div class="qr-content">
       <h2 id="qr-title">Flashez, puis partagez&nbsp;!</h2>
       <div id="qr-code" class="qr-code" aria-label="QR code du site"></div>
+    </div>
+  </dialog>
+  <dialog id="contact-dialog" class="contact-dialog" aria-labelledby="contact-title">
+    <div class="contact-panel">
+      <button id="contact-close" class="contact-close" type="button" aria-label="Fermer le formulaire">×</button>
+      <header class="contact-heading">
+        <span class="contact-heading-icon" aria-hidden="true">✉</span>
+        <div>
+          <p>Une question, un projet&nbsp;?</p>
+          <h2 id="contact-title">Nous contacter</h2>
+        </div>
+      </header>
+      <form id="contact-form" class="contact-form">
+        <label for="contact-subject">Sujet</label>
+        <select id="contact-subject" name="subject" required>
+          <option value="">Choisir un sujet</option>
+          <option>Concert / programmation</option>
+          <option>Événement privé ou professionnel</option>
+          <option>Presse / média</option>
+          <option>Collaboration artistique</option>
+          <option>Dossier de presse / fiche technique</option>
+          <option>Autre demande</option>
+        </select>
+        <label for="contact-email">Adresse e-mail</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" required placeholder="votre.nom@exemple.fr">
+        <label for="contact-phone">Numéro de téléphone <span>(facultatif)</span></label>
+        <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+33 6 00 00 00 00">
+        <div class="contact-message-label"><label for="contact-message">Votre message</label><span><output id="contact-count">0</output>/255</span></div>
+        <textarea id="contact-message" name="message" maxlength="255" rows="5" required placeholder="Décrivez votre demande…"></textarea>
+        <button class="contact-submit" type="submit" disabled>Envoi bientôt disponible</button>
+        <p class="contact-notice">Le formulaire est en préparation. L’envoi des messages sera activé prochainement.</p>
+      </form>
     </div>
   </dialog>
   <noscript>Ce site nécessite JavaScript pour charger son contenu.</noscript>
