@@ -147,21 +147,6 @@
         "date": "2026-06-07",
         "credit": "Non renseigné",
         "description": "Betty au chant et à la guitare acoustique lors d’un concert en plein air."
-      },
-      {
-        "title": "Flow Therapy — portrait noir et blanc",
-        "type": "Photo de groupe",
-        "orientation": "landscape",
-        "ratio": "3:2",
-        "asset": "flow-therapy-groupe-noir-blanc",
-        "widths": [
-          640,
-          960,
-          1440
-        ],
-        "date": "2026-02-06",
-        "credit": "Non renseigné",
-        "description": "Betty, Jennifer et Lauris réunis pour un portrait du groupe."
       }
     ]
   }
