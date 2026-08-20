@@ -70,3 +70,6 @@
   .art{height:450px}
   .journey-landscape img{width:max(680px,156vw)}
 }
+
+/* Le watermark historique devient la première étape de la roue, pas un calque permanent. */
+.journey-background-ready .watermark{opacity:0;background:none}
