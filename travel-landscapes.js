@@ -55,8 +55,8 @@ function setupJourneyBackground() {
       const tilt = Math.max(-1, Math.min(1, index - position)) * 0.8;
       slide.style.setProperty('--landscape-opacity', String(opacity));
       slide.style.setProperty('--landscape-scale', String(scale));
-      slide.style.setProperty('--landscape-shift', \`${shift}vw\`);
-      slide.style.setProperty('--landscape-tilt', \`${tilt}deg\`);
+      slide.style.setProperty('--landscape-shift', String(shift) + 'vw');
+      slide.style.setProperty('--landscape-tilt', String(tilt) + 'deg');
     });
   };
   const requestUpdate = () => {
