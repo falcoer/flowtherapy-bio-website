@@ -18,7 +18,7 @@
     {"path": "decorations/chalk-heart.svg", "sha256": "0bca32069d6de8f9e7904c795ecbea8fa22023ef1df6fffac8dae61e0ae8d6ac", "mode": "svg-mask-ci"},
     {"path": "decorations/chalk-paint-splash.svg", "sha256": "0be4fc69b7cd467067a576c3b37bbe67d26603722e906ce16610b856471ccd46", "mode": "svg-mask-ci"},
     {"path": "decorations/chalk-spark.svg", "sha256": "1184fb07b83b27e2837b76cba5a15a7f0a4e9fb4b0c46a5464fb33de9aec789f", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-star.svg", "sha256": "3108db906986d2539b363e92eb52da74f7150bc2dba26d1d39baceb1eb035f34", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-star.svg", "sha256": "41974782249edbf8f8925bf8cfbd964000106d78238e8b2a23969c2b3cc1d14d", "mode": "svg-mask-ci"},
     {"path": "decorations/chalk-swoosh.svg", "sha256": "a5268682e6331f34b957141ea3f41a9e6c66d3e5396eb6a1068f1174e9fb7b8f", "mode": "svg-mask-ci"},
     {"path": "decorations/chalk-underline.svg", "sha256": "c05360cedfdedfd18aaf23412467ec80599d426a0a30375a934cee20fb74b2c9", "mode": "svg-mask-ci"}
   ],
