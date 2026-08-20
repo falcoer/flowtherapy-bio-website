@@ -40,3 +40,10 @@ footer{padding:35px 6vw 50px;border-top:1px solid var(--line);display:flex;gap:2
   .copy{padding-top:clamp(48px,5vh,68px)}
   .art{height:590px}
 }
+
+/* Resserrement volontaire : le héros démarre immédiatement sous la navigation. */
+@media(min-width:901px){
+  .hero-grid{min-height:0;align-items:start}
+  .copy{padding-top:0}
+  .art{height:560px}
+}
