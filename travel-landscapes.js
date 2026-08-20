@@ -10,7 +10,7 @@ const generatedUrl = (id, width, extension) => `assets/generated/landscape-${id}
 
 function pictureMarkup(item, index) {
   const srcset = extension => LANDSCAPE_WIDTHS.map(width => `${generatedUrl(item.id, width, extension)} ${width}w`).join(', ');
-  return `<picture class="travel-landscape" data-landscape-index="${index}" aria-hidden="true">
+  return `<picture class="journey-landscape" data-landscape-index="${index}" aria-hidden="true">
     <source type="image/avif" srcset="${srcset('avif')}">
     <source type="image/webp" srcset="${srcset('webp')}">
     <img src="${generatedUrl(item.id, 960, 'png')}" srcset="${srcset('png')}" sizes="100vw" width="1672" height="941" alt="" decoding="async">
@@ -26,38 +26,35 @@ async function assetAvailable() {
   }
 }
 
-function setupLandscapeWheel(watermark, home) {
-  watermark.classList.add('travel-wheel-ready');
-  watermark.innerHTML = `<div class="travel-wheel" aria-hidden="true">${LANDSCAPES.map(pictureMarkup).join('')}</div>`;
-  const slides = [...watermark.querySelectorAll('.travel-landscape')];
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function setupJourneyBackground() {
+  if (document.querySelector('.journey-background')) return;
 
-  if (reducedMotion) {
-    slides.forEach((slide, index) => slide.style.setProperty('--landscape-angle', index === 0 ? '0deg' : '28deg'));
-    return;
-  }
+  const background = document.createElement('div');
+  background.className = 'journey-background';
+  background.setAttribute('aria-hidden', 'true');
+  background.innerHTML = LANDSCAPES.map(pictureMarkup).join('');
+  document.body.prepend(background);
+
+  const slides = [...background.querySelectorAll('.journey-landscape')];
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) return;
 
   let ticking = false;
   const update = () => {
     ticking = false;
-    const rect = home.getBoundingClientRect();
-    const scrollable = Math.max(home.offsetHeight - innerHeight, 1);
-    const travelled = Math.min(Math.max(-rect.top, 0), scrollable);
-    const progress = travelled / scrollable;
+    const scrollHeight = Math.max(document.documentElement.scrollHeight - innerHeight, 1);
+    const progress = Math.min(Math.max(scrollY / scrollHeight, 0), 1);
     const position = progress * (LANDSCAPES.length - 1);
 
     slides.forEach((slide, index) => {
-      const delta = index - position;
-      const angle = delta * 23;
-      const distance = Math.abs(delta);
-      const opacity = Math.max(0, 1 - distance * 0.9);
-      const scale = Math.max(0.86, 1 - distance * 0.06);
-      slide.style.setProperty('--landscape-angle', `${angle}deg`);
+      const distance = Math.abs(index - position);
+      const visibility = Math.max(0, 1 - distance);
+      const opacity = 0.06 + visibility * 0.42;
+      const scale = 1.015 - visibility * 0.025;
       slide.style.setProperty('--landscape-opacity', String(opacity));
       slide.style.setProperty('--landscape-scale', String(scale));
     });
   };
-
   const requestUpdate = () => {
     if (!ticking) {
       ticking = true;
@@ -71,20 +68,7 @@ function setupLandscapeWheel(watermark, home) {
 }
 
 async function installTravelLandscapes() {
-  const app = document.querySelector('#app');
-  if (!app) return;
-
-  const observer = new MutationObserver(async () => {
-    const watermark = document.querySelector('.watermark');
-    const home = document.querySelector('.home');
-    if (!watermark || !home || watermark.dataset.travelLandscapeInit) return;
-    watermark.dataset.travelLandscapeInit = 'true';
-    observer.disconnect();
-
-    if (await assetAvailable()) setupLandscapeWheel(watermark, home);
-  });
-
-  observer.observe(app, { childList: true, subtree: true });
+  if (await assetAvailable()) setupJourneyBackground();
 }
 
 installTravelLandscapes();
