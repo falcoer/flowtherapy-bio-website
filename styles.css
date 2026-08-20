@@ -79,3 +79,46 @@ footer{justify-content:center;text-align:center}
      0 0 18px #fff,
      0 0 38px #fff9;
 }
+
+/* Raccourci QR aligné sur les boutons sociaux. */
+.qr-social{
+  margin:0;
+  padding:0;
+  border:0;
+  background:linear-gradient(135deg,#111827 8%,var(--purple) 58%,var(--pink));
+  cursor:pointer;
+  -webkit-appearance:none;
+  appearance:none;
+}
+.qr-social:hover,.qr-social:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 9px 22px #0004;
+}
+.qr-social:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+
+/* Modale QR épurée. */
+.qr-dialog{padding:0}
+.qr-content{gap:clamp(24px,4vh,38px);padding:32px}
+.qr-content h2{
+  margin:0;
+  font-family:Kalam,cursive;
+  font-size:clamp(34px,5vw,62px);
+  line-height:1.1;
+}
+.qr-code{
+  padding:clamp(12px,2vw,20px);
+  border-radius:24px;
+  box-shadow:0 24px 80px #0009,0 0 0 1px #ffffff24;
+}
+.qr-code canvas,.qr-code img{
+  display:block;
+  width:min(280px,72vw)!important;
+  height:auto!important;
+  aspect-ratio:1;
+}
+.qr-close{
+  z-index:2;
+  background:#ffffff18;
+  color:#fff;
+  cursor:pointer;
+}
