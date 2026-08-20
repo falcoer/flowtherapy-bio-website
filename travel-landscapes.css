@@ -1,99 +1,45 @@
-.watermark.travel-wheel-ready{
-  inset:0 auto 0 50%;
-  width:100vw;
-  max-width:none;
-  transform:translateX(-50%);
-  background:none;
-  opacity:1;
-  filter:none;
-  -webkit-mask-image:none;
-  mask-image:none;
-  overflow:visible;
+/* Paysages de voyage : décor fixe, indépendant du contenu qui défile. */
+#app{position:relative;z-index:1}
+.journey-background{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
   pointer-events:none;
+  background:radial-gradient(ellipse at 50% 46%,transparent 22%,var(--bg) 78%);
 }
-:root[data-theme=dark] .watermark.travel-wheel-ready{opacity:1;filter:none}
-.travel-wheel{
-  position:absolute;
-  inset:-3% 0 -8%;
-  overflow:visible;
-  isolation:isolate;
-}
-.travel-landscape{
-  --landscape-angle:0deg;
+.journey-landscape{
   --landscape-opacity:0;
   --landscape-scale:1;
   position:absolute;
-  left:50%;
-  top:52%;
-  width:100vw;
-  max-width:none;
-  transform-origin:50% 168%;
-  transform:translate(-50%,-50%) rotate(var(--landscape-angle)) scale(var(--landscape-scale));
+  inset:0;
+  display:grid;
+  place-items:center;
   opacity:var(--landscape-opacity);
-  transition:opacity .18s linear;
-  will-change:transform,opacity;
+  transform:scale(var(--landscape-scale));
+  transition:opacity .28s linear,transform .45s ease-out;
+  will-change:opacity,transform;
 }
-.travel-landscape img{
+.journey-landscape img{
   display:block;
-  width:100vw;
+  width:clamp(820px,112vw,1920px);
   max-width:none;
   height:auto;
+  max-height:94vh;
   object-fit:contain;
-  object-position:center;
   filter:saturate(1.04);
 }
-:root[data-theme=dark] .travel-landscape img{
-  filter:saturate(1.12) brightness(.72) contrast(1.08);
+:root[data-theme=dark] .journey-background{
+  background:radial-gradient(ellipse at 50% 46%,transparent 18%,var(--bg) 80%);
 }
-
-@media (min-width:791px){
-  .home:has(.travel-wheel-ready){
-    min-height:320vh;
-    overflow:clip;
-  }
-  .home:has(.travel-wheel-ready) .hero-grid{
-    position:sticky;
-    top:0;
-    min-height:100vh;
-  }
-  .home:has(.travel-wheel-ready) .art{
-    overflow:visible;
-  }
-  .home:has(.travel-wheel-ready) .travel-wheel{
-    inset:-1vh 0 -9vh;
-  }
-  .home:has(.travel-wheel-ready) .travel-landscape{
-    top:50%;
-    transform-origin:50% 170%;
-  }
+:root[data-theme=dark] .journey-landscape img{
+  filter:saturate(1.12) brightness(.64) contrast(1.08);
 }
-
-@media (min-width:1200px) and (orientation:landscape){
-  .home:has(.travel-wheel-ready) .travel-landscape,
-  .home:has(.travel-wheel-ready) .travel-landscape img{
-    width:100vw;
-  }
+@media(max-width:790px){
+  .journey-landscape img{width:max(760px,172vw);max-height:none}
 }
-
-@media (max-width:790px){
-  .watermark.travel-wheel-ready{
-    inset:2% auto 2% 50%;
-    width:118vw;
-  }
-  .travel-landscape,
-  .travel-landscape img{
-    width:118vw;
-  }
-  .travel-landscape{
-    top:51%;
-    transform-origin:50% 176%;
-  }
-}
-
-@media (prefers-reduced-motion:reduce){
-  .home:has(.travel-wheel-ready){min-height:min(100vh,960px)}
-  .home:has(.travel-wheel-ready) .hero-grid{position:relative;min-height:690px}
-  .travel-landscape{transition:none;will-change:auto}
-  .travel-landscape:not(:first-child){display:none}
-  .travel-landscape:first-child{opacity:.16!important;transform:translate(-50%,-50%)!important}
+@media(prefers-reduced-motion:reduce){
+  .journey-landscape{transition:none;will-change:auto}
+  .journey-landscape:not(:first-child){display:none}
+  .journey-landscape:first-child{opacity:.22!important;transform:none!important}
 }
