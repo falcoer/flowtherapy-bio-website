@@ -23,6 +23,8 @@ const required = [
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
   'assets/generated/alpaga3-nu-640.avif', 'assets/generated/alpaga3-nu-768.avif', 'assets/generated/alpaga3-nu-1024.webp', 'assets/generated/alpaga3-640.avif', 'assets/generated/alpaga3-768.avif', 'assets/generated/alpaga3-1024.webp',
   'assets/generated/fond-urbain-transparent-960.avif', 'assets/generated/fond-urbain-transparent-1440.png',
+  'assets/decorations/chalk-arrow.svg', 'assets/decorations/chalk-heart.svg', 'assets/decorations/chalk-paint-splash.svg',
+  'assets/decorations/chalk-spark.svg', 'assets/decorations/chalk-star.svg', 'assets/decorations/chalk-swoosh.svg', 'assets/decorations/chalk-underline.svg',
   'assets/fonts/bangers-regular.woff2', 'assets/fonts/inter-variable.woff2',
   'assets/fonts/kalam-regular.woff2', 'assets/vendor/qrcodejs/qrcode.min.js',
   'assets/vendor/qrcodejs/LICENSE'
@@ -50,9 +52,16 @@ expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') &&
 expect(app.includes("const ASSET='assets/';") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
 expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 expect(css.includes('@media(max-width:790px){.watermark') && css.includes('fond-urbain-transparent-960.webp'), 'le mobile doit utiliser le filigrane CI le plus léger');
+expect(app.includes('class="doodle-field hero-doodles"') && app.includes('class="doodle-field section-doodles"') && app.includes('aria-hidden="true"'), 'les décorations à la craie doivent rester des arrière-plans purement décoratifs');
+expect(css.includes("assets/decorations/chalk-star.svg") && css.includes("assets/decorations/chalk-heart.svg") && css.includes("assets/decorations/chalk-arrow.svg") && css.includes("assets/decorations/chalk-paint-splash.svg"), 'les décorations générées par la CI doivent être utilisées par le site');
+expect(css.includes('-webkit-mask:var(--doodle-image)') && css.includes('mask:var(--doodle-image)'), 'les SVG de décoration doivent être colorés par le thème avec un masque compatible Safari');
+expect(css.includes(':root[data-theme=dark] .doodle{opacity:calc(var(--doodle-alpha) + .06)') && css.includes('@media(prefers-reduced-motion:reduce){.doodle'), 'les décorations doivent gérer le thème sombre et la réduction des animations');
 const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'woff2-subset');
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
+const decorations = generatedManifest.assets.filter(asset => asset.mode === 'svg-mask-ci');
+expect(decorations.length === 7, 'exactement sept décorations SVG doivent être générées');
+expect(decorations.reduce((total, asset) => total + asset.bytes, 0) <= 15_000, 'le budget total des décorations SVG est limité à 15 ko');
 
 if (problems.length) throw new Error(`Validation du site échouée:\n- ${problems.join('\n- ')}`);
 console.log(`Validation du site réussie : ${root}`);

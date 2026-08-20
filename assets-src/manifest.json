@@ -13,6 +13,15 @@
     {"path": "images/logo.svg", "sha256": "47cf1b69cae66ecee4817c9e7038b57eb97643157eb97e6c77794b8f609b5966", "mode": "passthrough"},
     {"path": "images/logo_transparent.png", "sha256": "18b67ce67598a12c7142bd63f3851061bb449b73cffc16e5171e3eadbe99be6d", "mode": "responsive-ci"}
   ],
+  "decorations": [
+    {"path": "decorations/chalk-arrow.svg", "sha256": "85f3ae1a0111a9eeccdc877113b391468ea970299635263653f7966141799d83", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-heart.svg", "sha256": "0bca32069d6de8f9e7904c795ecbea8fa22023ef1df6fffac8dae61e0ae8d6ac", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-paint-splash.svg", "sha256": "0be4fc69b7cd467067a576c3b37bbe67d26603722e906ce16610b856471ccd46", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-spark.svg", "sha256": "1184fb07b83b27e2837b76cba5a15a7f0a4e9fb4b0c46a5464fb33de9aec789f", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-star.svg", "sha256": "3108db906986d2539b363e92eb52da74f7150bc2dba26d1d39baceb1eb035f34", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-swoosh.svg", "sha256": "a5268682e6331f34b957141ea3f41a9e6c66d3e5396eb6a1068f1174e9fb7b8f", "mode": "svg-mask-ci"},
+    {"path": "decorations/chalk-underline.svg", "sha256": "c05360cedfdedfd18aaf23412467ec80599d426a0a30375a934cee20fb74b2c9", "mode": "svg-mask-ci"}
+  ],
   "fonts": [
     {"path": "fonts/bangers/Bangers-Regular.ttf", "sha256": "4160a7311de9342674cce9160cde9fcbb30f48190397d86ff1b70b455af65824", "upstream": "https://github.com/google/fonts/blob/main/ofl/bangers/Bangers-Regular.ttf", "license": "fonts/bangers/OFL.txt"},
     {"path": "fonts/inter/Inter-Variable.ttf.gz", "sha256": "f70c5d2e6a784420e76aa12b7f81e9749c6583e42d7f2b7ce78d2ed38ca55b72", "upstream": "https://github.com/google/fonts/blob/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf", "license": "fonts/inter/OFL.txt"},
