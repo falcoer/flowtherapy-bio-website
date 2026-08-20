@@ -2,9 +2,19 @@
   "schema": "flowtherapy.travel-landscapes/v1",
   "policy": "immutable-sources-ci-generated-outputs",
   "sourceDirectory": "images",
-  "widths": [960, 1440, 1672],
+  "widths": [
+    960,
+    1440,
+    1672
+  ],
   "quality": 72,
   "landscapes": [
+    {
+      "id": "urban",
+      "source": "fond-urbain-transparent.png",
+      "sha256": "c0c69523743c83332cff285b91087c7c107f338d2792d4b6bac45d0467451aff",
+      "alt": "Paysage urbain artistique original de Flow Therapy"
+    },
     {
       "id": "himalaya",
       "source": "eclat_himalayen_au_coucher_du_soleil.png",
