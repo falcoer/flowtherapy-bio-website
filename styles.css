@@ -72,12 +72,12 @@ footer{justify-content:center;text-align:center}
 }
 :root[data-theme=dark] #groupe h2{
   text-shadow:
-    -2px -2px 0 #07101d,
-     2px -2px 0 #07101d,
-    -2px  2px 0 #07101d,
-     2px  2px 0 #07101d,
-     0 0 18px #fff,
-     0 0 38px #fff9;
+    -1px -1px 0 #07101d,
+     1px -1px 0 #07101d,
+    -1px  1px 0 #07101d,
+     1px  1px 0 #07101d,
+     0 0 10px #07101d,
+     0 0 16px #fff4;
 }
 
 /* Raccourci QR aligné sur les boutons sociaux. */
@@ -136,10 +136,7 @@ footer{justify-content:center;text-align:center}
 }
 :root[data-theme=dark] #groupe{
   text-shadow:
-    -1px -1px 0 #07101d,
-     1px -1px 0 #07101d,
-    -1px  1px 0 #07101d,
-     1px  1px 0 #07101d,
-     0 0 12px #07101d,
-     0 0 28px #fff7;
+    0 1px 1px #07101d,
+    0 0 6px #07101d,
+    0 0 12px #fff3;
 }
