@@ -1,24 +1,49 @@
 {
   "site": {
     "name": "Flow Therapy",
-    "tagline": "Flow Therapy, trio martégual, compose une musique qui fait voyager, rassemble et touche.",
+    "tagline": "Trio musical aux compositions et reprises qui font voyager, rassemble et touche.",
     "url": "https://falcoer.github.io/flowtherapy-bio-website/",
-    "location": "Martigues, France",
+    "location": "Basé à Martigues (13), France",
     "copyright": "© 2026 Flow Therapy. Tous droits réservés."
   },
   "hero": {
-    "lines": ["SENSIBLE.", "INTENSE.", "VIVANT."],
+    "lines": [
+      "SENSIBLE.",
+      "INTENSE.",
+      "VIVANT."
+    ],
     "signature": "Musique · Énergie · Émotion"
   },
   "navigation": [
-    {"label": "Le groupe", "href": "#groupe"},
-    {"label": "Médias", "href": "#medias"},
-    {"label": "Contact", "href": "#contact"}
+    {
+      "label": "Le groupe",
+      "href": "#groupe"
+    },
+    {
+      "label": "Médias",
+      "href": "#medias"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    }
   ],
   "socials": [
-    {"label": "Instagram", "url": "https://www.instagram.com/flowtherapymusic/", "icon": "instagram"},
-    {"label": "YouTube", "url": "https://www.youtube.com/@FlowTherapyMusic", "icon": "youtube"},
-    {"label": "Facebook", "url": "https://www.facebook.com/reel/1030974076268187", "icon": "facebook"}
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/flowtherapymusic/",
+      "icon": "instagram"
+    },
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@FlowTherapyMusic",
+      "icon": "youtube"
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/reel/1030974076268187",
+      "icon": "facebook"
+    }
   ],
   "about": {
     "title": "Le groupe",
