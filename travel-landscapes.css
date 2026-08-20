@@ -43,3 +43,30 @@
   .journey-landscape:not(:first-child){display:none}
   .journey-landscape:first-child{opacity:.22!important;transform:none!important}
 }
+
+/* Carousel de paysages fixe : mouvement lisible, sans déplacer le contenu. */
+.journey-landscape{
+  --landscape-shift:0vw;
+  --landscape-tilt:0deg;
+}
+.journey-landscape img{
+  transform:translateX(var(--landscape-shift)) rotate(var(--landscape-tilt)) scale(var(--landscape-scale));
+  transition:opacity .36s linear,transform .48s cubic-bezier(.22,.8,.32,1);
+}
+@media(min-width:901px){
+  /* Le contenu reste équilibré, mais sans la grande réserve vide initiale. */
+  .home{padding-top:12px}
+  .hero-grid{min-height:620px;align-items:center}
+  .copy{padding-top:0}
+  .art{height:620px}
+}
+@media(max-width:900px){
+  .home{min-height:auto}
+  .copy{padding-top:24px}
+  .art{height:500px;margin-top:-4px}
+}
+@media(max-width:520px){
+  .copy{padding-top:18px}
+  .art{height:450px}
+  .journey-landscape img{width:max(680px,156vw)}
+}
