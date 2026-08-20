@@ -28,6 +28,7 @@ Objectif : intégrer dans ce dépôt tous les éléments nécessaires au rendu c
 - [ ] Intégrer le vrai logo Flow Therapy en version transparente haute définition.
 - [ ] Préparer favicon / icône carrée dérivée du logo.
 - [ ] Ajouter les icônes Instagram, YouTube et Facebook sous forme SVG locale.
+- [x] Mutualiser les décorations à la craie de la vidéo Remotion (étoiles, cœur, flèche, traits et projection de peinture) sous forme de SVG vectoriels compatibles Light / Dark.
 - [ ] Supprimer toutes les dépendances d'assets vers `flowtherapy-animation-website`.
 - [ ] Optimiser le poids des images sans perte visuelle notable.
 - [ ] Documenter l'origine et l'usage de chaque asset dans `assets/README.md`.
@@ -91,6 +92,7 @@ Objectif : obtenir la même hiérarchie visuelle que le mockup validé.
 - [ ] Reproduire l'équilibre Light : crème, watercolor rose/orange/violet.
 - [ ] Reproduire l'équilibre Dark : bleu nuit, magenta/violet/bleu.
 - [ ] Éviter toute image unique aplatie du hero final.
+- [x] Prolonger l'identité de la vidéo avec des décorations de fond légères, responsive et désactivables via `prefers-reduced-motion`.
 
 **Critère de sortie :** comparaison côte à côte avec le mockup sans divergence majeure de composition, proportions ou hiérarchie.
 

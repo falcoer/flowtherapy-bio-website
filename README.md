@@ -27,7 +27,8 @@ Le HTML ne contient pas de contenu éditorial statique. `app.js` charge la confi
 ```text
 .
 ├── .github/workflows/pages.yml
-├── assets/logo.svg
+├── assets-src/decorations/*.svg
+├── assets-src/images/*
 ├── config/site.json
 ├── ROADMAP.md
 ├── app.js

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title">
+  <title id="title">Étoile dessinée à la craie</title>
+  <path d="M90 12 108 64 164 51 130 94 166 134 111 128 88 170 72 120 18 111 61 82 43 31 86 61Z" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M91 17 106 68 158 55 126 94 160 130 108 124 88 164 75 116 24 109 65 80 48 37 87 66Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".48"/>
+</svg>

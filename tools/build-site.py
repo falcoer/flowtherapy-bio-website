@@ -3,7 +3,9 @@ from __future__ import annotations
 import gzip
 import hashlib
 import json
+import re
 import shutil
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import fontTools
@@ -45,7 +47,7 @@ def sha256(path: Path) -> str:
 
 
 def verify_sources(manifest: dict) -> None:
-    for category in ("images", "fonts", "vendor"):
+    for category in ("images", "decorations", "fonts", "vendor"):
         for asset in manifest[category]:
             source = SOURCE / asset["path"]
             if not source.is_file():
@@ -53,6 +55,20 @@ def verify_sources(manifest: dict) -> None:
             actual = sha256(source)
             if actual != asset["sha256"]:
                 raise ValueError(f"Source modifiée sans mise à jour du manifeste : {source.relative_to(ROOT)}")
+
+
+def optimize_svg(source: Path, output: Path) -> None:
+    svg = source.read_text(encoding="utf-8")
+    root = ET.fromstring(svg)
+    if not root.tag.endswith("svg"):
+        raise ValueError(f"Source SVG invalide : {source.relative_to(ROOT)}")
+    lowered = svg.lower()
+    if "<script" in lowered or re.search(r"\son[a-z]+\s*=", lowered):
+        raise ValueError(f"Source SVG non sûre : {source.relative_to(ROOT)}")
+    optimized = re.sub(r"<!--.*?-->", "", svg, flags=re.DOTALL)
+    optimized = re.sub(r">\s+<", "><", optimized).strip()
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(optimized + "\n", encoding="utf-8")
 
 
 def prepare_dist() -> None:
@@ -94,6 +110,13 @@ def build_assets(manifest: dict) -> list[dict]:
                     else:
                         resized.save(output, quality=variant["quality"], speed=8)
                     records.append({"source": asset["path"], "output": f"assets/generated/{output.name}", "mode": "responsive-ci", "width": width, "height": height, "format": extension, "sha256": sha256(output), "bytes": output.stat().st_size})
+
+    decorations = output_assets / "decorations"
+    for asset in manifest["decorations"]:
+        source = SOURCE / asset["path"]
+        output = decorations / source.name
+        optimize_svg(source, output)
+        records.append({"source": asset["path"], "output": f"assets/decorations/{output.name}", "mode": asset["mode"], "format": "svg", "sha256": sha256(output), "bytes": output.stat().st_size})
 
     output_fonts = output_assets / "fonts"
     for source_name, output_name in FONT_OUTPUTS.items():

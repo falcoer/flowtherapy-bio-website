@@ -13,8 +13,11 @@ Ce répertoire contient exclusivement les fichiers d'origine nécessaires à la 
 ## Organisation
 
 - `images/` : PNG, JPEG et SVG maîtres. Les entrées `responsive-ci` du manifeste produisent des tailles AVIF, WebP et PNG adaptées ; les entrées `passthrough` sont recopiées sans altération.
+- `decorations/` : SVG maîtres dessinés à la craie. Ils reprennent les formes vectorielles de la vidéo Remotion `Don't Speak` v8 ; la CI les valide et les minifie en masques monochromes, ensuite colorés par les thèmes CSS.
 - `fonts/` : fontes TTF officielles et licences OFL. La CI génère les WOFF2 utilisés par le navigateur.
 - `vendor/` : distributions tierces originales et licences ; elles sont publiées localement et peuvent être chargées à la demande.
 - `manifest.json` : provenance, empreintes SHA-256 et rôle de chaque source.
 
 Les alpagas nus et costumés, le logo transparent et le filigrane restent archivés ici dans leur format maître. La CI génère seule leurs variantes responsive ; aucune source n'est modifiée.
+
+Les décorations sont conservées en SVG vectoriel pour rester nettes sans limite de résolution. Les variantes Light et Dark ne dupliquent pas les fichiers : les mêmes masques reçoivent les couleurs sémantiques `pink`, `blue`, `orange` et `purple` du thème actif.
