@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+import unicodedata
 from pathlib import Path
 
 from PIL import Image
@@ -22,13 +23,30 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def normalized_name(value: str) -> str:
+    return unicodedata.normalize("NFC", value)
+
+
+def resolve_source(source_dir: Path, configured_name: str) -> Path:
+    direct = source_dir / configured_name
+    if direct.is_file():
+        return direct
+
+    expected = normalized_name(configured_name)
+    for candidate in source_dir.iterdir():
+        if candidate.is_file() and normalized_name(candidate.name) == expected:
+            return candidate
+
+    return direct
+
+
 def main() -> None:
     for filename in ("travel-landscapes.css", "travel-landscapes.js"):
         shutil.copy2(ROOT / filename, DIST / filename)
 
     config = json.loads(CONFIG.read_text(encoding="utf-8"))
     source_dir = SOURCE / config["sourceDirectory"]
-    expected = [(item, source_dir / item["source"]) for item in config["landscapes"]]
+    expected = [(item, resolve_source(source_dir, item["source"])) for item in config["landscapes"]]
     present = [(item, path) for item, path in expected if path.is_file()]
 
     if not present:
@@ -36,7 +54,7 @@ def main() -> None:
         return
 
     if len(present) != len(expected):
-        missing = ", ".join(path.name for _, path in expected if not path.is_file())
+        missing = ", ".join(item["source"] for item, path in expected if not path.is_file())
         raise FileNotFoundError(f"Travel landscapes incomplete; missing: {missing}")
 
     generated = DIST / "assets" / "generated"
