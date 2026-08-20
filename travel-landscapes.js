@@ -49,10 +49,14 @@ function setupJourneyBackground() {
     slides.forEach((slide, index) => {
       const distance = Math.abs(index - position);
       const visibility = Math.max(0, 1 - distance);
-      const opacity = 0.06 + visibility * 0.42;
-      const scale = 1.015 - visibility * 0.025;
+      const opacity = 0.02 + visibility * 0.56;
+      const scale = 1.018 - visibility * 0.028;
+      const shift = Math.max(-1, Math.min(1, index - position)) * 5;
+      const tilt = Math.max(-1, Math.min(1, index - position)) * 0.8;
       slide.style.setProperty('--landscape-opacity', String(opacity));
       slide.style.setProperty('--landscape-scale', String(scale));
+      slide.style.setProperty('--landscape-shift', \`${shift}vw\`);
+      slide.style.setProperty('--landscape-tilt', \`${tilt}deg\`);
     });
   };
   const requestUpdate = () => {
