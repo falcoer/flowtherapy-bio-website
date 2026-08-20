@@ -1,0 +1,33 @@
+{
+  "schema": "flowtherapy.travel-landscapes/v1",
+  "policy": "immutable-sources-ci-generated-outputs",
+  "sourceDirectory": "images",
+  "widths": [960, 1440, 1672],
+  "quality": 72,
+  "landscapes": [
+    {
+      "id": "himalaya",
+      "source": "landscape-himalaya.png",
+      "sha256": "82bc5ef0ade1a6af1c9773b8016b3e1050898f2e482cc2ef29e39cbcccb7ae2a",
+      "alt": "Paysage artistique de l'Himalaya"
+    },
+    {
+      "id": "city",
+      "source": "landscape-city.png",
+      "sha256": "a5f8d3b2d96b3a78758fd32fb392efa003cada0df6b83e5856687247125e3561",
+      "alt": "Paysage artistique d'une grande métropole"
+    },
+    {
+      "id": "amazonia",
+      "source": "landscape-amazonia.png",
+      "sha256": "6bbda8094cba06bc61fb651c8d116dad1c0755bccc613df9b5019a02d59076ae",
+      "alt": "Paysage artistique de forêt amazonienne"
+    },
+    {
+      "id": "caribbean",
+      "source": "landscape-caribbean.png",
+      "sha256": "f898eb629e29e88c0eab92b461bd954891ab6034b23d4f86e6e025170d53e506",
+      "alt": "Paysage artistique de côte caraïbéenne"
+    }
+  ]
+}
