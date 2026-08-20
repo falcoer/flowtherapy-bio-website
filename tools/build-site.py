@@ -10,7 +10,7 @@ from pathlib import Path
 
 import fontTools
 import PIL
-from PIL import Image
+from PIL import Image, ImageOps
 from fontTools import subset
 
 
@@ -47,7 +47,7 @@ def sha256(path: Path) -> str:
 
 
 def verify_sources(manifest: dict) -> None:
-    for category in ("images", "decorations", "fonts", "vendor"):
+    for category in ("images", "medias", "decorations", "fonts", "vendor"):
         for asset in manifest[category]:
             source = SOURCE / asset["path"]
             if not source.is_file():
@@ -110,6 +110,32 @@ def build_assets(manifest: dict) -> list[dict]:
                     else:
                         resized.save(output, quality=variant["quality"], speed=8)
                     records.append({"source": asset["path"], "output": f"assets/generated/{output.name}", "mode": "responsive-ci", "width": width, "height": height, "format": extension, "sha256": sha256(output), "bytes": output.stat().st_size})
+
+
+    output_media = output_assets / "media"
+    output_media.mkdir(parents=True)
+    for asset in manifest["medias"]:
+        source = SOURCE / asset["path"]
+        if asset["mode"] == "excluded-source":
+            records.append({"source": asset["path"], "mode": "excluded-source", "reason": asset["reason"]})
+            continue
+        with Image.open(source) as original:
+            normalized = ImageOps.exif_transpose(original).convert("RGB")
+            for width in asset["widths"]:
+                if width > normalized.width:
+                    raise ValueError(f"Largeur demandée supérieure à la source : {asset['path']} ({width} > {normalized.width})")
+                height = round(normalized.height * width / normalized.width)
+                resized = normalized.resize((width, height), Image.Resampling.LANCZOS)
+                for extension in ("avif", "webp", "jpg"):
+                    output = output_media / f"{asset['name']}-{width}.{extension}"
+                    if extension == "jpg":
+                        resized.save(output, format="JPEG", quality=84, optimize=True, progressive=True)
+                    elif extension == "webp":
+                        resized.save(output, quality=78, method=6)
+                    else:
+                        resized.save(output, quality=72, speed=8)
+                    records.append({"source": asset["path"], "output": f"assets/media/{output.name}", "mode": "responsive-media-ci", "width": width, "height": height, "format": extension, "sha256": sha256(output), "bytes": output.stat().st_size})
+
 
     decorations = output_assets / "decorations"
     for asset in manifest["decorations"]:

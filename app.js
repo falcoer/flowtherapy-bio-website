@@ -10,12 +10,24 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const orientationClass=item=>item.orientation==='portrait'?'ratio-portrait':'ratio-landscape';
 const responsivePicture=(name,widths,className,alt='')=>`<picture><source type="image/avif" srcset="${widths.map(width=>`${ASSET}generated/${name}-${width}.avif ${width}w`).join(', ')}"><source type="image/webp" srcset="${widths.map(width=>`${ASSET}generated/${name}-${width}.webp ${width}w`).join(', ')}"><img class="${className}" src="${ASSET}generated/${name}-${widths[0]}.png" srcset="${widths.map(width=>`${ASSET}generated/${name}-${width}.png ${width}w`).join(', ')}" sizes="${className==='logo'?'(max-width: 790px) 200px, 240px':'(max-width: 790px) 52vw, 640px'}" width="${widths[0]}" height="${Math.round(widths[0]*2/3)}" alt="${esc(alt)}" decoding="async"></picture>`;
 
+const responsiveMediaPicture=(item,viewer=false)=>{
+  const widths=Array.isArray(item.widths)?item.widths.filter(Number.isFinite):[];
+  if(!item.asset||!widths.length)return '';
+  const name=esc(item.asset);
+  const sizes=viewer?'min(92vw, 1280px)':item.orientation==='portrait'?'(max-width: 790px) 86vw, 32vw':'(max-width: 790px) 92vw, 48vw';
+  const srcset=extension=>widths.map(width=>`${ASSET}media/${name}-${width}.${extension} ${width}w`).join(', ');
+  const fallback=widths[widths.length-1];
+  return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}media/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async"></picture>`;
+};
+
 function mediaVisual(item,index,viewer=false){
   const ratio=orientationClass(item);
   const ratioStyle=/^\d+:\d+$/.test(String(item.ratio))?` style="--media-ratio:${item.ratio.replace(':','/')}"`:'';
-  const content=item.src
-    ? `<img src="${esc(item.src)}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async">`
-    : `<div class="media-placeholder tone-${index%3+1}" aria-hidden="true"></div>`;
+  const content=item.asset
+    ? responsiveMediaPicture(item,viewer)
+    : item.src
+      ? `<img src="${esc(item.src)}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async">`
+      : `<div class="media-placeholder tone-${index%3+1}" aria-hidden="true"></div>`;
   return `<div class="media-frame ${ratio}"${ratioStyle}>${content}</div>`;
 }
 

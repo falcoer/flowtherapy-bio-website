@@ -56,61 +56,112 @@
   },
   "media": {
     "title": "Médias",
-    "intro": "Photos de scène, portraits et contenus du groupe. Les visuels définitifs seront ajoutés prochainement.",
+    "intro": "Photos de scène, portraits et souvenirs de Flow Therapy.",
     "items": [
       {
-        "title": "Live — scène",
-        "type": "Photo",
-        "orientation": "landscape",
-        "ratio": "16:9",
-        "date": "À renseigner",
-        "credit": "À renseigner",
-        "description": "Emplacement réservé à une photographie panoramique de Flow Therapy en concert."
-      },
-      {
-        "title": "Portrait — Betty",
-        "type": "Portrait",
-        "orientation": "portrait",
-        "ratio": "4:5",
-        "date": "À renseigner",
-        "credit": "À renseigner",
-        "description": "Emplacement réservé à un portrait vertical de Betty."
-      },
-      {
-        "title": "Portrait — Jennifer",
-        "type": "Portrait",
-        "orientation": "portrait",
-        "ratio": "4:5",
-        "date": "À renseigner",
-        "credit": "À renseigner",
-        "description": "Emplacement réservé à un portrait vertical de Jennifer."
-      },
-      {
-        "title": "Portrait — Lauris",
-        "type": "Portrait",
-        "orientation": "portrait",
-        "ratio": "4:5",
-        "date": "À renseigner",
-        "credit": "À renseigner",
-        "description": "Emplacement réservé à un portrait vertical de Lauris."
-      },
-      {
-        "title": "Flow Therapy — groupe",
+        "title": "Flow Therapy — portrait de groupe sur scène",
         "type": "Photo de groupe",
         "orientation": "landscape",
         "ratio": "3:2",
-        "date": "À renseigner",
-        "credit": "À renseigner",
-        "description": "Emplacement réservé à une photographie paysage du trio."
+        "asset": "flow-therapy-portrait-groupe-scene",
+        "widths": [
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-06-30",
+        "credit": "Non renseigné",
+        "description": "Betty, Jennifer et Lauris réunis sous les lumières de la scène."
       },
       {
-        "title": "Coulisses",
-        "type": "Photo",
+        "title": "Flow Therapy en concert",
+        "type": "Photo de concert",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "flow-therapy-live-noir-blanc",
+        "widths": [
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-06-07",
+        "credit": "Non renseigné",
+        "description": "Le trio en concert en plein air, photographié en noir et blanc."
+      },
+      {
+        "title": "Concert sous les lumières bleues",
+        "type": "Photo de concert",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "flow-therapy-live-lumieres-bleues",
+        "widths": [
+          640,
+          960,
+          1440
+        ],
+        "date": "2025-10-14",
+        "credit": "Non renseigné",
+        "description": "Flow Therapy sur scène dans une ambiance de faisceaux bleus."
+      },
+      {
+        "title": "Flow Therapy — le trio en lumière",
+        "type": "Montage photo",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "flow-therapy-triptyque-live",
+        "widths": [
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-06-29",
+        "credit": "Photo CB",
+        "description": "Triptyque de Betty, Jennifer et Lauris en concert."
+      },
+      {
+        "title": "Lauris à la basse",
+        "type": "Portrait",
+        "orientation": "portrait",
+        "ratio": "2:3",
+        "asset": "lauris-basse-noir-blanc",
+        "widths": [
+          480,
+          720,
+          960
+        ],
+        "date": "2026-03-22",
+        "credit": "Non renseigné",
+        "description": "Lauris à la basse, photographié en noir et blanc."
+      },
+      {
+        "title": "Betty — guitare et chant",
+        "type": "Portrait",
         "orientation": "portrait",
         "ratio": "9:16",
-        "date": "À renseigner",
-        "credit": "À renseigner",
-        "description": "Emplacement réservé à un contenu vertical pris en coulisses."
+        "asset": "betty-guitare-chant",
+        "widths": [
+          480,
+          720,
+          898
+        ],
+        "date": "2026-06-07",
+        "credit": "Non renseigné",
+        "description": "Betty au chant et à la guitare acoustique lors d’un concert en plein air."
+      },
+      {
+        "title": "Flow Therapy — portrait noir et blanc",
+        "type": "Photo de groupe",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "flow-therapy-groupe-noir-blanc",
+        "widths": [
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-02-06",
+        "credit": "Non renseigné",
+        "description": "Betty, Jennifer et Lauris réunis pour un portrait du groupe."
       }
     ]
   }

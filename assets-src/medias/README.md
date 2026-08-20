@@ -44,7 +44,8 @@ Chaque média publié doit posséder une entrée dans `config/site.json`, sous `
 | `type` | oui | Libellé éditorial : `Photo`, `Portrait`, `Pochette`, `Affiche`, etc. |
 | `orientation` | oui | `landscape` ou `portrait`. |
 | `ratio` | oui | Ratio sous la forme `16:9`, `3:2`, `4:5` ou `9:16`. |
-| `src` | oui | Chemin du fichier généré et publié, par exemple `assets/media/live-martigues-2026.webp`. |
+| `asset` | oui | Nom de base des variantes générées dans `assets/media/`. |
+| `widths` | oui | Trois largeurs responsives générées par la CI. |
 | `date` | oui | Date de prise de vue ou de publication. Préférer `AAAA-MM-JJ` lorsqu’elle est connue. |
 | `credit` | oui | Nom du photographe, du vidéaste ou du créateur du visuel. |
 | `description` | oui | Description courte affichée dans les informations de la visionneuse. |
@@ -57,7 +58,8 @@ Exemple :
   "type": "Photo",
   "orientation": "landscape",
   "ratio": "16:9",
-  "src": "assets/media/flow-therapy-live-martigues-2026.webp",
+  "asset": "flow-therapy-live-martigues-2026",
+  "widths": [640, 960, 1440],
   "date": "2026-07-18",
   "credit": "Nom du photographe",
   "description": "Flow Therapy sur scène lors d’un concert à Martigues."
@@ -99,3 +101,12 @@ L’ajout d’un fichier dans ce dossier ne suffit pas à le publier. Il faut é
 4. vérifier le rendu paysage et mobile ainsi que le poids des fichiers produits.
 
 Aucun fichier généré ne doit être commité dans `assets-src/medias/`.
+
+## Index actuel
+
+Huit sources sont déclarées dans `assets-src/manifest.json` :
+
+- sept photographies publiées en 63 variantes responsives (AVIF, WebP et JPEG) ;
+- une capture d’écran de galerie mobile conservée et vérifiée, mais exclue de la publication en attendant la photographie originale.
+
+Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles. Les crédits non fournis restent explicitement indiqués comme « Non renseigné ».

@@ -32,6 +32,16 @@ const required = [
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
+for (const [index, item] of (config.media?.items || []).entries()) {
+  expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
+  expect(item.asset && Array.isArray(item.widths) && item.widths.length === 3, `media.items[${index}] doit référencer un asset responsive et trois largeurs`);
+  for (const width of (item.widths || [])) {
+    for (const extension of ['avif', 'webp', 'jpg']) {
+      const file = `assets/media/${item.asset}-${width}.${extension}`;
+      try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
+    }
+  }
+}
 for (const file of ['assets/alpaga1-nu.png', 'assets/alpaga2-nu.png', 'assets/alpaga3-nu.png', 'assets/alpaga1.png', 'assets/alpaga2.png', 'assets/alpaga3.png', 'assets/logo_transparent.png', 'assets/fond-urbain-transparent.png']) {
   try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
@@ -59,6 +69,10 @@ expect(css.includes(':root[data-theme=dark] .doodle{opacity:calc(var(--doodle-al
 const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'woff2-subset');
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
+const responsiveMedia = generatedManifest.assets.filter(asset => asset.mode === 'responsive-media-ci');
+expect(responsiveMedia.length === 63, 'exactement 63 variantes média doivent être générées pour les sept photos publiées');
+const excludedMedia = generatedManifest.assets.filter(asset => asset.mode === 'excluded-source');
+expect(excludedMedia.length === 1, 'la capture d’écran mobile doit rester indexée mais exclue de la galerie');
 const decorations = generatedManifest.assets.filter(asset => asset.mode === 'svg-mask-ci');
 expect(decorations.length === 7, 'exactement sept décorations SVG doivent être générées');
 expect(decorations.reduce((total, asset) => total + asset.bytes, 0) <= 15_000, 'le budget total des décorations SVG est limité à 15 ko');

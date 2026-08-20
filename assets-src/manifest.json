@@ -2,34 +2,226 @@
   "schema": "flowtherapy.assets-sources/v1",
   "policy": "immutable-sources-ci-generated-outputs",
   "images": [
-    {"path": "images/alpaga1-nu.png", "sha256": "51ec2fe21a6a662649d109dc1fa4171550710654fa36fd64fa1b0900fa6a4fdb", "mode": "responsive-ci"},
-    {"path": "images/alpaga1.png", "sha256": "26808818ebc84b8440a76c0abaa3b1720dac764020b56862230707b2ef94b04c", "mode": "responsive-ci"},
-    {"path": "images/alpaga2-nu.png", "sha256": "6b54dcd9f26bb301636ab6b13a8be3149f197f0c89d4b16a758a61b41a62967f", "mode": "responsive-ci"},
-    {"path": "images/alpaga2.png", "sha256": "9db64274a6958145c7077ad3f9ded3247feb11bcd0b5ca0920035f3f55de1566", "mode": "responsive-ci"},
-    {"path": "images/alpaga3-nu.png", "sha256": "b9acff77178fb737a1d488f79982cd05cd4107520df75ccee57348e44a422471", "mode": "responsive-ci"},
-    {"path": "images/alpaga3.png", "sha256": "2110008d2df984f454a09a634d4528149e1ae48fb3652e7f3fab5d464672043c", "mode": "responsive-ci"},
-    {"path": "images/fond-urbain-transparent.png", "sha256": "c0c69523743c83332cff285b91087c7c107f338d2792d4b6bac45d0467451aff", "mode": "responsive-ci"},
-    {"path": "images/logo.jpg", "sha256": "dc52210cdd5439a85a1661b7ed6245b67f4ff478a8355ddd3f037c17264c95a8", "mode": "passthrough"},
-    {"path": "images/logo.svg", "sha256": "47cf1b69cae66ecee4817c9e7038b57eb97643157eb97e6c77794b8f609b5966", "mode": "passthrough"},
-    {"path": "images/logo_transparent.png", "sha256": "18b67ce67598a12c7142bd63f3851061bb449b73cffc16e5171e3eadbe99be6d", "mode": "responsive-ci"}
+    {
+      "path": "images/alpaga1-nu.png",
+      "sha256": "51ec2fe21a6a662649d109dc1fa4171550710654fa36fd64fa1b0900fa6a4fdb",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/alpaga1.png",
+      "sha256": "26808818ebc84b8440a76c0abaa3b1720dac764020b56862230707b2ef94b04c",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/alpaga2-nu.png",
+      "sha256": "6b54dcd9f26bb301636ab6b13a8be3149f197f0c89d4b16a758a61b41a62967f",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/alpaga2.png",
+      "sha256": "9db64274a6958145c7077ad3f9ded3247feb11bcd0b5ca0920035f3f55de1566",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/alpaga3-nu.png",
+      "sha256": "b9acff77178fb737a1d488f79982cd05cd4107520df75ccee57348e44a422471",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/alpaga3.png",
+      "sha256": "2110008d2df984f454a09a634d4528149e1ae48fb3652e7f3fab5d464672043c",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/fond-urbain-transparent.png",
+      "sha256": "c0c69523743c83332cff285b91087c7c107f338d2792d4b6bac45d0467451aff",
+      "mode": "responsive-ci"
+    },
+    {
+      "path": "images/logo.jpg",
+      "sha256": "dc52210cdd5439a85a1661b7ed6245b67f4ff478a8355ddd3f037c17264c95a8",
+      "mode": "passthrough"
+    },
+    {
+      "path": "images/logo.svg",
+      "sha256": "47cf1b69cae66ecee4817c9e7038b57eb97643157eb97e6c77794b8f609b5966",
+      "mode": "passthrough"
+    },
+    {
+      "path": "images/logo_transparent.png",
+      "sha256": "18b67ce67598a12c7142bd63f3851061bb449b73cffc16e5171e3eadbe99be6d",
+      "mode": "responsive-ci"
+    }
   ],
   "decorations": [
-    {"path": "decorations/chalk-arrow.svg", "sha256": "85f3ae1a0111a9eeccdc877113b391468ea970299635263653f7966141799d83", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-heart.svg", "sha256": "0bca32069d6de8f9e7904c795ecbea8fa22023ef1df6fffac8dae61e0ae8d6ac", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-paint-splash.svg", "sha256": "0be4fc69b7cd467067a576c3b37bbe67d26603722e906ce16610b856471ccd46", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-spark.svg", "sha256": "1184fb07b83b27e2837b76cba5a15a7f0a4e9fb4b0c46a5464fb33de9aec789f", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-star.svg", "sha256": "41974782249edbf8f8925bf8cfbd964000106d78238e8b2a23969c2b3cc1d14d", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-swoosh.svg", "sha256": "a5268682e6331f34b957141ea3f41a9e6c66d3e5396eb6a1068f1174e9fb7b8f", "mode": "svg-mask-ci"},
-    {"path": "decorations/chalk-underline.svg", "sha256": "c05360cedfdedfd18aaf23412467ec80599d426a0a30375a934cee20fb74b2c9", "mode": "svg-mask-ci"}
+    {
+      "path": "decorations/chalk-arrow.svg",
+      "sha256": "85f3ae1a0111a9eeccdc877113b391468ea970299635263653f7966141799d83",
+      "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/chalk-heart.svg",
+      "sha256": "0bca32069d6de8f9e7904c795ecbea8fa22023ef1df6fffac8dae61e0ae8d6ac",
+      "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/chalk-paint-splash.svg",
+      "sha256": "0be4fc69b7cd467067a576c3b37bbe67d26603722e906ce16610b856471ccd46",
+      "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/chalk-spark.svg",
+      "sha256": "1184fb07b83b27e2837b76cba5a15a7f0a4e9fb4b0c46a5464fb33de9aec789f",
+      "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/chalk-star.svg",
+      "sha256": "41974782249edbf8f8925bf8cfbd964000106d78238e8b2a23969c2b3cc1d14d",
+      "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/chalk-swoosh.svg",
+      "sha256": "a5268682e6331f34b957141ea3f41a9e6c66d3e5396eb6a1068f1174e9fb7b8f",
+      "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/chalk-underline.svg",
+      "sha256": "c05360cedfdedfd18aaf23412467ec80599d426a0a30375a934cee20fb74b2c9",
+      "mode": "svg-mask-ci"
+    }
   ],
   "fonts": [
-    {"path": "fonts/bangers/Bangers-Regular.ttf", "sha256": "4160a7311de9342674cce9160cde9fcbb30f48190397d86ff1b70b455af65824", "upstream": "https://github.com/google/fonts/blob/main/ofl/bangers/Bangers-Regular.ttf", "license": "fonts/bangers/OFL.txt"},
-    {"path": "fonts/inter/Inter-Variable.ttf.gz", "sha256": "f70c5d2e6a784420e76aa12b7f81e9749c6583e42d7f2b7ce78d2ed38ca55b72", "upstream": "https://github.com/google/fonts/blob/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf", "license": "fonts/inter/OFL.txt"},
-    {"path": "fonts/kalam/Kalam-Regular.ttf", "sha256": "57cecb63d4608019371954274ae1d8c397764debd5b19d4a33c1efa4dc923c0b", "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Regular.ttf", "license": "fonts/kalam/OFL.txt"},
-    {"path": "fonts/kalam/Kalam-Bold.ttf", "sha256": "2f6576601db015d4f6c08678120277fc8510b98c06e932ce7a6a9cbff4cbdded", "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Bold.ttf", "license": "fonts/kalam/OFL.txt"}
+    {
+      "path": "fonts/bangers/Bangers-Regular.ttf",
+      "sha256": "4160a7311de9342674cce9160cde9fcbb30f48190397d86ff1b70b455af65824",
+      "upstream": "https://github.com/google/fonts/blob/main/ofl/bangers/Bangers-Regular.ttf",
+      "license": "fonts/bangers/OFL.txt"
+    },
+    {
+      "path": "fonts/inter/Inter-Variable.ttf.gz",
+      "sha256": "f70c5d2e6a784420e76aa12b7f81e9749c6583e42d7f2b7ce78d2ed38ca55b72",
+      "upstream": "https://github.com/google/fonts/blob/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+      "license": "fonts/inter/OFL.txt"
+    },
+    {
+      "path": "fonts/kalam/Kalam-Regular.ttf",
+      "sha256": "57cecb63d4608019371954274ae1d8c397764debd5b19d4a33c1efa4dc923c0b",
+      "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Regular.ttf",
+      "license": "fonts/kalam/OFL.txt"
+    },
+    {
+      "path": "fonts/kalam/Kalam-Bold.ttf",
+      "sha256": "2f6576601db015d4f6c08678120277fc8510b98c06e932ce7a6a9cbff4cbdded",
+      "upstream": "https://github.com/google/fonts/blob/main/ofl/kalam/Kalam-Bold.ttf",
+      "license": "fonts/kalam/OFL.txt"
+    }
   ],
   "vendor": [
-    {"path": "vendor/qrcodejs/qrcode.min.js", "sha256": "c541ef06327885a8415bca8df6071e14189b4855336def4f36db54bde8484f36", "mode": "lazy-passthrough", "upstream": "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js", "license": "vendor/qrcodejs/LICENSE"},
-    {"path": "vendor/qrcodejs/LICENSE", "sha256": "aaa1f349028a59432eb00222b8ddfe4d2ccebdce04cf8348dcb8d41b7068107b", "mode": "license", "upstream": "https://github.com/davidshimjs/qrcodejs/blob/master/LICENSE"}
+    {
+      "path": "vendor/qrcodejs/qrcode.min.js",
+      "sha256": "c541ef06327885a8415bca8df6071e14189b4855336def4f36db54bde8484f36",
+      "mode": "lazy-passthrough",
+      "upstream": "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js",
+      "license": "vendor/qrcodejs/LICENSE"
+    },
+    {
+      "path": "vendor/qrcodejs/LICENSE",
+      "sha256": "aaa1f349028a59432eb00222b8ddfe4d2ccebdce04cf8348dcb8d41b7068107b",
+      "mode": "license",
+      "upstream": "https://github.com/davidshimjs/qrcodejs/blob/master/LICENSE"
+    }
+  ],
+  "medias": [
+    {
+      "path": "medias/11fe83c3-d862-48b5-8123-32aa1af0f9a6.JPG",
+      "sha256": "8e22b37a4222b4330327df2712a1338f2f119668d74c78a0a5aeefe59a8f1235",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-portrait-groupe-scene",
+      "widths": [
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/18f77f88-ed57-4bf6-ada0-a11b133ecdc7.JPG",
+      "sha256": "39b594d5f507703a547412b516635fdc32ec2d77518ee608debf5263b32fc926",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-live-noir-blanc",
+      "widths": [
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/52e253fa-e8ee-477a-a27b-cfa4db0f661d.JPG",
+      "sha256": "22267c86f96a69156c4f9c3cce54a8eaa06fa40b5ffec5d0b00ff0f390f0fc8b",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-live-lumieres-bleues",
+      "widths": [
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/71866b5d-63e4-4ef2-b79c-48ebcb9396c2.JPG",
+      "sha256": "5bb01f61bc77114df5a81fe3f3145d92e7294fcebef70be078d8983b81d73f3f",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-triptyque-live",
+      "widths": [
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1067"
+    },
+    {
+      "path": "medias/734ba641-565f-46d3-9c1f-3515ab49450d.JPG",
+      "sha256": "d54f1f7f38d8ea7d17f85ffddad671d273b2c3dc38c50198dd93c9583ba9767f",
+      "mode": "responsive-media-ci",
+      "name": "lauris-basse-noir-blanc",
+      "widths": [
+        480,
+        720,
+        960
+      ],
+      "dimensions": "1068x1600"
+    },
+    {
+      "path": "medias/7ad9b863-3450-4fec-996e-5837ef948a28.JPG",
+      "sha256": "cf9f63d4782ae399dced50a01a8245f58e643a7a3c3114d3c30146100c209d0b",
+      "mode": "responsive-media-ci",
+      "name": "betty-guitare-chant",
+      "widths": [
+        480,
+        720,
+        898
+      ],
+      "dimensions": "898x1600"
+    },
+    {
+      "path": "medias/8b388508-71cf-44e5-ad62-d0ba88dbe9a6.JPG",
+      "sha256": "db15e2667228c818f251f76ceba5774ab7a029582184b03f6efec708ba577887",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-groupe-noir-blanc",
+      "widths": [
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/a8c1539c-929f-4d04-9ad3-acca84a10487.JPG",
+      "sha256": "824a4558b51a4487bbe5f57b25d3269223718dbc4828c833c9ebc0a52b5ce1fb",
+      "mode": "excluded-source",
+      "dimensions": "921x2048",
+      "reason": "Capture d’écran de galerie mobile : demander la photographie originale avant publication."
+    }
   ]
 }
