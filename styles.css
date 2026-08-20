@@ -47,3 +47,14 @@ footer{padding:35px 6vw 50px;border-top:1px solid var(--line);display:flex;gap:2
   .copy{padding-top:0}
   .art{height:560px}
 }
+
+/* Lisibilité du titre de groupe sur les paysages en filigrane. */
+#groupe h2{
+  text-shadow:0 2px 2px #fff,0 0 12px #fff,0 0 30px #fff;
+}
+:root[data-theme=dark] #groupe h2{
+  text-shadow:0 2px 2px #07101d,0 0 12px #fff9,0 0 30px #fff6;
+}
+
+/* Pied de page volontairement réduit à la mention légale. */
+footer{justify-content:center;text-align:center}
