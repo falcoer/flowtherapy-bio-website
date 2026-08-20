@@ -71,8 +71,8 @@ function setupJourneyBackground() {
   update();
 }
 
-async function installTravelLandscapes() {
-  if (await assetAvailable()) setupJourneyBackground();
+function installTravelLandscapes() {
+  setupJourneyBackground();
 }
 
 installTravelLandscapes();
