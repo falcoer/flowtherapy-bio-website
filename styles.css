@@ -122,3 +122,24 @@ footer{justify-content:center;text-align:center}
   color:#fff;
   cursor:pointer;
 }
+
+/* Halo lisible sur l’intégralité du contenu éditorial du groupe. */
+#groupe{
+  text-shadow:
+    -1px -1px 0 #fff,
+     1px -1px 0 #fff,
+    -1px  1px 0 #fff,
+     1px  1px 0 #fff,
+     0 0 10px #fff,
+     0 0 24px #fff,
+     0 0 42px #fff;
+}
+:root[data-theme=dark] #groupe{
+  text-shadow:
+    -1px -1px 0 #07101d,
+     1px -1px 0 #07101d,
+    -1px  1px 0 #07101d,
+     1px  1px 0 #07101d,
+     0 0 12px #07101d,
+     0 0 28px #fff7;
+}
