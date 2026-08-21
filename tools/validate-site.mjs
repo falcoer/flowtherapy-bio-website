@@ -32,6 +32,7 @@ const required = [
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
+expect(!JSON.stringify(config).includes('Jennifer'), 'Le prénom Jennifer ne doit plus apparaître dans les contenus ou métadonnées du site');
 for (const [index, item] of (config.media?.items || []).entries()) {
   expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
   expect(item.asset && Array.isArray(item.widths) && item.widths.length === 3, `media.items[${index}] doit référencer un asset responsive et trois largeurs`);
@@ -70,7 +71,7 @@ const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'wof
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
 const responsiveMedia = generatedManifest.assets.filter(asset => asset.mode === 'responsive-media-ci');
-expect(responsiveMedia.length === 63, 'exactement 63 variantes média doivent être générées pour les sept photos publiées');
+expect(responsiveMedia.length === 72, 'exactement 72 variantes média doivent être générées pour les huit photos publiées');
 const excludedMedia = generatedManifest.assets.filter(asset => asset.mode === 'excluded-source');
 expect(excludedMedia.length === 1, 'la capture d’écran mobile doit rester indexée mais exclue de la galerie');
 const decorations = generatedManifest.assets.filter(asset => asset.mode === 'svg-mask-ci');

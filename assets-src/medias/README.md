@@ -104,9 +104,9 @@ Aucun fichier généré ne doit être commité dans `assets-src/medias/`.
 
 ## Index actuel
 
-Huit sources sont déclarées dans `assets-src/manifest.json` :
+Neuf sources sont déclarées dans `assets-src/manifest.json` :
 
-- sept photographies publiées en 63 variantes responsives (AVIF, WebP et JPEG) ;
+- huit photographies publiées en 72 variantes responsives (AVIF, WebP et JPEG) ;
 - une capture d’écran de galerie mobile conservée et vérifiée, mais exclue de la publication en attendant la photographie originale.
 
-Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles. Les crédits non fournis restent explicitement indiqués comme « Non renseigné ».
+Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles. Les crédits photo affichés sont attribués à C.B.
