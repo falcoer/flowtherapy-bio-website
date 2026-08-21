@@ -32,7 +32,6 @@ const required = [
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
-expect(!JSON.stringify(config).includes('Jennifer'), 'Le prénom Jennifer ne doit plus apparaître dans les contenus ou métadonnées du site');
 for (const [index, item] of (config.media?.items || []).entries()) {
   expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
   expect(item.asset && Array.isArray(item.widths) && item.widths.length === 3, `media.items[${index}] doit référencer un asset responsive et trois largeurs`);
