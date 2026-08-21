@@ -15,7 +15,7 @@ const responsiveMediaPicture=(item,viewer=false)=>{
   const widths=Array.isArray(item.widths)?item.widths.filter(Number.isFinite):[];
   if(!item.asset||!widths.length)return '';
   const name=esc(item.asset);
-  const sizes=viewer?'min(92vw, 1280px)':item.orientation==='portrait'?'(max-width: 790px) 86vw, 32vw':'(max-width: 790px) 92vw, 48vw';
+  const sizes=viewer?'min(92vw, 1280px)':'(max-width: 520px) calc(50vw - 12px), (max-width: 900px) calc(33vw - 18px), 25vw';
   const srcset=extension=>widths.map(width=>`${ASSET}media/${name}-${width}.${extension} ${width}w`).join(', ');
   const fallback=widths[widths.length-1];
   return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}media/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async"></picture>`;

@@ -138,6 +138,8 @@
       "mode": "responsive-media-ci",
       "name": "flow-therapy-portrait-groupe-scene",
       "widths": [
+        320,
+        480,
         640,
         960,
         1440
@@ -150,6 +152,8 @@
       "mode": "responsive-media-ci",
       "name": "flow-therapy-live-noir-blanc",
       "widths": [
+        320,
+        480,
         640,
         960,
         1440
@@ -162,6 +166,8 @@
       "mode": "responsive-media-ci",
       "name": "flow-therapy-live-lumieres-bleues",
       "widths": [
+        320,
+        480,
         640,
         960,
         1440
@@ -174,6 +180,8 @@
       "mode": "responsive-media-ci",
       "name": "flow-therapy-triptyque-live",
       "widths": [
+        320,
+        480,
         640,
         960,
         1440
@@ -186,6 +194,7 @@
       "mode": "responsive-media-ci",
       "name": "lauris-basse-noir-blanc",
       "widths": [
+        320,
         480,
         720,
         960
@@ -198,6 +207,7 @@
       "mode": "responsive-media-ci",
       "name": "betty-guitare-chant",
       "widths": [
+        320,
         480,
         720,
         898
@@ -210,6 +220,8 @@
       "mode": "responsive-media-ci",
       "name": "flow-therapy-groupe-noir-blanc",
       "widths": [
+        320,
+        480,
         640,
         960,
         1440
@@ -222,6 +234,7 @@
       "mode": "responsive-media-ci",
       "name": "jenni-chant",
       "widths": [
+        320,
         480,
         720,
         960

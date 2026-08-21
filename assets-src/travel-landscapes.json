@@ -7,7 +7,8 @@
     1440,
     1672
   ],
-  "quality": 72,
+  "webpQuality": 72,
+  "avifQuality": 64,
   "landscapes": [
     {
       "id": "urban",

@@ -61,6 +61,8 @@
         "ratio": "3:2",
         "asset": "flow-therapy-portrait-groupe-scene",
         "widths": [
+          320,
+          480,
           640,
           960,
           1440
@@ -76,6 +78,8 @@
         "ratio": "3:2",
         "asset": "flow-therapy-live-noir-blanc",
         "widths": [
+          320,
+          480,
           640,
           960,
           1440
@@ -91,6 +95,8 @@
         "ratio": "3:2",
         "asset": "flow-therapy-live-lumieres-bleues",
         "widths": [
+          320,
+          480,
           640,
           960,
           1440
@@ -106,6 +112,8 @@
         "ratio": "3:2",
         "asset": "flow-therapy-triptyque-live",
         "widths": [
+          320,
+          480,
           640,
           960,
           1440
@@ -121,6 +129,7 @@
         "ratio": "2:3",
         "asset": "lauris-basse-noir-blanc",
         "widths": [
+          320,
           480,
           720,
           960
@@ -136,6 +145,7 @@
         "ratio": "9:16",
         "asset": "betty-guitare-chant",
         "widths": [
+          320,
           480,
           720,
           898
@@ -151,6 +161,7 @@
         "ratio": "2:3",
         "asset": "jenni-chant",
         "widths": [
+          320,
           480,
           720,
           960

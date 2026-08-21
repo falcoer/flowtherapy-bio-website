@@ -17,7 +17,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'styles.css', 'app.js', 'assets-manifest.json',
+  'index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -34,10 +34,19 @@ for (const file of required) {
 }
 for (const [index, item] of (config.media?.items || []).entries()) {
   expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
-  expect(item.asset && Array.isArray(item.widths) && item.widths.length === 3, `media.items[${index}] doit référencer un asset responsive et trois largeurs`);
+  expect(item.asset && Array.isArray(item.widths) && item.widths.length >= 4, `media.items[${index}] doit référencer un asset responsive et au moins quatre largeurs`);
+  expect(item.widths?.includes(320) && item.widths?.includes(480), `media.items[${index}] doit proposer les variantes mobiles 320 et 480 px`);
   for (const width of (item.widths || [])) {
     for (const extension of ['avif', 'webp', 'jpg']) {
       const file = `assets/media/${item.asset}-${width}.${extension}`;
+      try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
+    }
+  }
+}
+for (const id of ['urban', 'himalaya', 'city', 'amazonia', 'caribbean']) {
+  for (const width of [960, 1440, 1672]) {
+    for (const extension of ['avif', 'webp', 'png']) {
+      const file = `assets/generated/landscape-${id}-${width}.${extension}`;
       try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
     }
   }
@@ -46,8 +55,8 @@ for (const file of ['assets/alpaga1-nu.png', 'assets/alpaga2-nu.png', 'assets/al
   try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
 
-const [app, css, html, generatedManifest] = await Promise.all([
-  ...['app.js', 'styles.css', 'index.html'].map(file => readFile(fromRoot(file), 'utf8')),
+const [app, css, html, travelScript, generatedManifest] = await Promise.all([
+  ...['app.js', 'styles.css', 'index.html', 'travel-landscapes.js'].map(file => readFile(fromRoot(file), 'utf8')),
   readFile(fromRoot('assets-manifest.json'), 'utf8').then(JSON.parse)
 ]);
 for (const [file, source] of [['app.js', app], ['styles.css', css], ['index.html', html]]) {
@@ -59,6 +68,7 @@ expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter gén�
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
 expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
+expect(app.includes('(max-width: 520px) calc(50vw - 12px)') && app.includes('(max-width: 900px) calc(33vw - 18px)'), 'la galerie doit annoncer au navigateur les dimensions réelles de ses colonnes mobiles');
 expect(app.includes("const ASSET='assets/';") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
 expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 expect(css.includes('@media(max-width:790px){.watermark') && css.includes('fond-urbain-transparent-960.webp'), 'le mobile doit utiliser le filigrane CI le plus léger');
@@ -70,7 +80,18 @@ const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'wof
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
 const responsiveMedia = generatedManifest.assets.filter(asset => asset.mode === 'responsive-media-ci');
-expect(responsiveMedia.length === 72, 'exactement 72 variantes média doivent être générées pour les huit photos publiées');
+const mediaBySource = Map.groupBy(responsiveMedia, asset => asset.source);
+for (const [source, variants] of mediaBySource) {
+  const widths = new Set(variants.map(asset => asset.width));
+  expect(widths.has(320) && widths.has(480), `${source} doit être généré en 320 et 480 px`);
+  expect(variants.length === widths.size * 3, `${source} doit proposer AVIF, WebP et JPEG pour chaque largeur`);
+}
+expect(travelScript.includes('const mounted = new Map()') && travelScript.includes('replaceRenderedLandscapes(pair)') && !travelScript.includes('LANDSCAPES.map(pictureMarkup)'), 'la roue doit limiter le DOM rendu à la paire de paysages active');
+expect(travelScript.includes("link.rel = 'preload'") && travelScript.includes("link.fetchPriority = 'low'"), 'les paysages suivants doivent être préchargés progressivement pendant le défilement');
+const responsiveLandscapes = generatedManifest.assets.filter(asset => asset.mode === 'responsive-landscape-ci');
+expect(responsiveLandscapes.length === 45, 'exactement 45 variantes de paysage doivent être générées');
+expect(responsiveLandscapes.filter(asset => asset.format === 'avif').every(asset => asset.quality === 64), 'les paysages AVIF doivent utiliser la qualité mobile optimisée');
+expect(responsiveLandscapes.filter(asset => asset.format === 'webp').every(asset => asset.quality === 72), 'la qualité WebP des paysages doit rester inchangée');
 const excludedMedia = generatedManifest.assets.filter(asset => asset.mode === 'excluded-source');
 expect(excludedMedia.length === 1, 'la capture d’écran mobile doit rester indexée mais exclue de la galerie');
 const decorations = generatedManifest.assets.filter(asset => asset.mode === 'svg-mask-ci');

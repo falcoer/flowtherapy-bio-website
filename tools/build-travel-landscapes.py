@@ -60,7 +60,9 @@ def main() -> None:
     generated = DIST / "assets" / "generated"
     generated.mkdir(parents=True, exist_ok=True)
     widths = tuple(int(width) for width in config["widths"])
-    quality = int(config["quality"])
+    webp_quality = int(config["webpQuality"])
+    avif_quality = int(config["avifQuality"])
+    records: list[dict] = []
 
     for item, source in expected:
         actual = sha256(source)
@@ -74,9 +76,37 @@ def main() -> None:
                 height = round(original.height * width / original.width)
                 resized = original if width == original.width else original.resize((width, height), Image.Resampling.LANCZOS)
                 stem = f"landscape-{item['id']}-{width}"
-                resized.save(generated / f"{stem}.png", optimize=True, compress_level=9)
-                resized.save(generated / f"{stem}.webp", format="WEBP", quality=quality, method=6)
-                resized.save(generated / f"{stem}.avif", format="AVIF", quality=quality, speed=8)
+                outputs = {
+                    "png": (generated / f"{stem}.png", None),
+                    "webp": (generated / f"{stem}.webp", webp_quality),
+                    "avif": (generated / f"{stem}.avif", avif_quality),
+                }
+                outputs["png"][0].parent.mkdir(parents=True, exist_ok=True)
+                resized.save(outputs["png"][0], optimize=True, compress_level=9)
+                resized.save(outputs["webp"][0], format="WEBP", quality=webp_quality, method=6)
+                resized.save(outputs["avif"][0], format="AVIF", quality=avif_quality, speed=8)
+                for extension, (output, output_quality) in outputs.items():
+                    record = {
+                        "source": str(source.relative_to(SOURCE)),
+                        "output": f"assets/generated/{output.name}",
+                        "mode": "responsive-landscape-ci",
+                        "landscape": item["id"],
+                        "width": width,
+                        "height": height,
+                        "format": extension,
+                        "sha256": sha256(output),
+                        "bytes": output.stat().st_size,
+                    }
+                    if output_quality is not None:
+                        record["quality"] = output_quality
+                    records.append(record)
+
+    generated_manifest = DIST / "assets-manifest.json"
+    if generated_manifest.is_file():
+        manifest = json.loads(generated_manifest.read_text(encoding="utf-8"))
+        manifest["assets"] = [asset for asset in manifest["assets"] if asset.get("mode") != "responsive-landscape-ci"]
+        manifest["assets"].extend(records)
+        generated_manifest.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     print(f"Travel landscapes generated: {len(expected)} sources × {len(widths)} widths × 3 formats.")
 
