@@ -44,7 +44,7 @@
   "about": {
     "title": "Le groupe",
     "paragraphs": [
-      "Né de la rencontre entre Betty, Jennifer et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
+      "Né de la rencontre entre Betty, Jenni et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
       "Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.",
       "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.",
       "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
@@ -67,7 +67,7 @@
         ],
         "date": "2026-06-30",
         "credit": "C.B.",
-        "description": "Betty, Jennifer et Lauris réunis sous les lumières de la scène."
+        "description": "Betty, Jenni et Lauris réunis sous les lumières de la scène."
       },
       {
         "title": "Flow Therapy en concert",
@@ -112,7 +112,7 @@
         ],
         "date": "2026-06-29",
         "credit": "C.B.",
-        "description": "Triptyque de Betty, Jennifer et Lauris en concert."
+        "description": "Triptyque de Betty, Jenni et Lauris en concert."
       },
       {
         "title": "Lauris à la basse",
@@ -143,6 +143,21 @@
         "date": "2026-06-07",
         "credit": "C.B.",
         "description": "Betty au chant et à la guitare acoustique lors d’un concert en plein air."
+      },
+      {
+        "title": "Jenni au chant",
+        "type": "Portrait",
+        "orientation": "portrait",
+        "ratio": "2:3",
+        "asset": "jenni-chant",
+        "widths": [
+          480,
+          720,
+          960
+        ],
+        "date": "2026-08-20",
+        "credit": "C.B.",
+        "description": "Jenni au chant lors d’un concert de Flow Therapy."
       }
     ]
   }

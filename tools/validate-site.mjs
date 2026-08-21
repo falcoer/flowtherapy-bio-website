@@ -70,7 +70,7 @@ const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'wof
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
 const responsiveMedia = generatedManifest.assets.filter(asset => asset.mode === 'responsive-media-ci');
-expect(responsiveMedia.length === 63, 'exactement 63 variantes média doivent être générées pour les sept photos publiées');
+expect(responsiveMedia.length === 72, 'exactement 72 variantes média doivent être générées pour les huit photos publiées');
 const excludedMedia = generatedManifest.assets.filter(asset => asset.mode === 'excluded-source');
 expect(excludedMedia.length === 1, 'la capture d’écran mobile doit rester indexée mais exclue de la galerie');
 const decorations = generatedManifest.assets.filter(asset => asset.mode === 'svg-mask-ci');

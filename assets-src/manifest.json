@@ -217,6 +217,18 @@
       "dimensions": "1600x1068"
     },
     {
+      "path": "medias/dcb14df1-98f3-486a-8e0f-f3825dd78b6b.jpeg",
+      "sha256": "b0774a11e139fa3271500bdd5892d5b78fa19ff87da01ac16986d79ad2412cd7",
+      "mode": "responsive-media-ci",
+      "name": "jenni-chant",
+      "widths": [
+        480,
+        720,
+        960
+      ],
+      "dimensions": "1068x1600"
+    },
+    {
       "path": "medias/a8c1539c-929f-4d04-9ad3-acca84a10487.JPG",
       "sha256": "824a4558b51a4487bbe5f57b25d3269223718dbc4828c833c9ebc0a52b5ce1fb",
       "mode": "excluded-source",
