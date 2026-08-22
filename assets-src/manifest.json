@@ -24,12 +24,12 @@
     },
     {
       "path": "images/alpaga3-nu.png",
-      "sha256": "b9acff77178fb737a1d488f79982cd05cd4107520df75ccee57348e44a422471",
+      "sha256": "70782f77738a9caab8af66fe2095c295c21f65c493058efda188da6fb128b425",
       "mode": "responsive-ci"
     },
     {
       "path": "images/alpaga3.png",
-      "sha256": "2110008d2df984f454a09a634d4528149e1ae48fb3652e7f3fab5d464672043c",
+      "sha256": "7aa65095901e64ba38b8fda17c3e4464d1dc6cd748d1dd809937ac8fb8ce6950",
       "mode": "responsive-ci"
     },
     {
