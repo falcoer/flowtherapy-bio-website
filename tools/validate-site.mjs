@@ -65,6 +65,7 @@ for (const [file, source] of [['app.js', app], ['styles.css', css], ['index.html
 expect(!css.includes('fonts.googleapis.com') && !css.includes('fonts.gstatic.com'), 'les polices doivent être servies localement');
 expect(!html.includes('cdn.jsdelivr.net') && !app.includes('cdn.jsdelivr.net'), 'le runtime ne doit plus dépendre du CDN QR code');
 expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter générée doit être référencée');
+expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
 expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
@@ -79,6 +80,8 @@ expect(css.includes("assets/decorations/chalk-star.svg") && css.includes("assets
 expect(css.includes('-webkit-mask:var(--doodle-image)') && css.includes('mask:var(--doodle-image)'), 'les SVG de décoration doivent être colorés par le thème avec un masque compatible Safari');
 expect(css.includes(':root[data-theme=dark] .doodle{opacity:calc(var(--doodle-alpha) + .06)') && css.includes('@media(prefers-reduced-motion:reduce){.doodle'), 'les décorations doivent gérer le thème sombre et la réduction des animations');
 const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'woff2-subset');
+const generatedOutputs = generatedManifest.assets.filter(asset => asset.output);
+expect(generatedOutputs.every(asset => asset.source_sha256 && asset.build_key), 'chaque asset généré doit contenir les empreintes nécessaires au cache incrémental');
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
 const responsiveMedia = generatedManifest.assets.filter(asset => asset.mode === 'responsive-media-ci');
