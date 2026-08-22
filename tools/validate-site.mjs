@@ -67,6 +67,8 @@ expect(!html.includes('cdn.jsdelivr.net') && !app.includes('cdn.jsdelivr.net'), 
 expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter générée doit être référencée');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
+expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
+expect(!html.includes('contact-dialog') && !app.includes('contact-footer-open') && !css.includes('.contact-dialog'), 'le formulaire de contact ne doit plus utiliser de modale ni de raccourci dans le pied de page');
 expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
 expect(app.includes('(max-width: 520px) calc(50vw - 12px)') && app.includes('(max-width: 900px) calc(33vw - 18px)'), 'la galerie doit annoncer au navigateur les dimensions réelles de ses colonnes mobiles');
 expect(app.includes("const ASSET='assets/';") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
