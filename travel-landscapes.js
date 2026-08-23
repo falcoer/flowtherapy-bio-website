@@ -7,7 +7,8 @@ const LANDSCAPES = [
 ];
 
 const LANDSCAPE_WIDTHS = [960, 1440, 1672];
-const generatedUrl = (id, width, extension) => `assets/generated/landscape-${id}-${width}.${extension}`;
+const GENERATED_ASSET_URL = new URL('assets/generated/', import.meta.url).href;
+const generatedUrl = (id, width, extension) => `${GENERATED_ASSET_URL}landscape-${id}-${width}.${extension}`;
 const landscapeSrcset = (id, extension) => LANDSCAPE_WIDTHS.map(width => `${generatedUrl(id, width, extension)} ${width}w`).join(', ');
 
 function pictureMarkup(item, index) {
