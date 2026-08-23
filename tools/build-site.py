@@ -135,7 +135,7 @@ def prepare_dist() -> None:
     (DIST / "assets" / "fonts" / "licenses").mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / "config", DIST / "config", dirs_exist_ok=True)
     shutil.copytree(ROOT / "i18n", DIST / "i18n", dirs_exist_ok=True)
-    for filename in ("index.html", "app.js", "styles.css"):
+    for filename in ("index.html", "app.js", "styles.css", "CNAME"):
         shutil.copy2(ROOT / filename, DIST / filename)
     for locale in ("fr", "en"):
         localized = (ROOT / "index.html").read_text(encoding="utf-8")
