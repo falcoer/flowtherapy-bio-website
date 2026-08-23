@@ -17,7 +17,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'assets-manifest.json',
+  'index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -102,6 +102,24 @@ expect(excludedMedia.length === 1, 'la capture d’écran mobile doit rester ind
 const decorations = generatedManifest.assets.filter(asset => asset.mode === 'svg-mask-ci');
 expect(decorations.length === 7, 'exactement sept décorations SVG doivent être générées');
 expect(decorations.reduce((total, asset) => total + asset.bytes, 0) <= 15_000, 'le budget total des décorations SVG est limité à 15 ko');
+
+
+const [previewApp, previewRootHtml, previewFrHtml, previewEnHtml, frCopy, enCopy] = await Promise.all([
+  readFile(fromRoot('i18n-preview/app.js'), 'utf8'),
+  readFile(fromRoot('i18n-preview/index.html'), 'utf8'),
+  readFile(fromRoot('i18n-preview/fr/index.html'), 'utf8'),
+  readFile(fromRoot('i18n-preview/en/index.html'), 'utf8'),
+  readFile(fromRoot('i18n/fr.json'), 'utf8').then(JSON.parse),
+  readFile(fromRoot('i18n/en.json'), 'utf8').then(JSON.parse)
+]);
+expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && previewApp.includes('history===\'replace\'?\'replaceState\':\'pushState\''), 'la préversion doit changer de langue sans rechargement');
+expect(previewApp.includes("new URL('assets/',SITE_ROOT)") && previewApp.includes("new URL('config/site.json',SITE_ROOT)"), 'la préversion doit résoudre ses ressources depuis la racine du site');
+expect(previewRootHtml.includes('src="app.js?v=20260823-i18n-preview-1"'), 'la racine de préversion doit charger son runtime isolé');
+expect(previewFrHtml.includes('src="../app.js') && previewFrHtml.includes('href="../../styles.css'), 'la route française doit utiliser les chemins localisés');
+expect(previewEnHtml.includes('src="../app.js') && previewEnHtml.includes('href="../../styles.css'), 'la route anglaise doit utiliser les chemins localisés');
+expect(Object.keys(frCopy.media?.items || {}).length === config.media.items.length, 'le français doit traduire chaque média');
+expect(Object.keys(enCopy.media?.items || {}).length === config.media.items.length, 'l’anglais doit traduire chaque média');
+expect(Object.keys(frCopy.contact?.subjects || {}).join(',') === Object.keys(enCopy.contact?.subjects || {}).join(','), 'les sujets de contact doivent partager les mêmes identifiants');
 
 if (problems.length) throw new Error(`Validation du site échouée:\n- ${problems.join('\n- ')}`);
 console.log(`Validation du site réussie : ${root}`);
