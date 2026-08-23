@@ -1,4 +1,4 @@
-const ASSET='assets/';
+
 const icons={
   instagram:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle class="dot" cx="17.4" cy="6.7" r="1"></circle></svg>',
   youtube:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0 2.8-.3 4.6-.7 5.6a3 3 0 0 1-1.7 1.7C18.6 19.7 16.8 20 12 20s-6.6-.3-7.6-.7a3 3 0 0 1-1.7-1.7C2.3 16.6 2 14.8 2 12s.3-4.6.7-5.6a3 3 0 0 1 1.7-1.7C5.4 4.3 7.2 4 12 4s6.6.3 7.6.7a3 3 0 0 1 1.7 1.7c.4 1 .7 2.8.7 5.6Z" fill="currentColor"></path><path d="m10 8 5 4-5 4V8Z" fill="#e21b18"></path></svg>',
@@ -32,7 +32,7 @@ function mediaVisual(item,index,viewer=false){
   return `<div class="media-frame ${ratio}"${ratioStyle}>${content}</div>`;
 }
 
-function render(config){
+function renderPage(config){
   const {site,hero,navigation,socials,about,media}=config;
   const mediaItems=media?.items||[];
   const listen=socials.find(s=>s.icon==='youtube')?.url||socials[0]?.url||'#contact';
@@ -82,13 +82,64 @@ function render(config){
 </section>
 <footer><span>${esc(site.copyright)}</span></footer>`;
   setupTheme();
-  setupQr(site.url);
+  setupQr(localizedSiteUrl(site.url));
   setupContact();
   setupAlpacaReveal();
   setupMediaViewer(mediaItems);
 }
 
-function setupMediaViewer(items){
+let activeCopy;
+const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}};
+const ASSET=new URL('assets/',import.meta.url).href;
+const CONFIG_URL=new URL('config/site.json',import.meta.url);
+const I18N_URL=locale=>new URL('i18n/'+locale+'.json',import.meta.url);
+function localizedSiteUrl(siteUrl){return new URL(activeLocale+'/',siteUrl).href;}
+function translateConfiguration(config,copy){
+  return {...config,site:{...config.site,...copy.site},hero:copy.hero,navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.media,href:'#medias'}],about:copy.about,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...copy.media.items[item.id]}))}};
+}
+function updateStaticTranslations(copy,locale){
+  document.documentElement.lang=locale;
+  document.title=copy.meta.title;
+  const description=document.querySelector('meta[name="description"]');if(description)description.content=copy.meta.description;
+  const setText=(selector,value)=>{const element=document.querySelector(selector);if(element)element.textContent=value;};
+  setText('.actions .primary',copy.hero.listen);setText('.actions .secondary',copy.hero.media);
+  setText('.contact-heading > div > p:first-child',copy.contact.eyebrow);setText('#contact-title',copy.contact.title);setText('.contact-intro',copy.contact.intro);
+  setText('label[for="contact-subject"]',copy.contact.subject);
+  const subject=document.querySelector('#contact-subject');if(subject){subject.replaceChildren(new Option(copy.contact.chooseSubject,''));Object.entries(copy.contact.subjects).forEach(([value,label])=>subject.add(new Option(label,value)));}
+  setText('label[for="contact-email"]',copy.contact.email);
+  const email=document.querySelector('#contact-email');if(email)email.placeholder=copy.contact.emailPlaceholder;
+  const phoneLabel=document.querySelector('label[for="contact-phone"]');if(phoneLabel){phoneLabel.replaceChildren(document.createTextNode(copy.contact.phone+' '),Object.assign(document.createElement('span'),{textContent:'('+copy.contact.optional+')'}));}
+  const phone=document.querySelector('#contact-phone');if(phone)phone.placeholder=copy.contact.phonePlaceholder;
+  setText('label[for="contact-message"]',copy.contact.message);
+  const message=document.querySelector('#contact-message');if(message)message.placeholder=copy.contact.messagePlaceholder;
+  setText('.contact-submit',copy.contact.submit);setText('.contact-notice',copy.contact.notice);
+  const info=document.querySelector('#media-info');if(info)info.textContent=copy.viewer.info;
+  const close=document.querySelector('#media-close');if(close)close.setAttribute('aria-label',copy.viewer.close);
+  const prev=document.querySelector('#media-prev');if(prev)prev.setAttribute('aria-label',copy.viewer.previous);
+  const next=document.querySelector('#media-next');if(next)next.setAttribute('aria-label',copy.viewer.next);
+  document.querySelectorAll('#media-meta dt').forEach((field,index)=>field.textContent=[copy.viewer.type,copy.viewer.format,copy.viewer.date,copy.viewer.credit][index]||'');
+  const qrClose=document.querySelector('#qr-close');if(qrClose)qrClose.setAttribute('aria-label',copy.qr.close);setText('#qr-title',copy.qr.title);
+  const qrCode=document.querySelector('#qr-code');if(qrCode)qrCode.setAttribute('aria-label',copy.qr.label);
+}
+function setupLanguageSwitcher(locale,copy){
+  const tools=document.querySelector('.tools');if(!tools)return;
+  const switcher=document.createElement('div');switcher.className='language-switcher';
+  switcher.innerHTML='<button id="language-toggle" class="language-toggle" type="button" aria-label="'+esc(copy.controls.language)+'" aria-expanded="false" aria-controls="language-menu"><span aria-hidden="true">'+LOCALES[locale].flag+'</span><span class="language-code" aria-hidden="true">'+locale.toUpperCase()+'</span></button><div id="language-menu" class="language-menu" hidden>'+Object.entries(LOCALES).map(([code,details])=>'<button type="button" class="language-option" data-locale="'+code+'" lang="'+code+'"'+(code===locale?' aria-current="true"':'')+'><span aria-hidden="true">'+details.flag+'</span>'+esc(copy.controls.languages[code])+'</button>').join('')+'</div>';
+  tools.insertBefore(switcher,tools.firstChild);
+  const toggle=switcher.querySelector('#language-toggle'),menu=switcher.querySelector('#language-menu');
+  const close=()=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false');};
+  toggle.onclick=()=>{const opened=menu.hidden;menu.hidden=!opened;toggle.setAttribute('aria-expanded',String(opened));};
+  menu.querySelectorAll('[data-locale]').forEach(button=>button.addEventListener('click',()=>setLocale(button.dataset.locale,{persist:true,history:'push'})));
+  document.addEventListener('click',event=>{if(!event.target.closest('.language-switcher'))close();},{once:true});
+  document.addEventListener('keydown',event=>{if(event.key==='Escape')close();},{once:true});
+}
+function render(config,copy,locale){
+  activeCopy=copy;activeLocale=locale;
+  renderPage(translateConfiguration(config,copy));
+  updateStaticTranslations(copy,locale);setupLanguageSwitcher(locale,copy);
+}
+
+function setupMediaViewer(items){const labels=activeCopy?.viewer||{info:'Infos',hideInfo:'Masquer les infos'};
   const dialog=document.querySelector('#media-dialog');
   if(!dialog||!items.length)return;
   const cards=[...document.querySelectorAll('[data-media-index]')];
@@ -119,7 +170,7 @@ function setupMediaViewer(items){
     opener=button;
     meta.hidden=true;
     info.setAttribute('aria-expanded','false');
-    info.textContent='Infos';
+    info.textContent=labels.info;
     update();
     dialog.showModal();
     closeButton.focus();
@@ -133,7 +184,7 @@ function setupMediaViewer(items){
     meta.hidden=!meta.hidden;
     const expanded=!meta.hidden;
     info.setAttribute('aria-expanded',String(expanded));
-    info.textContent=expanded?'Masquer les infos':'Infos';
+    info.textContent=expanded?labels.hideInfo:labels.info;
   };
   dialog.addEventListener('click',event=>{if(event.target===dialog)close()});
   dialog.addEventListener('close',()=>opener?.focus());
@@ -176,7 +227,7 @@ function setupAlpacaReveal(){
   },{threshold:[0,.35],rootMargin:'0px 0px -8% 0px'});
   observer.observe(group);
 }
-function setupTheme(){const button=document.querySelector('#theme'),meta=document.querySelector('meta[name="theme-color"]');let theme=localStorage.getItem('ft-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const apply=()=>{document.documentElement.dataset.theme=theme;button.setAttribute('aria-pressed',String(theme==='dark'));button.setAttribute('aria-label',theme==='dark'?'Activer le thème clair':'Activer le thème sombre');meta.content=theme==='dark'?'#07101d':'#fbf8f2'};apply();button.onclick=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('ft-theme',theme);apply()}}
+function setupTheme(){const button=document.querySelector('#theme'),meta=document.querySelector('meta[name="theme-color"]');const labels=activeCopy?.controls||{themeDark:'Activer le thème sombre',themeLight:'Activer le thème clair'};let theme=localStorage.getItem('ft-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const apply=()=>{document.documentElement.dataset.theme=theme;button.setAttribute('aria-pressed',String(theme==='dark'));button.setAttribute('aria-label',theme==='dark'?labels.themeLight:labels.themeDark);meta.content=theme==='dark'?'#07101d':'#fbf8f2'};apply();button.onclick=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('ft-theme',theme);apply()}}
 let qrCodeLoader;
 function loadQrCode(){
   if(window.QRCode)return Promise.resolve(window.QRCode);
@@ -196,4 +247,12 @@ function setupContact(){
   updateCount();
 }
 
-fetch('config/site.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Configuration indisponible (${r.status})`);return r.json()}).then(render).catch(e=>{console.error(e);document.querySelector('#app').innerHTML='<p class="error">Le contenu du site ne peut pas être chargé.</p>'});
+let siteConfig;let activeLocale;
+const localeFromUrl=()=>{const match=location.pathname.match(/\/(fr|en)\/?$/);return match?.[1]||null;};
+const browserLocale=()=>{const languages=[...(navigator.languages||[]),navigator.language].filter(Boolean).map(value=>value.toLowerCase());return languages.some(value=>value.startsWith('en'))?'en':'fr';};
+const resolveLocale=()=>localeFromUrl()||localStorage.getItem('ft-locale')||browserLocale();
+const localePath=locale=>{const base=location.pathname.replace(/\/(fr|en)\/?$/,'/')||'/';return base.replace(/\/?$/,'/')+locale+'/';};
+async function setLocale(locale,{persist=false,history='none'}={}){if(!LOCALES[locale]||!siteConfig)return;const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Translation unavailable ('+response.status+')');const copy=await response.json();if(persist)localStorage.setItem('ft-locale',locale);if(history!=='none')history[history==='replace'?'replaceState':'pushState']({locale},'',localePath(locale)+location.search+location.hash);render(siteConfig,copy,locale);}
+async function boot(){const response=await fetch(CONFIG_URL,{cache:'no-store'});if(!response.ok)throw new Error('Configuration unavailable ('+response.status+')');siteConfig=await response.json();const locale=resolveLocale();await setLocale(locale,{history:localeFromUrl()?'none':'replace'});}
+window.addEventListener('popstate',()=>{const locale=localeFromUrl()||resolveLocale();if(locale!==activeLocale)setLocale(locale);});
+boot().catch(error=>{console.error(error);document.querySelector('#app').innerHTML='<p class="error">Le contenu du site ne peut pas être chargé.</p>';});
