@@ -131,7 +131,14 @@ function setupLanguageSwitcher(locale,copy){
 }
 function render(config,copy,locale){
   activeCopy=copy;activeLocale=locale;
-  for(const selector of ['#media-dialog','#qr-dialog']){const dialog=document.querySelector(selector);if(dialog)dialog.replaceWith(dialog.cloneNode(true));}
+  for(const selector of ['#media-dialog','#qr-dialog']){
+    const dialog=document.querySelector(selector);if(!dialog)continue;
+    if(dialog.open)dialog.close();
+    const replacement=dialog.cloneNode(true);
+    replacement.removeAttribute('open');replacement.classList.remove('is-open');
+    replacement.querySelector('#qr-code')?.replaceChildren();
+    dialog.replaceWith(replacement);
+  }
   renderPage(localizedConfig(config,copy));translateRenderedPage(copy,locale);setupLanguageSwitcher(locale,copy);
 }
 
@@ -230,7 +237,7 @@ function loadQrCode(){
   if(!qrCodeLoader)qrCodeLoader=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=`${ASSET}vendor/qrcodejs/qrcode.min.js`;script.onload=()=>resolve(window.QRCode);script.onerror=()=>reject(new Error('Le générateur QR code local est indisponible'));document.head.append(script)});
   return qrCodeLoader;
 }
-function setupQr(url){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close'),t=document.querySelector('#qr-code');let done=false;const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=async()=>{o.disabled=true;try{await loadQrCode();if(!done){t.replaceChildren();new QRCode(t,{text:url,width:280,height:280,correctLevel:QRCode.CorrectLevel.H});done=true}d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()}catch(error){console.error(error)}finally{o.disabled=false}};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
+function setupQr(url){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close'),t=document.querySelector('#qr-code');const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=async()=>{o.disabled=true;try{await loadQrCode();t.replaceChildren();new QRCode(t,{text:url,width:280,height:280,correctLevel:QRCode.CorrectLevel.H});d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()}catch(error){console.error(error)}finally{o.disabled=false}};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
 
 function setupContact(){
   const form=document.querySelector('#contact-form');
