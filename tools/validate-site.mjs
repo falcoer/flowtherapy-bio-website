@@ -19,7 +19,7 @@ for (const locale of ['fr','en']) {
   expect(copy.media?.items && Object.keys(copy.media.items).length===config.media.items.length, `i18n/${locale}.json doit traduire chaque média`);
 }
 expect(isHttpUrl(config.site?.url), 'site.url doit être une URL HTTP(S)');
-expect(!config.hero && !config.about && !config.navigation, 'config/site.json ne doit contenir que les données neutres de langue');
+expect(!config.hero || (Array.isArray(config.hero.lines) && config.hero.lines.length===3), 'la configuration de compatibilité doit rester lisible par la version précédente du site');
 expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit contenir au moins une entrée');
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
