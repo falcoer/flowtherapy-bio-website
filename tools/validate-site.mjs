@@ -5,26 +5,19 @@ import { pathToFileURL } from 'node:url';
 const root = process.argv[2] ? resolve(process.argv[2]) : resolve(new URL('..', import.meta.url).pathname);
 const fromRoot = file => new URL(file, `${pathToFileURL(root).href}/`);
 const config = JSON.parse(await readFile(fromRoot('config/site.json'), 'utf8'));
-const translations = Object.fromEntries(await Promise.all(['fr','en'].map(async locale => [locale, JSON.parse(await readFile(fromRoot(`i18n/${locale}.json`), 'utf8'))])));
 const problems = [];
 const expect = (condition, message) => { if (!condition) problems.push(message); };
 const isHttpUrl = value => { try { return ['http:', 'https:'].includes(new URL(value).protocol); } catch { return false; } };
 
 expect(config.site?.name, 'site.name est requis');
-for (const locale of ['fr','en']) {
-  const copy=translations[locale];
-  expect(copy.meta?.title && copy.meta?.description, `i18n/${locale}.json doit définir les métadonnées`);
-  expect(Array.isArray(copy.hero?.lines) && copy.hero.lines.length===3, `i18n/${locale}.json doit définir les trois lignes du hero`);
-  expect(copy.contact?.subjects && Object.keys(copy.contact.subjects).length===6, `i18n/${locale}.json doit définir les sujets du formulaire`);
-  expect(copy.media?.items && Object.keys(copy.media.items).length===config.media.items.length, `i18n/${locale}.json doit traduire chaque média`);
-}
 expect(isHttpUrl(config.site?.url), 'site.url doit être une URL HTTP(S)');
-expect(!config.hero || (Array.isArray(config.hero.lines) && config.hero.lines.length===3), 'la configuration de compatibilité doit rester lisible par la version précédente du site');
+expect(Array.isArray(config.hero?.lines) && config.hero.lines.length === 3, 'hero.lines doit contenir exactement trois lignes');
+expect(Array.isArray(config.navigation) && config.navigation.length > 0, 'navigation doit contenir au moins une entrée');
 expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit contenir au moins une entrée');
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'fr/index.html', 'en/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'CNAME', 'assets-manifest.json',
+  'index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -39,10 +32,8 @@ const required = [
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
-expect((await readFile(fromRoot('CNAME'), 'utf8')).trim()==='flowtherapymusic.com', 'CNAME doit déclarer flowtherapymusic.com');
 for (const [index, item] of (config.media?.items || []).entries()) {
-  expect(item.id && item.orientation && item.ratio && item.date && item.credit, `media.items[${index}] doit contenir toutes les métadonnées neutres`);
-  for (const locale of ['fr','en']) { const copy=translations[locale].media?.items?.[item.id]; expect(copy?.title && copy?.type && copy?.description, `i18n/${locale}.json doit traduire media.items[${index}]`); }
+  expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
   expect(item.asset && Array.isArray(item.widths) && item.widths.length >= 4, `media.items[${index}] doit référencer un asset responsive et au moins quatre largeurs`);
   expect(item.widths?.includes(320) && item.widths?.includes(480), `media.items[${index}] doit proposer les variantes mobiles 320 et 480 px`);
   for (const width of (item.widths || [])) {
@@ -77,13 +68,11 @@ expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter gén�
 expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
-expect(app.includes("LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && app.includes('setLocale(button.dataset.locale') && app.includes('localeFromUrl'), 'le changement de langue doit être immédiat et préserver une URL localisée');
-expect(app.includes("new URL('assets/',import.meta.url)") && app.includes("new URL('config/site.json',import.meta.url)"), 'les ressources doivent rester accessibles depuis les routes /fr/ et /en/');
 expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
 expect(!html.includes('contact-dialog') && !app.includes('contact-footer-open') && !css.includes('.contact-dialog'), 'le formulaire de contact ne doit plus utiliser de modale ni de raccourci dans le pied de page');
 expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
 expect(app.includes('(max-width: 520px) calc(50vw - 12px)') && app.includes('(max-width: 900px) calc(33vw - 18px)'), 'la galerie doit annoncer au navigateur les dimensions réelles de ses colonnes mobiles');
-expect(app.includes("const ASSET=new URL('assets/',import.meta.url).href;") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
+expect(app.includes("const ASSET='assets/';") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
 expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 expect(css.includes('@media(max-width:790px){.watermark') && css.includes('fond-urbain-transparent-960.webp'), 'le mobile doit utiliser le filigrane CI le plus léger');
 expect(app.includes('class="doodle-field hero-doodles"') && app.includes('class="doodle-field section-doodles"') && app.includes('aria-hidden="true"'), 'les décorations à la craie doivent rester des arrière-plans purement décoratifs');
@@ -104,7 +93,6 @@ for (const [source, variants] of mediaBySource) {
 }
 expect(travelScript.includes('const mounted = new Map()') && travelScript.includes('replaceRenderedLandscapes(pair)') && !travelScript.includes('LANDSCAPES.map(pictureMarkup)'), 'la roue doit limiter le DOM rendu à la paire de paysages active');
 expect(travelScript.includes("link.rel = 'preload'") && travelScript.includes("link.fetchPriority = 'low'"), 'les paysages suivants doivent être préchargés progressivement pendant le défilement');
-expect(travelScript.includes("new URL('assets/generated/', import.meta.url)"), 'les paysages doivent rester accessibles depuis les routes localisées');
 const responsiveLandscapes = generatedManifest.assets.filter(asset => asset.mode === 'responsive-landscape-ci');
 expect(responsiveLandscapes.length === 45, 'exactement 45 variantes de paysage doivent être générées');
 expect(responsiveLandscapes.filter(asset => asset.format === 'avif').every(asset => asset.quality === 64), 'les paysages AVIF doivent utiliser la qualité mobile optimisée');
