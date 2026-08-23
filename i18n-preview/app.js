@@ -245,12 +245,12 @@ function setupContact(){
 }
 
 const localeFromUrl=()=>location.pathname.match(/\/i18n-preview\/(fr|en)\/?$/)?.[1]||null;
-const browserLocale=()=>[...(navigator.languages||[]),navigator.language].filter(Boolean).some(value=>value.toLowerCase().startsWith('en'))?'en':'fr';
-const resolveLocale=()=>localeFromUrl()||localStorage.getItem('ft-locale')||browserLocale();
+const browserLocale=()=>{for(const value of [...(navigator.languages||[]),navigator.language].filter(Boolean)){const code=value.toLowerCase().split('-')[0];if(LOCALES[code])return code;}return 'fr';};
+const resolveLocale=()=>localeFromUrl()||browserLocale();
 const localePath=locale=>new URL(locale+'/',PREVIEW_ROOT).pathname;
 async function setLocale(locale,{persist=false,history='none'}={}){
   if(!LOCALES[locale]||!siteConfig)return;const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Traduction indisponible ('+response.status+')');const copy=await response.json();
-  if(persist)localStorage.setItem('ft-locale',locale);if(history!=='none')history[history==='replace'?'replaceState':'pushState']({locale},'',localePath(locale)+location.search+location.hash);render(siteConfig,copy,locale);
+  if(history!=='none')history[history==='replace'?'replaceState':'pushState']({locale},'',localePath(locale)+location.search+location.hash);render(siteConfig,copy,locale);
 }
 async function boot(){const response=await fetch(CONFIG_URL,{cache:'no-store'});if(!response.ok)throw new Error('Configuration indisponible ('+response.status+')');siteConfig=await response.json();const locale=resolveLocale();await setLocale(locale,{history:localeFromUrl()?'none':'replace'});}
 window.addEventListener('popstate',()=>{const locale=localeFromUrl()||resolveLocale();if(locale!==activeLocale)setLocale(locale);});
