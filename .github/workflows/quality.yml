@@ -49,3 +49,24 @@ jobs:
 
       - name: Validate generated output
         run: node tools/validate-site.mjs dist
+
+      - name: Install browser smoke runtime
+        run: |
+          npm install --no-save --ignore-scripts @playwright/test@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start preview server
+        run: |
+          python -m http.server 4173 --directory dist > /tmp/flowtherapy-http.log 2>&1 &
+          echo $! > /tmp/flowtherapy-http.pid
+
+      - name: Verify public root and i18n preview
+        run: npx playwright test tools/i18n-smoke.spec.mjs --reporter=line
+
+      - name: Upload browser captures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: i18n-browser-captures
+          path: test-results
+          if-no-files-found: ignore
