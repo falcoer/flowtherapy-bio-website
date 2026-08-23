@@ -17,7 +17,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'assets-manifest.json',
+  'index.html', 'fr/index.html', 'en/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -55,8 +55,8 @@ for (const file of ['assets/alpaga1-nu.png', 'assets/alpaga2-nu.png', 'assets/al
   try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
 
-const [app, css, html, travelScript, generatedManifest] = await Promise.all([
-  ...['app.js', 'styles.css', 'index.html', 'travel-landscapes.js'].map(file => readFile(fromRoot(file), 'utf8')),
+const [app, css, html, rootFrHtml, rootEnHtml, travelScript, generatedManifest] = await Promise.all([
+  ...['app.js', 'styles.css', 'index.html', 'fr/index.html', 'en/index.html', 'travel-landscapes.js'].map(file => readFile(fromRoot(file), 'utf8')),
   readFile(fromRoot('assets-manifest.json'), 'utf8').then(JSON.parse)
 ]);
 for (const [file, source] of [['app.js', app], ['styles.css', css], ['index.html', html]]) {
@@ -67,12 +67,19 @@ expect(!html.includes('cdn.jsdelivr.net') && !app.includes('cdn.jsdelivr.net'), 
 expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter générée doit être référencée');
 expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
+expect(css.includes('.language-switcher{position:relative}') && css.includes('.language-menu{position:absolute'), 'le sélecteur de langue doit être intégré aux styles publics');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
+expect(app.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && app.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la racine publique doit changer de langue sans rechargement');
+expect(app.includes("const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT)") && app.includes("const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname"), 'la racine publique doit résoudre les traductions et les routes localisées');
+expect(app.includes("setupQr(new URL(activeLocale+'/',site.url).href)"), 'le QR code doit partager la route localisée active');
+expect(html.includes('src="app.js?v=20260823-i18n-prod-1"'), 'la racine publique doit charger le runtime internationalisé');
+expect(rootFrHtml.includes('src="../app.js') && rootFrHtml.includes('href="../styles.css') && rootFrHtml.includes('<html lang="fr">'), 'la route publique française doit utiliser les chemins localisés');
+expect(rootEnHtml.includes('src="../app.js') && rootEnHtml.includes('href="../styles.css') && rootEnHtml.includes('<html lang="en">'), 'la route publique anglaise doit utiliser les chemins localisés');
 expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
 expect(!html.includes('contact-dialog') && !app.includes('contact-footer-open') && !css.includes('.contact-dialog'), 'le formulaire de contact ne doit plus utiliser de modale ni de raccourci dans le pied de page');
 expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
 expect(app.includes('(max-width: 520px) calc(50vw - 12px)') && app.includes('(max-width: 900px) calc(33vw - 18px)'), 'la galerie doit annoncer au navigateur les dimensions réelles de ses colonnes mobiles');
-expect(app.includes("const ASSET='assets/';") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
+expect(app.includes("const ASSET=new URL('assets/',SITE_ROOT).href;") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
 expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 expect(css.includes('@media(max-width:790px){.watermark') && css.includes('fond-urbain-transparent-960.webp'), 'le mobile doit utiliser le filigrane CI le plus léger');
 expect(app.includes('class="doodle-field hero-doodles"') && app.includes('class="doodle-field section-doodles"') && app.includes('aria-hidden="true"'), 'les décorations à la craie doivent rester des arrière-plans purement décoratifs');

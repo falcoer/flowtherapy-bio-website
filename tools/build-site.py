@@ -150,6 +150,15 @@ def prepare_dist() -> None:
         (target / "index.html").write_text(localized, encoding="utf-8")
     for filename in ("index.html", "app.js", "styles.css"):
         shutil.copy2(ROOT / filename, DIST / filename)
+    root_html = (ROOT / "index.html").read_text(encoding="utf-8")
+    for locale in ("fr", "en"):
+        localized = root_html.replace('<html lang="fr">', f'<html lang="{locale}">')
+        for resource in ("assets/", "styles.css", "travel-landscapes.css", "app.js", "travel-landscapes.js"):
+            localized = localized.replace(f'href="{resource}', f'href="../{resource}')
+            localized = localized.replace(f'src="{resource}', f'src="../{resource}')
+        target = DIST / locale
+        target.mkdir(exist_ok=True)
+        (target / "index.html").write_text(localized, encoding="utf-8")
     (DIST / ".nojekyll").touch()
 
 
