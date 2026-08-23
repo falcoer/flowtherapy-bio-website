@@ -89,6 +89,7 @@ function renderPage(config){
 }
 
 let activeCopy;
+let languageOutsideHandler;
 const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}};
 const ASSET=new URL('assets/',import.meta.url).href;
 const CONFIG_URL=new URL('config/site.json',import.meta.url);
@@ -130,11 +131,14 @@ function setupLanguageSwitcher(locale,copy){
   const close=()=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false');};
   toggle.onclick=()=>{const opened=menu.hidden;menu.hidden=!opened;toggle.setAttribute('aria-expanded',String(opened));};
   menu.querySelectorAll('[data-locale]').forEach(button=>button.addEventListener('click',()=>setLocale(button.dataset.locale,{persist:true,history:'push'})));
-  document.addEventListener('click',event=>{if(!event.target.closest('.language-switcher'))close();},{once:true});
+  if(languageOutsideHandler)document.removeEventListener('click',languageOutsideHandler);
+  languageOutsideHandler=event=>{if(!event.target.closest('.language-switcher'))close();};
+  document.addEventListener('click',languageOutsideHandler);
   document.addEventListener('keydown',event=>{if(event.key==='Escape')close();},{once:true});
 }
 function render(config,copy,locale){
   activeCopy=copy;activeLocale=locale;
+  for(const selector of ['#media-dialog','#qr-dialog']){const dialog=document.querySelector(selector);if(dialog)dialog.replaceWith(dialog.cloneNode(true));}
   renderPage(translateConfiguration(config,copy));
   updateStaticTranslations(copy,locale);setupLanguageSwitcher(locale,copy);
 }
