@@ -24,7 +24,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'fr/index.html', 'en/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'assets-manifest.json',
+  'index.html', 'fr/index.html', 'en/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'CNAME', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -39,6 +39,7 @@ const required = [
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
+expect((await readFile(fromRoot('CNAME'), 'utf8')).trim()==='flowtherapymusic.com', 'CNAME doit déclarer flowtherapymusic.com');
 for (const [index, item] of (config.media?.items || []).entries()) {
   expect(item.id && item.orientation && item.ratio && item.date && item.credit, `media.items[${index}] doit contenir toutes les métadonnées neutres`);
   for (const locale of ['fr','en']) { const copy=translations[locale].media?.items?.[item.id]; expect(copy?.title && copy?.type && copy?.description, `i18n/${locale}.json doit traduire media.items[${index}]`); }
