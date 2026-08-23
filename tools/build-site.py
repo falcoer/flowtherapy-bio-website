@@ -134,8 +134,17 @@ def prepare_dist() -> None:
             entry.unlink()
     (DIST / "assets" / "fonts" / "licenses").mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / "config", DIST / "config", dirs_exist_ok=True)
+    shutil.copytree(ROOT / "i18n", DIST / "i18n", dirs_exist_ok=True)
     for filename in ("index.html", "app.js", "styles.css"):
         shutil.copy2(ROOT / filename, DIST / filename)
+    for locale in ("fr", "en"):
+        localized = (ROOT / "index.html").read_text(encoding="utf-8")
+        localized = localized.replace('<html lang="fr">', f'<html lang="{locale}">')
+        for filename in ("assets/", "styles.css", "travel-landscapes.css", "app.js", "travel-landscapes.js"):
+            localized = localized.replace(f'"{filename}', f'"../{filename}')
+        target = DIST / locale
+        target.mkdir(exist_ok=True)
+        (target / "index.html").write_text(localized, encoding="utf-8")
     (DIST / ".nojekyll").touch()
 
 
