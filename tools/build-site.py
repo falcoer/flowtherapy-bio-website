@@ -140,7 +140,7 @@ def prepare_dist() -> None:
     shutil.copytree(preview_source, preview_dist, dirs_exist_ok=True)
     preview_html = (preview_source / "index.html").read_text(encoding="utf-8")
     for locale in ("fr", "en", "es", "it", "de", "pt", "zh", "ja"):
-        localized = preview_html
+        localized = preview_html.replace('<html lang="fr">', f'<html lang="{locale}">')
         localized = localized.replace('href="../', 'href="../../')
         localized = localized.replace('src="../', 'src="../../')
         localized = localized.replace('href="preview.css', 'href="../preview.css')
