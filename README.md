@@ -1,62 +1,45 @@
 # Flow Therapy — Bio website
 
-Site public de type « link in bio » / one-page website pour Flow Therapy.
+Site public one-page de Flow Therapy, publié via GitHub Pages.
 
-## Roadmap
+## Contenu et traductions
 
-La convergence vers le design cible Light / Dark est suivie dans :
-
-```text
-ROADMAP.md
-```
-
-La roadmap détaille les jalons, la checklist d'implémentation, les critères de sortie et la définition de Done globale.
-
-## Modifier le contenu
-
-Tous les textes, liens sociaux, contenus médias et l'URL publique sont centralisés dans :
+Les données neutres (fichiers médias, formats, dates, crédits et liens sociaux) sont centralisées dans :
 
 ```text
 config/site.json
 ```
 
-Le HTML ne contient pas de contenu éditorial statique. `app.js` charge la configuration et construit la page, la galerie média et sa visionneuse.
-
-## Arborescence
+Les contenus éditoriaux et l’interface sont séparés par langue :
 
 ```text
-.
-├── .github/workflows/pages.yml
-├── assets-src/decorations/*.svg
-├── assets-src/images/*
-├── config/site.json
-├── ROADMAP.md
-├── app.js
-├── index.html
-└── styles.css
+i18n/
+├── fr.json
+└── en.json
 ```
 
-## Publication GitHub Pages
-
-Le workflow `Deploy GitHub Pages` publie automatiquement la branche `main`.
-
-Dans les paramètres du dépôt, sélectionner une seule fois :
+La langue est choisie dans cet ordre : code dans l’URL, préférence mémorisée, langue du navigateur, français. Les routes publiées sont :
 
 ```text
-Settings → Pages → Build and deployment → Source: GitHub Actions
+/fr/
+/en/
 ```
 
-Adresse prévue :
+Le sélecteur de langue met à jour le contenu et l’URL sans rechargement. Pour ajouter ultérieurement `zh-Hans`, créer son dictionnaire complet, puis l’ajouter aux listes de langues actives dans `app.js`, `tools/build-site.py` et `tools/validate-site.mjs`.
+
+## Assets
+
+Les originaux restent dans `assets-src/`. Les images et polices publiées sont générées exclusivement par la CI dans `dist/assets/`; aucun original n’est modifié.
+
+## Publication
+
+Le workflow GitHub Actions construit, valide puis publie automatiquement la branche `main`.
+
+Adresse actuelle :
 
 ```text
 https://falcoer.github.io/flowtherapy-bio-website/
 ```
-
-## QR code
-
-Le bouton discret placé à côté du logo ouvre une vue plein écran et génère un QR code à partir de `site.url` dans `config/site.json`.
-
-Lors du passage à un domaine personnalisé, modifier d'abord cette URL afin que le QR code pointe vers le domaine définitif.
 
 ## Développement local
 
