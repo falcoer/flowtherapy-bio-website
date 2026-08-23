@@ -1,29 +1,8 @@
 {
   "site": {
     "name": "Flow Therapy",
-    "tagline": "Trio musical aux compositions et reprises qui font voyager, rassemblent et touchent.",
-    "url": "https://falcoer.github.io/flowtherapy-bio-website/",
-    "location": "Basé à Martigues (13), France",
-    "copyright": "© 2026 Flow Therapy. Tous droits réservés."
+    "url": "https://falcoer.github.io/flowtherapy-bio-website/"
   },
-  "hero": {
-    "lines": [
-      "SENSIBLE.",
-      "INTENSE.",
-      "VIVANT."
-    ],
-    "signature": "Musique · Énergie · Émotion"
-  },
-  "navigation": [
-    {
-      "label": "Le groupe",
-      "href": "#groupe"
-    },
-    {
-      "label": "Médias",
-      "href": "#medias"
-    }
-  ],
   "socials": [
     {
       "label": "Instagram",
@@ -41,22 +20,10 @@
       "icon": "facebook"
     }
   ],
-  "about": {
-    "title": "Le groupe",
-    "paragraphs": [
-      "Né de la rencontre entre Betty, Jenni et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
-      "Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.",
-      "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.",
-      "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
-    ]
-  },
   "media": {
-    "title": "Médias",
-    "intro": "Photos de scène, portraits et souvenirs de Flow Therapy.",
     "items": [
       {
-        "title": "Flow Therapy — portrait de groupe sur scène",
-        "type": "Photo de groupe",
+        "id": "group-stage",
         "orientation": "landscape",
         "ratio": "3:2",
         "asset": "flow-therapy-portrait-groupe-scene",
@@ -68,12 +35,10 @@
           1440
         ],
         "date": "2026-06-30",
-        "credit": "C.B.",
-        "description": "Betty, Jenni et Lauris réunis sous les lumières de la scène."
+        "credit": "C.B."
       },
       {
-        "title": "Flow Therapy en concert",
-        "type": "Photo de concert",
+        "id": "live-black-white",
         "orientation": "landscape",
         "ratio": "3:2",
         "asset": "flow-therapy-live-noir-blanc",
@@ -85,12 +50,10 @@
           1440
         ],
         "date": "2026-06-07",
-        "credit": "C.B.",
-        "description": "Le trio en concert en plein air, photographié en noir et blanc."
+        "credit": "C.B."
       },
       {
-        "title": "Concert sous les lumières bleues",
-        "type": "Photo de concert",
+        "id": "live-blue-lights",
         "orientation": "landscape",
         "ratio": "3:2",
         "asset": "flow-therapy-live-lumieres-bleues",
@@ -102,12 +65,10 @@
           1440
         ],
         "date": "2025-10-14",
-        "credit": "C.B.",
-        "description": "Flow Therapy sur scène dans une ambiance de faisceaux bleus."
+        "credit": "C.B."
       },
       {
-        "title": "Flow Therapy — le trio en lumière",
-        "type": "Montage photo",
+        "id": "live-triptych",
         "orientation": "landscape",
         "ratio": "3:2",
         "asset": "flow-therapy-triptyque-live",
@@ -119,12 +80,10 @@
           1440
         ],
         "date": "2026-06-29",
-        "credit": "C.B.",
-        "description": "Triptyque de Betty, Jenni et Lauris en concert."
+        "credit": "C.B."
       },
       {
-        "title": "Lauris à la basse",
-        "type": "Portrait",
+        "id": "lauris-bass",
         "orientation": "portrait",
         "ratio": "2:3",
         "asset": "lauris-basse-noir-blanc",
@@ -135,12 +94,10 @@
           960
         ],
         "date": "2026-03-22",
-        "credit": "C.B.",
-        "description": "Lauris à la basse, photographié en noir et blanc."
+        "credit": "C.B."
       },
       {
-        "title": "Betty — guitare et chant",
-        "type": "Portrait",
+        "id": "betty-guitar-vocals",
         "orientation": "portrait",
         "ratio": "9:16",
         "asset": "betty-guitare-chant",
@@ -151,12 +108,10 @@
           898
         ],
         "date": "2026-06-07",
-        "credit": "C.B.",
-        "description": "Betty au chant et à la guitare acoustique lors d’un concert en plein air."
+        "credit": "C.B."
       },
       {
-        "title": "Jenni au chant",
-        "type": "Portrait",
+        "id": "jenni-vocals",
         "orientation": "portrait",
         "ratio": "2:3",
         "asset": "jenni-chant",
@@ -167,8 +122,7 @@
           960
         ],
         "date": "2026-08-20",
-        "credit": "C.B.",
-        "description": "Jenni au chant lors d’un concert de Flow Therapy."
+        "credit": "C.B."
       }
     ]
   }
