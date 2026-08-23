@@ -1,7 +1,10 @@
 {
   "site": {
     "name": "Flow Therapy",
-    "url": "https://falcoer.github.io/flowtherapy-bio-website/"
+    "url": "https://falcoer.github.io/flowtherapy-bio-website/",
+    "tagline": "Trio musical aux compositions et reprises qui font voyager, rassemblent et touchent.",
+    "location": "Basé à Martigues (13), France",
+    "copyright": "© 2026 Flow Therapy. Tous droits réservés."
   },
   "socials": [
     {
@@ -35,7 +38,10 @@
           1440
         ],
         "date": "2026-06-30",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Flow Therapy — portrait de groupe sur scène",
+        "type": "Photo de groupe",
+        "description": "Betty, Jenni et Lauris réunis sous les lumières de la scène."
       },
       {
         "id": "live-black-white",
@@ -50,7 +56,10 @@
           1440
         ],
         "date": "2026-06-07",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Flow Therapy en concert",
+        "type": "Photo de concert",
+        "description": "Le trio en concert en plein air, photographié en noir et blanc."
       },
       {
         "id": "live-blue-lights",
@@ -65,7 +74,10 @@
           1440
         ],
         "date": "2025-10-14",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Concert sous les lumières bleues",
+        "type": "Photo de concert",
+        "description": "Flow Therapy sur scène dans une ambiance de faisceaux bleus."
       },
       {
         "id": "live-triptych",
@@ -80,7 +92,10 @@
           1440
         ],
         "date": "2026-06-29",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Flow Therapy — le trio en lumière",
+        "type": "Montage photo",
+        "description": "Triptyque de Betty, Jenni et Lauris en concert."
       },
       {
         "id": "lauris-bass",
@@ -94,7 +109,10 @@
           960
         ],
         "date": "2026-03-22",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Lauris à la basse",
+        "type": "Portrait",
+        "description": "Lauris à la basse, photographié en noir et blanc."
       },
       {
         "id": "betty-guitar-vocals",
@@ -108,7 +126,10 @@
           898
         ],
         "date": "2026-06-07",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Betty — guitare et chant",
+        "type": "Portrait",
+        "description": "Betty au chant et à la guitare acoustique lors d’un concert en plein air."
       },
       {
         "id": "jenni-vocals",
@@ -122,8 +143,42 @@
           960
         ],
         "date": "2026-08-20",
-        "credit": "C.B."
+        "credit": "C.B.",
+        "title": "Jenni au chant",
+        "type": "Portrait",
+        "description": "Jenni au chant lors d’un concert de Flow Therapy."
       }
+    ],
+    "title": "Médias",
+    "intro": "Photos de scène, portraits et souvenirs de Flow Therapy."
+  },
+  "hero": {
+    "lines": [
+      "SENSIBLE.",
+      "INTENSE.",
+      "VIVANT."
+    ],
+    "signature": "Musique · Énergie · Émotion",
+    "listen": "▶ ÉCOUTER",
+    "media": "MÉDIAS"
+  },
+  "navigation": [
+    {
+      "label": "Le groupe",
+      "href": "#groupe"
+    },
+    {
+      "label": "Médias",
+      "href": "#medias"
+    }
+  ],
+  "about": {
+    "title": "Le groupe",
+    "paragraphs": [
+      "Né de la rencontre entre Betty, Jenni et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
+      "Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.",
+      "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.",
+      "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
     ]
   }
 }
