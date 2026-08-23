@@ -112,7 +112,7 @@ const [previewApp, previewRootHtml, previewFrHtml, previewEnHtml, frCopy, enCopy
   readFile(fromRoot('i18n/fr.json'), 'utf8').then(JSON.parse),
   readFile(fromRoot('i18n/en.json'), 'utf8').then(JSON.parse)
 ]);
-expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && previewApp.includes('history===\'replace\'?\'replaceState\':\'pushState\''), 'la préversion doit changer de langue sans rechargement');
+expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && previewApp.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la préversion doit changer de langue sans rechargement');
 expect(previewApp.includes("new URL('assets/',SITE_ROOT)") && previewApp.includes("new URL('config/site.json',SITE_ROOT)"), 'la préversion doit résoudre ses ressources depuis la racine du site');
 expect(previewRootHtml.includes('src="app.js?v=20260823-i18n-preview-3"'), 'la racine de préversion doit charger son runtime isolé');
 expect(previewFrHtml.includes('src="../app.js') && previewFrHtml.includes('href="../../styles.css'), 'la route française doit utiliser les chemins localisés');
