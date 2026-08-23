@@ -19,8 +19,7 @@ for (const locale of ['fr','en']) {
   expect(copy.media?.items && Object.keys(copy.media.items).length===config.media.items.length, `i18n/${locale}.json doit traduire chaque média`);
 }
 expect(isHttpUrl(config.site?.url), 'site.url doit être une URL HTTP(S)');
-expect(Array.isArray(config.hero?.lines) && config.hero.lines.length === 3, 'hero.lines doit contenir exactement trois lignes');
-expect(Array.isArray(config.navigation) && config.navigation.length > 0, 'navigation doit contenir au moins une entrée');
+expect(!config.hero && !config.about && !config.navigation, 'config/site.json ne doit contenir que les données neutres de langue');
 expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit contenir au moins une entrée');
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
@@ -41,7 +40,8 @@ for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
 for (const [index, item] of (config.media?.items || []).entries()) {
-  expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
+  expect(item.id && item.orientation && item.ratio && item.date && item.credit, `media.items[${index}] doit contenir toutes les métadonnées neutres`);
+  for (const locale of ['fr','en']) { const copy=translations[locale].media?.items?.[item.id]; expect(copy?.title && copy?.type && copy?.description, `i18n/${locale}.json doit traduire media.items[${index}]`); }
   expect(item.asset && Array.isArray(item.widths) && item.widths.length >= 4, `media.items[${index}] doit référencer un asset responsive et au moins quatre largeurs`);
   expect(item.widths?.includes(320) && item.widths?.includes(480), `media.items[${index}] doit proposer les variantes mobiles 320 et 480 px`);
   for (const width of (item.widths || [])) {
