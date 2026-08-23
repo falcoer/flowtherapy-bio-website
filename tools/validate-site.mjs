@@ -103,6 +103,7 @@ for (const [source, variants] of mediaBySource) {
 }
 expect(travelScript.includes('const mounted = new Map()') && travelScript.includes('replaceRenderedLandscapes(pair)') && !travelScript.includes('LANDSCAPES.map(pictureMarkup)'), 'la roue doit limiter le DOM rendu à la paire de paysages active');
 expect(travelScript.includes("link.rel = 'preload'") && travelScript.includes("link.fetchPriority = 'low'"), 'les paysages suivants doivent être préchargés progressivement pendant le défilement');
+expect(travelScript.includes("new URL('assets/generated/', import.meta.url)"), 'les paysages doivent rester accessibles depuis les routes localisées');
 const responsiveLandscapes = generatedManifest.assets.filter(asset => asset.mode === 'responsive-landscape-ci');
 expect(responsiveLandscapes.length === 45, 'exactement 45 variantes de paysage doivent être générées');
 expect(responsiveLandscapes.filter(asset => asset.format === 'avif').every(asset => asset.quality === 64), 'les paysages AVIF doivent utiliser la qualité mobile optimisée');
