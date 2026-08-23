@@ -5,11 +5,19 @@ import { pathToFileURL } from 'node:url';
 const root = process.argv[2] ? resolve(process.argv[2]) : resolve(new URL('..', import.meta.url).pathname);
 const fromRoot = file => new URL(file, `${pathToFileURL(root).href}/`);
 const config = JSON.parse(await readFile(fromRoot('config/site.json'), 'utf8'));
+const translations = Object.fromEntries(await Promise.all(['fr','en'].map(async locale => [locale, JSON.parse(await readFile(fromRoot(`i18n/${locale}.json`), 'utf8'))])));
 const problems = [];
 const expect = (condition, message) => { if (!condition) problems.push(message); };
 const isHttpUrl = value => { try { return ['http:', 'https:'].includes(new URL(value).protocol); } catch { return false; } };
 
 expect(config.site?.name, 'site.name est requis');
+for (const locale of ['fr','en']) {
+  const copy=translations[locale];
+  expect(copy.meta?.title && copy.meta?.description, `i18n/${locale}.json doit définir les métadonnées`);
+  expect(Array.isArray(copy.hero?.lines) && copy.hero.lines.length===3, `i18n/${locale}.json doit définir les trois lignes du hero`);
+  expect(copy.contact?.subjects && Object.keys(copy.contact.subjects).length===6, `i18n/${locale}.json doit définir les sujets du formulaire`);
+  expect(copy.media?.items && Object.keys(copy.media.items).length===config.media.items.length, `i18n/${locale}.json doit traduire chaque média`);
+}
 expect(isHttpUrl(config.site?.url), 'site.url doit être une URL HTTP(S)');
 expect(Array.isArray(config.hero?.lines) && config.hero.lines.length === 3, 'hero.lines doit contenir exactement trois lignes');
 expect(Array.isArray(config.navigation) && config.navigation.length > 0, 'navigation doit contenir au moins une entrée');
@@ -17,7 +25,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'assets-manifest.json',
+  'index.html', 'fr/index.html', 'en/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
