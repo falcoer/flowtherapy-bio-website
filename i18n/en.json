@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "title": "Flow Therapy — Music, energy, emotion",
+    "description": "Flow Therapy, a music trio from Martigues. Original music, news, media gallery and social networks."
+  },
+  "site": {
+    "tagline": "A musical trio whose original songs and covers take you on a journey, bring people together and move them.",
+    "location": "Based in Martigues, France",
+    "copyright": "© 2026 Flow Therapy. All rights reserved."
+  },
+  "hero": {
+    "lines": [
+      "SENSITIVE.",
+      "INTENSE.",
+      "ALIVE."
+    ],
+    "signature": "Music · Energy · Emotion",
+    "listen": "▶ LISTEN",
+    "media": "MEDIA"
+  },
+  "navigation": {
+    "group": "The band",
+    "media": "Media"
+  },
+  "controls": {
+    "language": "Choose language",
+    "themeDark": "Switch to dark theme",
+    "themeLight": "Switch to light theme",
+    "shareQr": "Share with QR code",
+    "contact": "Contact us",
+    "languages": {
+      "fr": "Français",
+      "en": "English"
+    }
+  },
+  "about": {
+    "title": "The band",
+    "paragraphs": [
+      "Born from the meeting of Betty, Jenni and Lauris, Flow Therapy is a trio from Martigues united by a shared desire: to create music that takes you on a journey, brings people together and moves them.",
+      "After giving timeless classics an original new spin, the trio naturally turned to songwriting to explore a universal theme: life, with all its beauty, trials, fragility and joys.",
+      "Through songs filled with empathy and sensitivity, the three artists share their perspective on a world that is at once intense, wonderful and sometimes unsettling — with strength and energy.",
+      "In 2026, their original song “Toi mon frère” received the award for Best Intergenerational Song at the national Music’al competition, sponsored by Bruno Bénabar and chaired by Gérard Pont, president of Les Francofolies. This recognition gives wings to the trio as they prepare their first EP."
+    ]
+  },
+  "media": {
+    "label": "Media",
+    "open": "Open {title} in the gallery",
+    "title": "Media",
+    "intro": "Live photos, portraits and memories from Flow Therapy.",
+    "items": {
+      "group-stage": {
+        "title": "Flow Therapy — group portrait on stage",
+        "type": "Group photo",
+        "description": "Betty, Jenni and Lauris together under the stage lights."
+      },
+      "live-black-white": {
+        "title": "Flow Therapy live",
+        "type": "Live photo",
+        "description": "The trio performing outdoors, photographed in black and white."
+      },
+      "live-blue-lights": {
+        "title": "Concert under blue lights",
+        "type": "Live photo",
+        "description": "Flow Therapy on stage in an atmosphere of blue beams of light."
+      },
+      "live-triptych": {
+        "title": "Flow Therapy — the trio in the spotlight",
+        "type": "Photo montage",
+        "description": "A triptych of Betty, Jenni and Lauris in concert."
+      },
+      "lauris-bass": {
+        "title": "Lauris on bass",
+        "type": "Portrait",
+        "description": "Lauris on bass, photographed in black and white."
+      },
+      "betty-guitar-vocals": {
+        "title": "Betty — guitar and vocals",
+        "type": "Portrait",
+        "description": "Betty singing and playing acoustic guitar at an outdoor concert."
+      },
+      "jenni-vocals": {
+        "title": "Jenni on vocals",
+        "type": "Portrait",
+        "description": "Jenni singing at a Flow Therapy concert."
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "A question, a project?",
+    "title": "Contact us",
+    "intro": "Concert, event, press or collaboration: choose the subject of your request and leave us your contact details.",
+    "subject": "Subject",
+    "chooseSubject": "Choose a subject",
+    "subjects": {
+      "booking": "Concert / booking",
+      "event": "Private or corporate event",
+      "press": "Press / media",
+      "collaboration": "Artistic collaboration",
+      "pressKit": "Press kit / technical rider",
+      "other": "Other request"
+    },
+    "email": "Email address",
+    "emailPlaceholder": "your.name@example.com",
+    "phone": "Phone number",
+    "optional": "optional",
+    "phonePlaceholder": "+44 20 0000 0000",
+    "message": "Your message",
+    "messagePlaceholder": "Tell us about your request…",
+    "submit": "Sending available soon",
+    "notice": "The form is being prepared. Sending messages will be enabled soon."
+  },
+  "viewer": {
+    "info": "Info",
+    "hideInfo": "Hide info",
+    "close": "Close gallery",
+    "previous": "Previous media",
+    "next": "Next media",
+    "type": "Type",
+    "format": "Format",
+    "date": "Date",
+    "credit": "Credit"
+  },
+  "qr": {
+    "title": "Scan, then share!",
+    "close": "Close QR code",
+    "label": "Website QR code"
+  },
+  "errors": {
+    "content": "Website content could not be loaded."
+  }
+}
