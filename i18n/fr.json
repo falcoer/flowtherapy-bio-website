@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "title": "Flow Therapy — Musique, énergie, émotion",
+    "description": "Flow Therapy, trio musical martégual. Musique originale, actualités, galerie média et réseaux sociaux."
+  },
+  "site": {
+    "tagline": "Trio musical aux compositions et reprises qui font voyager, rassemblent et touchent.",
+    "location": "Basé à Martigues (13), France",
+    "copyright": "© 2026 Flow Therapy. Tous droits réservés."
+  },
+  "hero": {
+    "lines": [
+      "SENSIBLE.",
+      "INTENSE.",
+      "VIVANT."
+    ],
+    "signature": "Musique · Énergie · Émotion",
+    "listen": "▶ ÉCOUTER",
+    "media": "MÉDIAS"
+  },
+  "navigation": {
+    "group": "Le groupe",
+    "media": "Médias"
+  },
+  "controls": {
+    "language": "Choisir la langue",
+    "themeDark": "Activer le thème sombre",
+    "themeLight": "Activer le thème clair",
+    "shareQr": "Partager par QR code",
+    "contact": "Nous contacter",
+    "languages": {
+      "fr": "Français",
+      "en": "English"
+    }
+  },
+  "about": {
+    "title": "Le groupe",
+    "paragraphs": [
+      "Né de la rencontre entre Betty, Jenni et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
+      "Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.",
+      "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.",
+      "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
+    ]
+  },
+  "media": {
+    "label": "Médias",
+    "open": "Ouvrir {title} dans la galerie",
+    "title": "Médias",
+    "intro": "Photos de scène, portraits et souvenirs de Flow Therapy.",
+    "items": {
+      "group-stage": {
+        "title": "Flow Therapy — portrait de groupe sur scène",
+        "type": "Photo de groupe",
+        "description": "Betty, Jenni et Lauris réunis sous les lumières de la scène."
+      },
+      "live-black-white": {
+        "title": "Flow Therapy en concert",
+        "type": "Photo de concert",
+        "description": "Le trio en concert en plein air, photographié en noir et blanc."
+      },
+      "live-blue-lights": {
+        "title": "Concert sous les lumières bleues",
+        "type": "Photo de concert",
+        "description": "Flow Therapy sur scène dans une ambiance de faisceaux bleus."
+      },
+      "live-triptych": {
+        "title": "Flow Therapy — le trio en lumière",
+        "type": "Montage photo",
+        "description": "Triptyque de Betty, Jenni et Lauris en concert."
+      },
+      "lauris-bass": {
+        "title": "Lauris à la basse",
+        "type": "Portrait",
+        "description": "Lauris à la basse, photographié en noir et blanc."
+      },
+      "betty-guitar-vocals": {
+        "title": "Betty — guitare et chant",
+        "type": "Portrait",
+        "description": "Betty au chant et à la guitare acoustique lors d’un concert en plein air."
+      },
+      "jenni-vocals": {
+        "title": "Jenni au chant",
+        "type": "Portrait",
+        "description": "Jenni au chant lors d’un concert de Flow Therapy."
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Une question, un projet ?",
+    "title": "Nous contacter",
+    "intro": "Concert, événement, presse ou collaboration : choisissez le sujet de votre demande et laissez-nous vos coordonnées.",
+    "subject": "Sujet",
+    "chooseSubject": "Choisir un sujet",
+    "subjects": {
+      "booking": "Concert / programmation",
+      "event": "Événement privé ou professionnel",
+      "press": "Presse / média",
+      "collaboration": "Collaboration artistique",
+      "pressKit": "Dossier de presse / fiche technique",
+      "other": "Autre demande"
+    },
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "votre.nom@exemple.fr",
+    "phone": "Numéro de téléphone",
+    "optional": "facultatif",
+    "phonePlaceholder": "+33 6 00 00 00 00",
+    "message": "Votre message",
+    "messagePlaceholder": "Décrivez votre demande…",
+    "submit": "Envoi bientôt disponible",
+    "notice": "Le formulaire est en préparation. L’envoi des messages sera activé prochainement."
+  },
+  "viewer": {
+    "info": "Infos",
+    "hideInfo": "Masquer les infos",
+    "close": "Fermer la galerie",
+    "previous": "Média précédent",
+    "next": "Média suivant",
+    "type": "Type",
+    "format": "Format",
+    "date": "Date",
+    "credit": "Crédit"
+  },
+  "qr": {
+    "title": "Flashez, puis partagez !",
+    "close": "Fermer le QR code",
+    "label": "QR code du site"
+  },
+  "errors": {
+    "content": "Le contenu du site ne peut pas être chargé."
+  }
+}
