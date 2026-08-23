@@ -134,6 +134,20 @@ def prepare_dist() -> None:
             entry.unlink()
     (DIST / "assets" / "fonts" / "licenses").mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / "config", DIST / "config", dirs_exist_ok=True)
+    shutil.copytree(ROOT / "i18n", DIST / "i18n", dirs_exist_ok=True)
+    preview_source = ROOT / "i18n-preview"
+    preview_dist = DIST / "i18n-preview"
+    shutil.copytree(preview_source, preview_dist, dirs_exist_ok=True)
+    preview_html = (preview_source / "index.html").read_text(encoding="utf-8")
+    for locale in ("fr", "en"):
+        localized = preview_html
+        localized = localized.replace('href="../', 'href="../../')
+        localized = localized.replace('src="../', 'src="../../')
+        localized = localized.replace('href="preview.css', 'href="../preview.css')
+        localized = localized.replace('src="app.js', 'src="../app.js')
+        target = preview_dist / locale
+        target.mkdir(exist_ok=True)
+        (target / "index.html").write_text(localized, encoding="utf-8")
     for filename in ("index.html", "app.js", "styles.css"):
         shutil.copy2(ROOT / filename, DIST / filename)
     (DIST / ".nojekyll").touch()
