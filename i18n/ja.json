@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "title": "Flow Therapy — 音楽、エネルギー、感動",
+    "description": "Flow Therapyは、フランス・マルティーグを拠点とする音楽トリオです。オリジナル曲、最新情報、メディアギャラリー、SNSをご紹介します。"
+  },
+  "site": {
+    "tagline": "オリジナル曲とカバー曲で、旅へ誘い、人をつなぎ、心を動かす音楽トリオ。",
+    "location": "フランス・マルティーグを拠点に活動",
+    "copyright": "© 2026 Flow Therapy. All rights reserved."
+  },
+  "hero": {
+    "lines": [
+      "繊細。",
+      "鮮烈。",
+      "躍動。"
+    ],
+    "signature": "音楽 · エネルギー · 感動",
+    "listen": "▶ 聴く",
+    "media": "メディア"
+  },
+  "navigation": {
+    "group": "バンド",
+    "media": "メディア"
+  },
+  "controls": {
+    "language": "言語を選択",
+    "themeDark": "ダークテーマに切り替える",
+    "themeLight": "ライトテーマに切り替える",
+    "shareQr": "QRコードで共有",
+    "contact": "お問い合わせ",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "es": "Español",
+      "it": "Italiano",
+      "de": "Deutsch",
+      "pt": "Português",
+      "zh": "中文",
+      "ja": "日本語"
+    }
+  },
+  "about": {
+    "title": "バンド",
+    "paragraphs": [
+      "Betty、Jenni、Laurisの出会いから生まれたFlow Therapyは、フランス・マルティーグを拠点とするトリオです。「旅へ誘い、人をつなぎ、心を動かす音楽を作りたい」という共通の思いで結ばれています。",
+      "時代を超えて愛される名曲を独自の感性で再解釈したのち、3人は自然とオリジナル曲の制作へ進みました。そこで描く普遍的なテーマは、美しさ、試練、儚さ、喜びをすべて含む「人生」です。",
+      "共感と繊細さに満ちた楽曲を通して、3人は力強いエネルギーとともに、鮮烈で素晴らしく、ときに心を揺さぶる世界へのまなざしを届けます。",
+      "2026年、オリジナル曲「Toi mon frère」が、フランス全国Music’alコンテストで最優秀世代間交流ソング賞を受賞しました。同大会はBruno Bénabarが後援し、Les Francofolies会長のGérard Pontが審査委員長を務めました。この評価を追い風に、トリオは初のEP制作を進めています。"
+    ]
+  },
+  "media": {
+    "label": "メディア",
+    "open": "「{title}」をギャラリーで開く",
+    "title": "メディア",
+    "intro": "Flow Therapyのライブ写真、ポートレート、思い出の記録。",
+    "items": {
+      "group-stage": {
+        "title": "Flow Therapy — ステージでのグループポートレート",
+        "type": "グループ写真",
+        "description": "ステージライトの下に集うBetty、Jenni、Lauris。"
+      },
+      "live-black-white": {
+        "title": "Flow Therapy ライブ",
+        "type": "ライブ写真",
+        "description": "屋外ライブで演奏するトリオをモノクロで撮影。"
+      },
+      "live-blue-lights": {
+        "title": "青い光に包まれたライブ",
+        "type": "ライブ写真",
+        "description": "青い光線が広がるステージで演奏するFlow Therapy。"
+      },
+      "live-triptych": {
+        "title": "Flow Therapy — スポットライトを浴びる3人",
+        "type": "フォトモンタージュ",
+        "description": "ライブ中のBetty、Jenni、Laurisを収めた三連写真。"
+      },
+      "lauris-bass": {
+        "title": "ベースを弾くLauris",
+        "type": "ポートレート",
+        "description": "ベースを演奏するLaurisのモノクロ写真。"
+      },
+      "betty-guitar-vocals": {
+        "title": "Betty — ギター＆ボーカル",
+        "type": "ポートレート",
+        "description": "屋外ライブで歌いながらアコースティックギターを弾くBetty。"
+      },
+      "jenni-vocals": {
+        "title": "ボーカルのJenni",
+        "type": "ポートレート",
+        "description": "Flow Therapyのライブで歌うJenni。"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "ご質問やご相談がありますか？",
+    "title": "お問い合わせ",
+    "intro": "ライブ、イベント、取材、コラボレーションについて、ご用件を選び、連絡先をご入力ください。",
+    "subject": "ご用件",
+    "chooseSubject": "ご用件を選択",
+    "subjects": {
+      "booking": "ライブ / 出演依頼",
+      "event": "プライベート・企業イベント",
+      "press": "プレス / メディア",
+      "collaboration": "アーティストとのコラボレーション",
+      "pressKit": "プレスキット / テクニカル資料",
+      "other": "その他のお問い合わせ"
+    },
+    "email": "メールアドレス",
+    "emailPlaceholder": "your.name@example.jp",
+    "phone": "電話番号",
+    "optional": "任意",
+    "phonePlaceholder": "+81 3 0000 0000",
+    "message": "メッセージ",
+    "messagePlaceholder": "ご依頼内容をご記入ください…",
+    "submit": "送信機能は近日公開予定",
+    "notice": "現在フォームを準備中です。メッセージ送信機能は近日中に公開します。"
+  },
+  "viewer": {
+    "info": "情報",
+    "hideInfo": "情報を隠す",
+    "close": "ギャラリーを閉じる",
+    "previous": "前のメディア",
+    "next": "次のメディア",
+    "type": "種類",
+    "format": "形式",
+    "date": "日付",
+    "credit": "クレジット"
+  },
+  "qr": {
+    "title": "スキャンして共有！",
+    "close": "QRコードを閉じる",
+    "label": "ウェブサイトのQRコード"
+  },
+  "errors": {
+    "content": "ウェブサイトの内容を読み込めませんでした。"
+  }
+}

@@ -2,7 +2,7 @@ const SITE_ROOT=new URL('./',import.meta.url);
 const ASSET=new URL('assets/',SITE_ROOT).href;
 const CONFIG_URL=new URL('config/site.json',SITE_ROOT);
 const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT);
-const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}};
+const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}};
 let siteConfig;
 let activeLocale;
 let activeCopy;

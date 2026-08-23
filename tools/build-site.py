@@ -139,7 +139,7 @@ def prepare_dist() -> None:
     preview_dist = DIST / "i18n-preview"
     shutil.copytree(preview_source, preview_dist, dirs_exist_ok=True)
     preview_html = (preview_source / "index.html").read_text(encoding="utf-8")
-    for locale in ("fr", "en"):
+    for locale in ("fr", "en", "es", "it", "de", "pt", "zh", "ja"):
         localized = preview_html
         localized = localized.replace('href="../', 'href="../../')
         localized = localized.replace('src="../', 'src="../../')
@@ -151,7 +151,7 @@ def prepare_dist() -> None:
     for filename in ("index.html", "app.js", "styles.css"):
         shutil.copy2(ROOT / filename, DIST / filename)
     root_html = (ROOT / "index.html").read_text(encoding="utf-8")
-    for locale in ("fr", "en"):
+    for locale in ("fr", "en", "es", "it", "de", "pt", "zh", "ja"):
         localized = root_html.replace('<html lang="fr">', f'<html lang="{locale}">')
         for resource in ("assets/", "styles.css", "travel-landscapes.css", "app.js", "travel-landscapes.js"):
             localized = localized.replace(f'href="{resource}', f'href="../{resource}')

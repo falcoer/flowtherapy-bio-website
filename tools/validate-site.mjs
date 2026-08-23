@@ -17,7 +17,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'fr/index.html', 'en/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'assets-manifest.json',
+  'index.html', 'fr/index.html', 'en/index.html', 'es/index.html', 'it/index.html', 'de/index.html', 'pt/index.html', 'zh/index.html', 'ja/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n/es.json', 'i18n/it.json', 'i18n/de.json', 'i18n/pt.json', 'i18n/zh.json', 'i18n/ja.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'i18n-preview/es/index.html', 'i18n-preview/it/index.html', 'i18n-preview/de/index.html', 'i18n-preview/pt/index.html', 'i18n-preview/zh/index.html', 'i18n-preview/ja/index.html', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -69,10 +69,10 @@ expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-a
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(css.includes('.language-switcher{position:relative}') && css.includes('.language-menu{position:absolute'), 'le sélecteur de langue doit être intégré aux styles publics');
 expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
-expect(app.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && app.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la racine publique doit changer de langue sans rechargement');
+expect(app.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && app.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la racine publique doit changer de langue sans rechargement');
 expect(app.includes("const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT)") && app.includes("const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname"), 'la racine publique doit résoudre les traductions et les routes localisées');
 expect(app.includes("setupQr(new URL(activeLocale+'/',site.url).href)"), 'le QR code doit partager la route localisée active');
-expect(html.includes('src="app.js?v=20260823-i18n-prod-1"'), 'la racine publique doit charger le runtime internationalisé');
+expect(html.includes('src="app.js?v=20260823-i18n-prod-2"'), 'la racine publique doit charger le runtime internationalisé');
 expect(rootFrHtml.includes('src="../app.js') && rootFrHtml.includes('href="../styles.css') && rootFrHtml.includes('<html lang="fr">'), 'la route publique française doit utiliser les chemins localisés');
 expect(rootEnHtml.includes('src="../app.js') && rootEnHtml.includes('href="../styles.css') && rootEnHtml.includes('<html lang="en">'), 'la route publique anglaise doit utiliser les chemins localisés');
 expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
@@ -111,22 +111,30 @@ expect(decorations.length === 7, 'exactement sept décorations SVG doivent être
 expect(decorations.reduce((total, asset) => total + asset.bytes, 0) <= 15_000, 'le budget total des décorations SVG est limité à 15 ko');
 
 
-const [previewApp, previewRootHtml, previewFrHtml, previewEnHtml, frCopy, enCopy] = await Promise.all([
+const localeCodes = ['fr', 'en', 'es', 'it', 'de', 'pt', 'zh', 'ja'];
+const [previewApp, previewRootHtml] = await Promise.all([
   readFile(fromRoot('i18n-preview/app.js'), 'utf8'),
-  readFile(fromRoot('i18n-preview/index.html'), 'utf8'),
-  readFile(fromRoot('i18n-preview/fr/index.html'), 'utf8'),
-  readFile(fromRoot('i18n-preview/en/index.html'), 'utf8'),
-  readFile(fromRoot('i18n/fr.json'), 'utf8').then(JSON.parse),
-  readFile(fromRoot('i18n/en.json'), 'utf8').then(JSON.parse)
+  readFile(fromRoot('i18n-preview/index.html'), 'utf8')
 ]);
-expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}}") && previewApp.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la préversion doit changer de langue sans rechargement');
+expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && previewApp.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la préversion doit changer entre toutes les langues sans rechargement');
 expect(previewApp.includes("new URL('assets/',SITE_ROOT)") && previewApp.includes("new URL('config/site.json',SITE_ROOT)"), 'la préversion doit résoudre ses ressources depuis la racine du site');
-expect(previewRootHtml.includes('src="app.js?v=20260823-i18n-preview-3"'), 'la racine de préversion doit charger son runtime isolé');
-expect(previewFrHtml.includes('src="../app.js') && previewFrHtml.includes('href="../../styles.css'), 'la route française doit utiliser les chemins localisés');
-expect(previewEnHtml.includes('src="../app.js') && previewEnHtml.includes('href="../../styles.css'), 'la route anglaise doit utiliser les chemins localisés');
-expect(Object.keys(frCopy.media?.items || {}).length === config.media.items.length, 'le français doit traduire chaque média');
-expect(Object.keys(enCopy.media?.items || {}).length === config.media.items.length, 'l’anglais doit traduire chaque média');
-expect(Object.keys(frCopy.contact?.subjects || {}).join(',') === Object.keys(enCopy.contact?.subjects || {}).join(','), 'les sujets de contact doivent partager les mêmes identifiants');
+expect(previewRootHtml.includes('src="app.js?v=20260823-i18n-preview-4"'), 'la racine de préversion doit charger son runtime isolé');
+
+const localizedCopies = {};
+for (const locale of localeCodes) {
+  const [rootLocalizedHtml, previewLocalizedHtml, copy] = await Promise.all([
+    readFile(fromRoot(`${locale}/index.html`), 'utf8'),
+    readFile(fromRoot(`i18n-preview/${locale}/index.html`), 'utf8'),
+    readFile(fromRoot(`i18n/${locale}.json`), 'utf8').then(JSON.parse)
+  ]);
+  localizedCopies[locale] = copy;
+  expect(rootLocalizedHtml.includes('src="../app.js') && rootLocalizedHtml.includes('href="../styles.css') && rootLocalizedHtml.includes(`<html lang="${locale}">`), `la route publique ${locale} doit utiliser les chemins localisés`);
+  expect(previewLocalizedHtml.includes('src="../app.js') && previewLocalizedHtml.includes('href="../../styles.css') && previewLocalizedHtml.includes(`<html lang="${locale}">`), `la route de préversion ${locale} doit utiliser les chemins localisés`);
+  expect(Object.keys(copy.media?.items || {}).length === config.media.items.length, `la langue ${locale} doit traduire chaque média`);
+  expect(Object.keys(copy.controls?.languages || {}).join(',') === localeCodes.join(','), `la langue ${locale} doit proposer les huit langues`);
+}
+const subjectKeys = Object.keys(localizedCopies.fr.contact?.subjects || {}).join(',');
+for (const locale of localeCodes) expect(Object.keys(localizedCopies[locale].contact?.subjects || {}).join(',') === subjectKeys, `les sujets de contact ${locale} doivent partager les mêmes identifiants`);
 
 if (problems.length) throw new Error(`Validation du site échouée:\n- ${problems.join('\n- ')}`);
 console.log(`Validation du site réussie : ${root}`);

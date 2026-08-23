@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "title": "Flow Therapy — Musica, energia, emozione",
+    "description": "Flow Therapy, trio musicale di Martigues. Musica originale, novità, galleria multimediale e social network."
+  },
+  "site": {
+    "tagline": "Un trio musicale con brani originali e cover che fanno viaggiare, uniscono ed emozionano.",
+    "location": "Con sede a Martigues, Francia",
+    "copyright": "© 2026 Flow Therapy. Tutti i diritti riservati."
+  },
+  "hero": {
+    "lines": [
+      "SENSIBILE.",
+      "INTENSA.",
+      "VIVA."
+    ],
+    "signature": "Musica · Energia · Emozione",
+    "listen": "▶ ASCOLTA",
+    "media": "MEDIA"
+  },
+  "navigation": {
+    "group": "Il gruppo",
+    "media": "Media"
+  },
+  "controls": {
+    "language": "Scegli la lingua",
+    "themeDark": "Attiva il tema scuro",
+    "themeLight": "Attiva il tema chiaro",
+    "shareQr": "Condividi tramite codice QR",
+    "contact": "Contattaci",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "es": "Español",
+      "it": "Italiano",
+      "de": "Deutsch",
+      "pt": "Português",
+      "zh": "中文",
+      "ja": "日本語"
+    }
+  },
+  "about": {
+    "title": "Il gruppo",
+    "paragraphs": [
+      "Nato dall’incontro tra Betty, Jenni e Lauris, Flow Therapy è un trio di Martigues unito da un desiderio comune: creare una musica che faccia viaggiare, avvicini le persone ed emozioni.",
+      "Dopo aver reinterpretato con originalità classici senza tempo, il trio si è naturalmente rivolto alla composizione per esplorare un tema universale: la vita, con tutta la sua bellezza, le sue prove, la sua fragilità e le sue gioie.",
+      "Attraverso brani ricchi di empatia e sensibilità, i tre artisti condividono con forza ed energia il loro sguardo su un mondo intenso, meraviglioso e talvolta sconvolgente.",
+      "Nel 2026, il loro brano originale «Toi mon frère» ha ricevuto il premio per la migliore canzone intergenerazionale al concorso nazionale Music’al, patrocinato da Bruno Bénabar e presieduto da Gérard Pont, presidente di Les Francofolies. Un riconoscimento che dà slancio al trio mentre prepara il suo primo EP."
+    ]
+  },
+  "media": {
+    "label": "Media",
+    "open": "Apri {title} nella galleria",
+    "title": "Media",
+    "intro": "Foto dal vivo, ritratti e ricordi di Flow Therapy.",
+    "items": {
+      "group-stage": {
+        "title": "Flow Therapy — ritratto del gruppo sul palco",
+        "type": "Foto di gruppo",
+        "description": "Betty, Jenni e Lauris insieme sotto le luci del palco."
+      },
+      "live-black-white": {
+        "title": "Flow Therapy dal vivo",
+        "type": "Foto dal vivo",
+        "description": "Il trio durante un concerto all’aperto, fotografato in bianco e nero."
+      },
+      "live-blue-lights": {
+        "title": "Concerto sotto le luci blu",
+        "type": "Foto dal vivo",
+        "description": "Flow Therapy sul palco in un’atmosfera di fasci di luce blu."
+      },
+      "live-triptych": {
+        "title": "Flow Therapy — il trio sotto i riflettori",
+        "type": "Fotomontaggio",
+        "description": "Un trittico di Betty, Jenni e Lauris in concerto."
+      },
+      "lauris-bass": {
+        "title": "Lauris al basso",
+        "type": "Ritratto",
+        "description": "Lauris al basso, fotografato in bianco e nero."
+      },
+      "betty-guitar-vocals": {
+        "title": "Betty — chitarra e voce",
+        "type": "Ritratto",
+        "description": "Betty canta e suona la chitarra acustica durante un concerto all’aperto."
+      },
+      "jenni-vocals": {
+        "title": "Jenni alla voce",
+        "type": "Ritratto",
+        "description": "Jenni canta durante un concerto dei Flow Therapy."
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "Una domanda, un progetto?",
+    "title": "Contattaci",
+    "intro": "Concerto, evento, stampa o collaborazione: scegli l’argomento della richiesta e lasciaci i tuoi recapiti.",
+    "subject": "Oggetto",
+    "chooseSubject": "Scegli un argomento",
+    "subjects": {
+      "booking": "Concerto / booking",
+      "event": "Evento privato o aziendale",
+      "press": "Stampa / media",
+      "collaboration": "Collaborazione artistica",
+      "pressKit": "Cartella stampa / scheda tecnica",
+      "other": "Altra richiesta"
+    },
+    "email": "Indirizzo e-mail",
+    "emailPlaceholder": "nome.cognome@esempio.it",
+    "phone": "Numero di telefono",
+    "optional": "facoltativo",
+    "phonePlaceholder": "+39 320 000 0000",
+    "message": "Il tuo messaggio",
+    "messagePlaceholder": "Descrivi la tua richiesta…",
+    "submit": "Invio disponibile prossimamente",
+    "notice": "Il modulo è in preparazione. L’invio dei messaggi sarà attivato prossimamente."
+  },
+  "viewer": {
+    "info": "Info",
+    "hideInfo": "Nascondi info",
+    "close": "Chiudi la galleria",
+    "previous": "Contenuto precedente",
+    "next": "Contenuto successivo",
+    "type": "Tipo",
+    "format": "Formato",
+    "date": "Data",
+    "credit": "Crediti"
+  },
+  "qr": {
+    "title": "Scansiona e condividi!",
+    "close": "Chiudi il codice QR",
+    "label": "Codice QR del sito"
+  },
+  "errors": {
+    "content": "Impossibile caricare il contenuto del sito."
+  }
+}

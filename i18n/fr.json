@@ -30,7 +30,13 @@
     "contact": "Nous contacter",
     "languages": {
       "fr": "Français",
-      "en": "English"
+      "en": "English",
+      "es": "Español",
+      "it": "Italiano",
+      "de": "Deutsch",
+      "pt": "Português",
+      "zh": "中文",
+      "ja": "日本語"
     }
   },
   "about": {

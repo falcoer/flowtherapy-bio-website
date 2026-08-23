@@ -3,7 +3,7 @@ const SITE_ROOT=new URL('../',PREVIEW_ROOT);
 const ASSET=new URL('assets/',SITE_ROOT).href;
 const CONFIG_URL=new URL('config/site.json',SITE_ROOT);
 const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT);
-const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'}};
+const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}};
 let siteConfig;
 let activeLocale;
 let activeCopy;
@@ -244,7 +244,7 @@ function setupContact(){
   updateCount();
 }
 
-const localeFromUrl=()=>location.pathname.match(/\/i18n-preview\/(fr|en)\/?$/)?.[1]||null;
+const localeFromUrl=()=>Object.keys(LOCALES).find(locale=>{const path=localePath(locale);return location.pathname===path||location.pathname===path.slice(0,-1)})||null;
 const browserLocale=()=>{for(const value of [...(navigator.languages||[]),navigator.language].filter(Boolean)){const code=value.toLowerCase().split('-')[0];if(LOCALES[code])return code;}return 'fr';};
 const resolveLocale=()=>localeFromUrl()||browserLocale();
 const localePath=locale=>new URL(locale+'/',PREVIEW_ROOT).pathname;

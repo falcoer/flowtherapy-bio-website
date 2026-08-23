@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "title": "Flow Therapy — 音乐、能量、情感",
+    "description": "Flow Therapy，来自法国马蒂格的音乐三重奏。原创音乐、最新动态、媒体图库和社交网络。"
+  },
+  "site": {
+    "tagline": "一个以原创作品和翻唱带领听众远行、凝聚彼此并触动心灵的音乐三重奏。",
+    "location": "来自法国马蒂格",
+    "copyright": "© 2026 Flow Therapy。保留所有权利。"
+  },
+  "hero": {
+    "lines": [
+      "细腻。",
+      "强烈。",
+      "鲜活。"
+    ],
+    "signature": "音乐 · 能量 · 情感",
+    "listen": "▶ 聆听",
+    "media": "媒体"
+  },
+  "navigation": {
+    "group": "乐队",
+    "media": "媒体"
+  },
+  "controls": {
+    "language": "选择语言",
+    "themeDark": "切换至深色主题",
+    "themeLight": "切换至浅色主题",
+    "shareQr": "通过二维码分享",
+    "contact": "联系我们",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "es": "Español",
+      "it": "Italiano",
+      "de": "Deutsch",
+      "pt": "Português",
+      "zh": "中文",
+      "ja": "日本語"
+    }
+  },
+  "about": {
+    "title": "乐队",
+    "paragraphs": [
+      "Flow Therapy 由 Betty、Jenni 和 Lauris 相识后共同创立。这个来自马蒂格的三重奏拥有同一个愿望：创作能够带人远行、凝聚彼此并触动心灵的音乐。",
+      "在以独特方式重新演绎多首永恒经典之后，三人自然而然地开始原创创作，探索一个普世主题：生命，以及其中的美好、考验、脆弱与喜悦。",
+      "三位音乐人通过充满共情与细腻情感的歌曲，以力量和能量分享他们眼中的世界——强烈、美好，也有时令人震撼。",
+      "2026 年，他们的原创歌曲《Toi mon frère》在法国全国 Music’al 大赛中荣获最佳跨世代歌曲奖。该赛事由 Bruno Bénabar 担任赞助人，并由 Les Francofolies 主席 Gérard Pont 担任评审主席。这份认可为正在筹备首张 EP 的三人注入了新的动力。"
+    ]
+  },
+  "media": {
+    "label": "媒体",
+    "open": "在图库中打开“{title}”",
+    "title": "媒体",
+    "intro": "Flow Therapy 的现场照片、肖像与珍贵回忆。",
+    "items": {
+      "group-stage": {
+        "title": "Flow Therapy — 舞台合影",
+        "type": "团体照片",
+        "description": "Betty、Jenni 和 Lauris 在舞台灯光下同框。"
+      },
+      "live-black-white": {
+        "title": "Flow Therapy 现场演出",
+        "type": "现场照片",
+        "description": "三人在户外演出中的黑白影像。"
+      },
+      "live-blue-lights": {
+        "title": "蓝色灯光下的演出",
+        "type": "现场照片",
+        "description": "Flow Therapy 在蓝色光束环绕的舞台上演出。"
+      },
+      "live-triptych": {
+        "title": "Flow Therapy — 聚光灯下的三人",
+        "type": "照片拼图",
+        "description": "Betty、Jenni 和 Lauris 演出现场的三联画。"
+      },
+      "lauris-bass": {
+        "title": "Lauris 与贝斯",
+        "type": "肖像",
+        "description": "Lauris 演奏贝斯的黑白照片。"
+      },
+      "betty-guitar-vocals": {
+        "title": "Betty — 吉他与演唱",
+        "type": "肖像",
+        "description": "Betty 在户外演出中演唱并弹奏木吉他。"
+      },
+      "jenni-vocals": {
+        "title": "Jenni 演唱",
+        "type": "肖像",
+        "description": "Jenni 在 Flow Therapy 演出中歌唱。"
+      }
+    }
+  },
+  "contact": {
+    "eyebrow": "有问题或合作计划？",
+    "title": "联系我们",
+    "intro": "无论是演出、活动、媒体采访还是合作，请选择咨询主题并留下您的联系方式。",
+    "subject": "主题",
+    "chooseSubject": "选择主题",
+    "subjects": {
+      "booking": "演出 / 预订",
+      "event": "私人或企业活动",
+      "press": "新闻 / 媒体",
+      "collaboration": "艺术合作",
+      "pressKit": "新闻资料包 / 技术要求",
+      "other": "其他咨询"
+    },
+    "email": "电子邮箱",
+    "emailPlaceholder": "your.name@example.cn",
+    "phone": "电话号码",
+    "optional": "选填",
+    "phonePlaceholder": "+86 10 0000 0000",
+    "message": "您的留言",
+    "messagePlaceholder": "请描述您的需求…",
+    "submit": "即将开放发送功能",
+    "notice": "表单正在准备中，留言发送功能即将开放。"
+  },
+  "viewer": {
+    "info": "信息",
+    "hideInfo": "隐藏信息",
+    "close": "关闭图库",
+    "previous": "上一项",
+    "next": "下一项",
+    "type": "类型",
+    "format": "格式",
+    "date": "日期",
+    "credit": "图片来源"
+  },
+  "qr": {
+    "title": "扫码并分享！",
+    "close": "关闭二维码",
+    "label": "网站二维码"
+  },
+  "errors": {
+    "content": "无法加载网站内容。"
+  }
+}
