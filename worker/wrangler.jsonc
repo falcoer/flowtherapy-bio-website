@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "flowtherapy-contact",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-24",
+  "compatibility_flags": ["nodejs_compat"],
+  "routes": [{ "pattern": "flowtherapymusic.com/api/contact*", "zone_name": "flowtherapymusic.com" }],
+  "send_email": [{ "name": "EMAIL", "destination_address": "flowtherapymusic@gmail.com" }],
+  "ratelimits": [{ "name": "CONTACT_RATE_LIMIT", "namespace_id": "1001", "simple": { "limit": 5, "period": 60 } }],
+  "observability": { "enabled": true, "logs": { "head_sampling_rate": 1 }, "traces": { "enabled": true, "head_sampling_rate": 0.01 } }
+}

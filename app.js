@@ -2,6 +2,7 @@ const SITE_ROOT=new URL('./',import.meta.url);
 const ASSET=new URL('assets/',SITE_ROOT).href;
 const CONFIG_URL=new URL('config/site.json',SITE_ROOT);
 const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT);
+const CONTACT_URL=new URL('api/contact',SITE_ROOT);
 const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}};
 let siteConfig;
 let activeLocale;
@@ -82,8 +83,10 @@ function renderPage(config){
         <input id="contact-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+33 6 00 00 00 00">
         <div class="contact-message-label"><label for="contact-message">Votre message</label><span><output id="contact-count">0</output>/255</span></div>
         <textarea id="contact-message" name="message" maxlength="255" rows="5" required placeholder="Décrivez votre demande…"></textarea>
-        <button class="contact-submit" type="submit" disabled>Envoi bientôt disponible</button>
-        <p class="contact-notice">Le formulaire est en préparation. L’envoi des messages sera activé prochainement.</p>
+        <div class="contact-trap" aria-hidden="true"><label for="contact-company">Société</label><input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+        <input name="startedAt" type="hidden" value="${Date.now()}">
+        <button class="contact-submit" type="submit">Envoyer le message</button>
+        <p class="contact-notice" role="status" aria-live="polite">Réponse habituelle sous quelques jours.</p>
       </form>
     </div>
   </div>
@@ -91,7 +94,6 @@ function renderPage(config){
 <footer><span>${esc(site.copyright)}</span></footer>`;
   setupTheme();
   setupQr();
-  setupContact();
   setupAlpacaReveal();
   setupMediaViewer(mediaItems);
 }
@@ -138,7 +140,7 @@ function render(config,copy,locale){
     replacement.removeAttribute('open');replacement.classList.remove('is-open');
     dialog.replaceWith(replacement);
   }
-  renderPage(localizedConfig(config,copy));translateRenderedPage(copy,locale);setupLanguageSwitcher(locale,copy);
+  renderPage(localizedConfig(config,copy));translateRenderedPage(copy,locale);setupContact();setupLanguageSwitcher(locale,copy);
 }
 
 function setupMediaViewer(items){const labels=activeCopy?.viewer||{info:'Infos',hideInfo:'Masquer les infos'};
@@ -237,9 +239,30 @@ function setupContact(){
   const message=document.querySelector('#contact-message');
   const counter=document.querySelector('#contact-count');
   if(!form||!message||!counter)return;
+  const button=form.querySelector('.contact-submit');
+  const notice=form.querySelector('.contact-notice');
+  const labels={
+    fr:{submit:'Envoyer le message',sending:'Envoi en cours…',success:'Merci, votre message a bien été envoyé.',error:'L’envoi a échoué. Réessayez dans quelques instants.',notice:'Réponse habituelle sous quelques jours.'},
+    en:{submit:'Send message',sending:'Sending…',success:'Thank you, your message has been sent.',error:'Sending failed. Please try again shortly.',notice:'We usually reply within a few days.'}
+  }[activeLocale]||{submit:activeCopy?.contact?.submit||'Send',sending:'Sending…',success:'Message sent.',error:'Sending failed. Please try again.',notice:''};
   const updateCount=()=>{counter.textContent=String(message.value.length)};
   message.addEventListener('input',updateCount);
-  form.addEventListener('submit',event=>event.preventDefault());
+  button.textContent=labels.submit;
+  notice.textContent=labels.notice;
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    button.disabled=true;button.textContent=labels.sending;notice.textContent='';notice.className='contact-notice';
+    const payload=Object.fromEntries(new FormData(form));
+    try{
+      const response=await fetch(CONTACT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      if(!response.ok)throw new Error('Contact request failed ('+response.status+')');
+      form.reset();form.elements.startedAt.value=String(Date.now());updateCount();
+      notice.textContent=labels.success;notice.classList.add('is-success');
+    }catch(error){
+      console.error(error);notice.textContent=labels.error;notice.classList.add('is-error');
+    }finally{button.disabled=false;button.textContent=labels.submit;}
+  });
   updateCount();
 }
 

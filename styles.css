@@ -168,6 +168,8 @@ footer{justify-content:center;text-align:center}
 .contact-submit{margin-top:14px;padding:15px 22px;border:0;border-radius:13px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-weight:850}
 .contact-submit:disabled{cursor:not-allowed;filter:grayscale(.35);opacity:.68}
 .contact-notice{margin:2px 0 0;text-align:center;font-size:12px;line-height:1.45}
+.contact-notice.is-success{color:#8ee6b0}.contact-notice.is-error{color:#ff9d9d}
+.contact-trap{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
 @media(max-width:790px){.contact-layout{grid-template-columns:1fr}.contact-heading{max-width:620px}.contact-heading .contact-intro{max-width:560px}}
 @media(max-width:520px){.contact-section{padding-left:18px;padding-right:18px}.contact-layout{gap:28px}.contact-heading{gap:12px}.contact-heading-icon{flex-basis:50px;width:50px;height:50px;font-size:24px}.contact-heading h2{font-size:48px}.contact-heading .contact-intro{font-size:16px}.contact-panel{padding:24px 18px;border-radius:20px}.contact-form input,.contact-form select,.contact-form textarea{padding:12px}}
 
