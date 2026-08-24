@@ -67,7 +67,7 @@ expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter gén�
 expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(css.includes('.language-switcher{position:relative}') && css.includes('.language-menu{position:absolute'), 'le sélecteur de langue doit être intégré aux styles publics');
-expect(html.includes('assets/decorations/flowtherapymusic-qr.svg') && qrSvg.includes('https://www.flowtherapymusic.com/') && qrSvg.includes('xmlns="http://www.w3.org/2000/svg"') && !app.includes('QRCode'), 'le QR code canonique doit être un SVG autonome valide sans génération côté client');
+expect(html.includes('assets/decorations/flowtherapymusic-qr.svg?v=') && qrSvg.includes('https://www.flowtherapymusic.com/') && qrSvg.includes('xmlns="http://www.w3.org/2000/svg"') && !app.includes('QRCode'), 'le QR code canonique doit être un SVG autonome valide, versionné et sans génération côté client');
 expect(app.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && app.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la racine publique doit changer de langue sans rechargement');
 expect(app.includes("const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT)") && app.includes("const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname"), 'la racine publique doit résoudre les traductions et les routes localisées');
 expect(app.includes('function setupQr()') && !app.includes('new QRCode'), 'la modale QR doit afficher l’asset canonique sans régénération');
@@ -118,7 +118,7 @@ const [previewApp, previewRootHtml] = await Promise.all([
 expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && previewApp.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la préversion doit changer entre toutes les langues sans rechargement');
 expect(previewApp.includes("new URL('assets/',SITE_ROOT)") && previewApp.includes("new URL('config/site.json',SITE_ROOT)"), 'la préversion doit résoudre ses ressources depuis la racine du site');
 expect(/src="app\.js\?v=[^"]+"/.test(previewRootHtml), 'la racine de préversion doit charger son runtime isolé versionné');
-expect(previewRootHtml.includes('../assets/decorations/flowtherapymusic-qr.svg') && !previewApp.includes('QRCode'), 'la préversion doit utiliser le QR code canonique statique');
+expect(previewRootHtml.includes('../assets/decorations/flowtherapymusic-qr.svg?v=') && !previewApp.includes('QRCode'), 'la préversion doit utiliser le QR code canonique statique versionné');
 
 const localizedCopies = {};
 for (const locale of localeCodes) {
