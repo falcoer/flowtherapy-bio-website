@@ -24,10 +24,9 @@ const required = [
   'assets/generated/alpaga3-nu-640.avif', 'assets/generated/alpaga3-nu-768.avif', 'assets/generated/alpaga3-nu-1024.webp', 'assets/generated/alpaga3-640.avif', 'assets/generated/alpaga3-768.avif', 'assets/generated/alpaga3-1024.webp',
   'assets/generated/fond-urbain-transparent-960.avif', 'assets/generated/fond-urbain-transparent-1440.png',
   'assets/decorations/chalk-arrow.svg', 'assets/decorations/chalk-heart.svg', 'assets/decorations/chalk-paint-splash.svg',
-  'assets/decorations/chalk-spark.svg', 'assets/decorations/chalk-star.svg', 'assets/decorations/chalk-swoosh.svg', 'assets/decorations/chalk-underline.svg',
+  'assets/decorations/chalk-spark.svg', 'assets/decorations/chalk-star.svg', 'assets/decorations/chalk-swoosh.svg', 'assets/decorations/chalk-underline.svg', 'assets/decorations/flowtherapymusic-qr.svg',
   'assets/fonts/bangers-regular.woff2', 'assets/fonts/inter-variable.woff2',
-  'assets/fonts/kalam-regular.woff2', 'assets/vendor/qrcodejs/qrcode.min.js',
-  'assets/vendor/qrcodejs/LICENSE'
+  'assets/fonts/kalam-regular.woff2'
 ];
 for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
@@ -68,7 +67,7 @@ expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter gén�
 expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(css.includes('.language-switcher{position:relative}') && css.includes('.language-menu{position:absolute'), 'le sélecteur de langue doit être intégré aux styles publics');
-expect(app.includes('loadQrCode') && app.includes('vendor/qrcodejs/qrcode.min.js'), 'le QR code doit être chargé localement et à la demande');
+expect(index.includes('assets/decorations/flowtherapymusic-qr.svg') && !app.includes('QRCode'), 'le QR code canonique doit être un asset statique sans génération côté client');
 expect(app.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && app.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la racine publique doit changer de langue sans rechargement');
 expect(app.includes("const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT)") && app.includes("const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname"), 'la racine publique doit résoudre les traductions et les routes localisées');
 expect(app.includes("setupQr(new URL(activeLocale+'/',site.url).href)"), 'le QR code doit partager la route localisée active');

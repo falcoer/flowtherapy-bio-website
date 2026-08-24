@@ -90,7 +90,7 @@ function renderPage(config){
 </section>
 <footer><span>${esc(site.copyright)}</span></footer>`;
   setupTheme();
-  setupQr(new URL(activeLocale+'/',site.url).href);
+  setupQr();
   setupContact();
   setupAlpacaReveal();
   setupMediaViewer(mediaItems);
@@ -136,7 +136,6 @@ function render(config,copy,locale){
     if(dialog.open)dialog.close();
     const replacement=dialog.cloneNode(true);
     replacement.removeAttribute('open');replacement.classList.remove('is-open');
-    replacement.querySelector('#qr-code')?.replaceChildren();
     dialog.replaceWith(replacement);
   }
   renderPage(localizedConfig(config,copy));translateRenderedPage(copy,locale);setupLanguageSwitcher(locale,copy);
@@ -231,14 +230,7 @@ function setupAlpacaReveal(){
   observer.observe(group);
 }
 function setupTheme(){const button=document.querySelector('#theme'),meta=document.querySelector('meta[name="theme-color"]');const labels=activeCopy?.controls||{themeDark:'Activer le thème sombre',themeLight:'Activer le thème clair'};let theme=localStorage.getItem('ft-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const apply=()=>{document.documentElement.dataset.theme=theme;button.setAttribute('aria-pressed',String(theme==='dark'));button.setAttribute('aria-label',theme==='dark'?labels.themeLight:labels.themeDark);meta.content=theme==='dark'?'#07101d':'#fbf8f2'};apply();button.onclick=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('ft-theme',theme);apply()}}
-let qrCodeLoader;
-function loadQrCode(){
-  if(window.QRCode)return Promise.resolve(window.QRCode);
-  if(!qrCodeLoader)qrCodeLoader=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=`${ASSET}vendor/qrcodejs/qrcode.min.js`;script.onload=()=>resolve(window.QRCode);script.onerror=()=>reject(new Error('Le générateur QR code local est indisponible'));document.head.append(script)});
-  return qrCodeLoader;
-}
-function resetQrModal(){const dialog=document.querySelector('#qr-dialog');if(dialog?.open)dialog.close();dialog?.classList.remove('is-open');document.querySelectorAll('#qr-code').forEach(container=>container.replaceChildren())}
-function setupQr(url){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close'),t=document.querySelector('#qr-code');const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=async()=>{o.disabled=true;try{await loadQrCode();if(!t.hasChildNodes())new QRCode(t,{text:url,width:280,height:280,correctLevel:QRCode.CorrectLevel.H});d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()}catch(error){console.error(error)}finally{o.disabled=false}};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
+function setupQr(){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close');const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=()=>{d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
 
 function setupContact(){
   const form=document.querySelector('#contact-form');
@@ -256,7 +248,7 @@ const browserLocale=()=>{for(const value of [...(navigator.languages||[]),naviga
 const resolveLocale=()=>localeFromUrl()||browserLocale();
 const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname;
 async function setLocale(locale,{historyMode='none'}={}){
-  if(!LOCALES[locale]||!siteConfig)return;resetQrModal();const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Traduction indisponible ('+response.status+')');const copy=await response.json();
+  if(!LOCALES[locale]||!siteConfig)return;const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Traduction indisponible ('+response.status+')');const copy=await response.json();
   if(historyMode!=='none')window.history[historyMode==='replace'?'replaceState':'pushState']({locale},'',localePath(locale)+location.search+location.hash);render(siteConfig,copy,locale);
 }
 async function boot(){const response=await fetch(CONFIG_URL,{cache:'no-store'});if(!response.ok)throw new Error('Configuration indisponible ('+response.status+')');siteConfig=await response.json();const locale=resolveLocale();await setLocale(locale,{historyMode:localeFromUrl()?'none':'replace'});}

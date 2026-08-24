@@ -88,6 +88,11 @@
       "path": "decorations/chalk-underline.svg",
       "sha256": "c05360cedfdedfd18aaf23412467ec80599d426a0a30375a934cee20fb74b2c9",
       "mode": "svg-mask-ci"
+    },
+    {
+      "path": "decorations/flowtherapymusic-qr.svg",
+      "sha256": "2bbc41b58c95abb424d06c5858a9856ebce9f8814a59877583eacb54da00601c",
+      "mode": "static-svg-ci"
     }
   ],
   "fonts": [
@@ -116,21 +121,7 @@
       "license": "fonts/kalam/OFL.txt"
     }
   ],
-  "vendor": [
-    {
-      "path": "vendor/qrcodejs/qrcode.min.js",
-      "sha256": "c541ef06327885a8415bca8df6071e14189b4855336def4f36db54bde8484f36",
-      "mode": "lazy-passthrough",
-      "upstream": "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js",
-      "license": "vendor/qrcodejs/LICENSE"
-    },
-    {
-      "path": "vendor/qrcodejs/LICENSE",
-      "sha256": "aaa1f349028a59432eb00222b8ddfe4d2ccebdce04cf8348dcb8d41b7068107b",
-      "mode": "license",
-      "upstream": "https://github.com/davidshimjs/qrcodejs/blob/master/LICENSE"
-    }
-  ],
+  "vendor": [],
   "medias": [
     {
       "path": "medias/11fe83c3-d862-48b5-8123-32aa1af0f9a6.JPG",
