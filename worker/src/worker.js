@@ -30,7 +30,7 @@ const makeRawEmail=(data,subjectLabel)=>[
   `Téléphone : ${data.phone||'Non renseigné'}`,'','Message :',data.message
 ].join('\r\n');
 
-export const createWorker=(EmailMessageClass,fetchImpl=fetch)=>({
+export const createWorker=EmailMessageClass=>({
   async fetch(request,env){
     const origin=request.headers.get('Origin')||'';
     if(!ALLOWED_ORIGINS.has(origin))return new Response('Forbidden',{status:403,headers:{'Cache-Control':'no-store'}});
@@ -50,18 +50,6 @@ export const createWorker=(EmailMessageClass,fetchImpl=fetch)=>({
     if(typeof data==='string')return json({error:data},data==='spam'?400:422,origin);
     const rate=await env.CONTACT_RATE_LIMIT.limit({key:request.headers.get('CF-Connecting-IP')||'unknown'});
     if(!rate.success)return json({error:'rate_limited'},429,origin,{'Retry-After':'60'});
-    const turnstileToken=clean(payload.turnstileToken);
-    if(!turnstileToken||turnstileToken.length>2048)return json({error:'turnstile_required'},422,origin);
-    if(!env.TURNSTILE_SECRET)return json({error:'service_unavailable'},503,origin);
-    try{
-      const verification=new URLSearchParams({secret:env.TURNSTILE_SECRET,response:turnstileToken,remoteip:request.headers.get('CF-Connecting-IP')||''});
-      const turnstileResponse=await fetchImpl('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:verification});
-      const turnstile=await turnstileResponse.json();
-      if(!turnstile.success||turnstile.hostname!==new URL(origin).hostname)return json({error:'turnstile_failed'},403,origin);
-    }catch(error){
-      console.error(JSON.stringify({event:'turnstile_verification_failed',error:error instanceof Error?error.message:String(error)}));
-      return json({error:'verification_unavailable'},502,origin);
-    }
     const labels={booking:'Concert / programmation',event:'Événement privé ou professionnel',press:'Presse / média',collaboration:'Collaboration artistique',pressKit:'Dossier de presse / fiche technique',other:'Autre demande'};
     try{
       await env.EMAIL.send(new EmailMessageClass(FROM,DESTINATION,makeRawEmail(data,labels[data.subject])));
