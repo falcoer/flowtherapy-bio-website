@@ -42,7 +42,7 @@ function mediaVisual(item,index,viewer=false){
 }
 
 function renderPage(config){
-  const {site,hero,navigation,socials,about,media}=config;
+  const {site,hero,navigation,socials,about,media,contact}=config;
   const mediaItems=media?.items||[];
   const listen=socials.find(s=>s.icon==='youtube')?.url||socials[0]?.url||'#contact';
   document.title=`${site.name} — ${hero.lines.join(' ')}`;
@@ -85,7 +85,8 @@ function renderPage(config){
         <textarea id="contact-message" name="message" maxlength="255" rows="5" required placeholder="Décrivez votre demande…"></textarea>
         <div class="contact-trap" aria-hidden="true"><label for="contact-company">Société</label><input id="contact-company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
         <input name="startedAt" type="hidden" value="${Date.now()}">
-        <button class="contact-submit" type="submit">Envoyer le message</button>
+        <div id="contact-turnstile" data-sitekey="${esc(contact?.turnstileSiteKey||'')}"></div>
+        <button class="contact-submit" type="submit"${contact?.turnstileSiteKey?'':' disabled'}>Envoyer le message</button>
         <p class="contact-notice" role="status" aria-live="polite">Réponse habituelle sous quelques jours.</p>
       </form>
     </div>
@@ -241,6 +242,9 @@ function setupContact(){
   if(!form||!message||!counter)return;
   const button=form.querySelector('.contact-submit');
   const notice=form.querySelector('.contact-notice');
+  const turnstileContainer=form.querySelector('#contact-turnstile');
+  const turnstileSiteKey=turnstileContainer?.dataset.sitekey||'';
+  let turnstileWidget;
   const labels={
     fr:{submit:'Envoyer le message',sending:'Envoi en cours…',success:'Merci, votre message a bien été envoyé.',error:'L’envoi a échoué. Réessayez dans quelques instants.',notice:'Réponse habituelle sous quelques jours.'},
     en:{submit:'Send message',sending:'Sending…',success:'Thank you, your message has been sent.',error:'Sending failed. Please try again shortly.',notice:'We usually reply within a few days.'}
@@ -248,20 +252,29 @@ function setupContact(){
   const updateCount=()=>{counter.textContent=String(message.value.length)};
   message.addEventListener('input',updateCount);
   button.textContent=labels.submit;
-  notice.textContent=labels.notice;
+  if(turnstileSiteKey){
+    notice.textContent=labels.notice;
+    const script=document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;script.defer=true;
+    script.onload=()=>{turnstileWidget=window.turnstile.render(turnstileContainer,{sitekey:turnstileSiteKey,theme:'auto'});};
+    document.head.append(script);
+  }else{
+    button.disabled=true;notice.textContent=activeLocale==='fr'?'Formulaire temporairement indisponible.':'Contact form temporarily unavailable.';
+  }
   form.addEventListener('submit',async event=>{
     event.preventDefault();
     if(!form.reportValidity())return;
     button.disabled=true;button.textContent=labels.sending;notice.textContent='';notice.className='contact-notice';
     const payload=Object.fromEntries(new FormData(form));
+    payload.turnstileToken=window.turnstile?.getResponse(turnstileWidget)||'';
+    if(!payload.turnstileToken){notice.textContent=activeLocale==='fr'?'Veuillez valider le contrôle anti-spam.':'Please complete the anti-spam check.';notice.classList.add('is-error');button.disabled=false;button.textContent=labels.submit;return;}
     try{
       const response=await fetch(CONTACT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       if(!response.ok)throw new Error('Contact request failed ('+response.status+')');
-      form.reset();form.elements.startedAt.value=String(Date.now());updateCount();
+      form.reset();form.elements.startedAt.value=String(Date.now());window.turnstile?.reset(turnstileWidget);updateCount();
       notice.textContent=labels.success;notice.classList.add('is-success');
     }catch(error){
       console.error(error);notice.textContent=labels.error;notice.classList.add('is-error');
-    }finally{button.disabled=false;button.textContent=labels.submit;}
+    }finally{button.disabled=!turnstileSiteKey;button.textContent=labels.submit;}
   });
   updateCount();
 }
