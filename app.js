@@ -237,7 +237,8 @@ function loadQrCode(){
   if(!qrCodeLoader)qrCodeLoader=new Promise((resolve,reject)=>{const script=document.createElement('script');script.src=`${ASSET}vendor/qrcodejs/qrcode.min.js`;script.onload=()=>resolve(window.QRCode);script.onerror=()=>reject(new Error('Le générateur QR code local est indisponible'));document.head.append(script)});
   return qrCodeLoader;
 }
-function setupQr(url){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close'),t=document.querySelector('#qr-code');const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=async()=>{o.disabled=true;t.replaceChildren();try{await loadQrCode();new QRCode(t,{text:url,width:280,height:280,correctLevel:QRCode.CorrectLevel.H});d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()}catch(error){console.error(error)}finally{o.disabled=false}};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
+function resetQrModal(){const dialog=document.querySelector('#qr-dialog');if(dialog?.open)dialog.close();dialog?.classList.remove('is-open');document.querySelectorAll('#qr-code').forEach(container=>container.replaceChildren())}
+function setupQr(url){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close'),t=document.querySelector('#qr-code');const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=async()=>{o.disabled=true;try{await loadQrCode();if(!t.hasChildNodes())new QRCode(t,{text:url,width:280,height:280,correctLevel:QRCode.CorrectLevel.H});d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()}catch(error){console.error(error)}finally{o.disabled=false}};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
 
 function setupContact(){
   const form=document.querySelector('#contact-form');
@@ -255,7 +256,7 @@ const browserLocale=()=>{for(const value of [...(navigator.languages||[]),naviga
 const resolveLocale=()=>localeFromUrl()||browserLocale();
 const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname;
 async function setLocale(locale,{historyMode='none'}={}){
-  if(!LOCALES[locale]||!siteConfig)return;const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Traduction indisponible ('+response.status+')');const copy=await response.json();
+  if(!LOCALES[locale]||!siteConfig)return;resetQrModal();const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Traduction indisponible ('+response.status+')');const copy=await response.json();
   if(historyMode!=='none')window.history[historyMode==='replace'?'replaceState':'pushState']({locale},'',localePath(locale)+location.search+location.hash);render(siteConfig,copy,locale);
 }
 async function boot(){const response=await fetch(CONFIG_URL,{cache:'no-store'});if(!response.ok)throw new Error('Configuration indisponible ('+response.status+')');siteConfig=await response.json();const locale=resolveLocale();await setLocale(locale,{historyMode:localeFromUrl()?'none':'replace'});}
