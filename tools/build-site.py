@@ -6,6 +6,7 @@ import json
 import re
 import shutil
 import xml.etree.ElementTree as ET
+from datetime import datetime, timezone
 from pathlib import Path
 
 import fontTools
@@ -316,7 +317,7 @@ def main() -> None:
     prepare_dist()
     records = build_assets(manifest, cache)
     records.extend(record for record in previous_records if record.get("mode") == "responsive-landscape-ci")
-    generated = {"schema": "flowtherapy.generated-assets/v1", "fonttools": fontTools.__version__, "pillow": PIL.__version__, "assets": records}
+    generated = {"schema": "flowtherapy.generated-assets/v1", "built_at": datetime.now(timezone.utc).isoformat(), "fonttools": fontTools.__version__, "pillow": PIL.__version__, "assets": records}
     (DIST / "assets-manifest.json").write_text(json.dumps(generated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Site construit dans {DIST} : {cache.generated} assets générés, {cache.reused} réutilisés.")
 

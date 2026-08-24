@@ -87,6 +87,7 @@ expect(css.includes('-webkit-mask:var(--doodle-image)') && css.includes('mask:va
 expect(css.includes(':root[data-theme=dark] .doodle{opacity:calc(var(--doodle-alpha) + .06)') && css.includes('@media(prefers-reduced-motion:reduce){.doodle'), 'les décorations doivent gérer le thème sombre et la réduction des animations');
 const subsetFonts = generatedManifest.assets.filter(asset => asset.mode === 'woff2-subset');
 const generatedOutputs = generatedManifest.assets.filter(asset => asset.output);
+expect(typeof generatedManifest.built_at === 'string' && !Number.isNaN(Date.parse(generatedManifest.built_at)), 'le manifeste doit exposer une date de build ISO valide');
 expect(generatedOutputs.every(asset => asset.source_sha256 && asset.build_key), 'chaque asset généré doit contenir les empreintes nécessaires au cache incrémental');
 expect(subsetFonts.length === 3, 'exactement trois sous-ensembles WOFF2 doivent être générés');
 expect(subsetFonts.reduce((total, asset) => total + asset.bytes, 0) <= 200_000, 'le budget total des polices WOFF2 est limité à 200 ko');
