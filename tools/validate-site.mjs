@@ -54,8 +54,8 @@ for (const file of ['assets/alpaga1-nu.png', 'assets/alpaga2-nu.png', 'assets/al
   try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
 
-const [app, css, html, rootFrHtml, rootEnHtml, travelScript, generatedManifest] = await Promise.all([
-  ...['app.js', 'styles.css', 'index.html', 'fr/index.html', 'en/index.html', 'travel-landscapes.js'].map(file => readFile(fromRoot(file), 'utf8')),
+const [app, css, html, rootFrHtml, rootEnHtml, travelScript, qrSvg, generatedManifest] = await Promise.all([
+  ...['app.js', 'styles.css', 'index.html', 'fr/index.html', 'en/index.html', 'travel-landscapes.js', 'assets/decorations/flowtherapymusic-qr.svg'].map(file => readFile(fromRoot(file), 'utf8')),
   readFile(fromRoot('assets-manifest.json'), 'utf8').then(JSON.parse)
 ]);
 for (const [file, source] of [['app.js', app], ['styles.css', css], ['index.html', html]]) {
@@ -67,11 +67,11 @@ expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter gén�
 expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(css.includes('.language-switcher{position:relative}') && css.includes('.language-menu{position:absolute'), 'le sélecteur de langue doit être intégré aux styles publics');
-expect(index.includes('assets/decorations/flowtherapymusic-qr.svg') && !app.includes('QRCode'), 'le QR code canonique doit être un asset statique sans génération côté client');
+expect(html.includes('assets/decorations/flowtherapymusic-qr.svg') && qrSvg.includes('https://www.flowtherapymusic.com/') && !app.includes('QRCode'), 'le QR code canonique doit être un asset statique sans génération côté client');
 expect(app.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && app.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la racine publique doit changer de langue sans rechargement');
 expect(app.includes("const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT)") && app.includes("const localePath=locale=>new URL(locale+'/',SITE_ROOT).pathname"), 'la racine publique doit résoudre les traductions et les routes localisées');
-expect(app.includes("setupQr(new URL(activeLocale+'/',site.url).href)"), 'le QR code doit partager la route localisée active');
-expect(html.includes('src="app.js?v=20260823-i18n-prod-2"'), 'la racine publique doit charger le runtime internationalisé');
+expect(app.includes('function setupQr()') && !app.includes('new QRCode'), 'la modale QR doit afficher l’asset canonique sans régénération');
+expect(/src="app\.js\?v=[^"]+"/.test(html), 'la racine publique doit charger un runtime internationalisé versionné');
 expect(rootFrHtml.includes('src="../app.js') && rootFrHtml.includes('href="../styles.css') && rootFrHtml.includes('<html lang="fr">'), 'la route publique française doit utiliser les chemins localisés');
 expect(rootEnHtml.includes('src="../app.js') && rootEnHtml.includes('href="../styles.css') && rootEnHtml.includes('<html lang="en">'), 'la route publique anglaise doit utiliser les chemins localisés');
 expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
@@ -117,7 +117,8 @@ const [previewApp, previewRootHtml] = await Promise.all([
 ]);
 expect(previewApp.includes("const LOCALES={fr:{flag:'🇫🇷'},en:{flag:'🇬🇧'},es:{flag:'🇪🇸'},it:{flag:'🇮🇹'},de:{flag:'🇩🇪'},pt:{flag:'🇵🇹'},zh:{flag:'🇨🇳'},ja:{flag:'🇯🇵'}}") && previewApp.includes("window.history[historyMode==='replace'?'replaceState':'pushState']"), 'la préversion doit changer entre toutes les langues sans rechargement');
 expect(previewApp.includes("new URL('assets/',SITE_ROOT)") && previewApp.includes("new URL('config/site.json',SITE_ROOT)"), 'la préversion doit résoudre ses ressources depuis la racine du site');
-expect(previewRootHtml.includes('src="app.js?v=20260823-i18n-preview-4"'), 'la racine de préversion doit charger son runtime isolé');
+expect(/src="app\.js\?v=[^"]+"/.test(previewRootHtml), 'la racine de préversion doit charger son runtime isolé versionné');
+expect(previewRootHtml.includes('../assets/decorations/flowtherapymusic-qr.svg') && !previewApp.includes('QRCode'), 'la préversion doit utiliser le QR code canonique statique');
 
 const localizedCopies = {};
 for (const locale of localeCodes) {
