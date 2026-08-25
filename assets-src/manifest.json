@@ -90,9 +90,9 @@
       "mode": "svg-mask-ci"
     },
     {
-      "path": "decorations/flowtherapymusic-qr.svg",
-      "sha256": "704dab50df3153f59e8c2c7cdb7822993b8d86fd56baba41dddf2b90fc6ba8da",
-      "mode": "static-svg-ci"
+      "path": "decorations/flowtherapymusic-qr.png",
+      "sha256": "a46edc1f2b38c018050d61e51650914b9ea02726f49faf6762df8b6b1e010fb5",
+      "mode": "static-png-ci"
     }
   ],
   "fonts": [

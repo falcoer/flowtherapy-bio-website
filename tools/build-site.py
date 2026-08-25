@@ -246,16 +246,23 @@ def build_assets(manifest: dict, cache: AssetCache) -> list[dict]:
 
 
     decorations = output_assets / "decorations"
+    decorations.mkdir(parents=True, exist_ok=True)
     for asset in manifest["decorations"]:
         source = SOURCE / asset["path"]
         output = decorations / source.name
-        key = build_key(asset["sha256"], {"mode": asset["mode"], "format": "svg"})
+        output_format = source.suffix.removeprefix(".").lower()
+        key = build_key(asset["sha256"], {"mode": asset["mode"], "format": output_format})
         cached = cache.reuse(output, key)
         if cached:
             records.append(cached)
             continue
-        optimize_svg(source, output)
-        records.append(cache.record(output, key, {"source": asset["path"], "source_sha256": asset["sha256"], "mode": asset["mode"], "format": "svg"}))
+        if output_format == "svg":
+            optimize_svg(source, output)
+        elif asset["mode"] == "static-png-ci" and output_format == "png":
+            shutil.copy2(source, output)
+        else:
+            raise ValueError(f"Décoration non prise en charge : {source.relative_to(ROOT)}")
+        records.append(cache.record(output, key, {"source": asset["path"], "source_sha256": asset["sha256"], "mode": asset["mode"], "format": output_format}))
 
     output_fonts = output_assets / "fonts"
     for source_name, output_name in FONT_OUTPUTS.items():
