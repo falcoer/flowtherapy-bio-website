@@ -6,6 +6,9 @@
     "location": "Basé à Martigues (13), France",
     "copyright": "© 2026 Flow Therapy. Tous droits réservés."
   },
+  "contact": {
+    "turnstileSiteKey": "0x4AAAAAAEbZzy0SLKsL4TjY"
+  },
   "socials": [
     {
       "label": "Instagram",
