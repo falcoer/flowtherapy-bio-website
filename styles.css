@@ -196,10 +196,15 @@ footer{justify-content:center;text-align:center}
   .logo-link,.nav-side{align-self:center}
   .logo-link picture,.logo{width:100%}
   .logo{height:auto}
-  .links{display:none}
+  .links{display:flex}
   .header-socials{
     width:100%;
     justify-self:stretch;
     justify-content:center;
   }
+}
+
+/* Les liens restent masqués uniquement quand la première ligne ne peut plus les contenir. */
+@media(max-width:699px){
+  .links{display:none}
 }
