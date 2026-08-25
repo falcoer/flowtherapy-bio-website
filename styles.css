@@ -178,3 +178,28 @@ footer{justify-content:center;text-align:center}
 
 /* Sélecteur de langue : adjacent au thème, sans modifier la hiérarchie mobile. */
 .language-switcher{position:relative}.language-toggle{display:inline-flex;align-items:center;justify-content:center;gap:3px;min-width:48px;height:48px;padding:0 9px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);cursor:pointer;box-shadow:0 4px 14px #00000012}.language-toggle:hover{transform:translateY(-1px)}.language-toggle:focus-visible,.language-option:focus-visible{outline:3px solid var(--orange);outline-offset:3px}.language-code{font-size:10px;font-weight:850;letter-spacing:.04em}.language-menu{position:absolute;z-index:20;top:calc(100% + 9px);right:0;min-width:148px;max-height:min(70vh,420px);overflow-y:auto;padding:6px;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:var(--shadow)}.language-option{display:flex;align-items:center;gap:9px;width:100%;padding:10px;border:0;border-radius:9px;background:transparent;color:var(--text);text-align:left;cursor:pointer;font-weight:700}.language-option:hover,.language-option[aria-current=true]{background:color-mix(in srgb,var(--purple) 13%,transparent)}.language-option span{font-size:18px}.tools{display:flex;align-items:center;gap:10px}@media(max-width:520px){.language-toggle{min-width:42px;height:42px;padding:0 7px}.language-code{display:none}.tools{gap:7px}}
+
+
+/* Navigation compacte pour tablettes portrait et largeurs contraintes. */
+@media(max-width:1100px){
+  .nav{
+    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-areas:"logo side" "socials socials";
+    align-items:center;
+    row-gap:12px;
+  }
+  .logo-link{
+    width:100%;
+    max-width:200px;
+    min-width:0;
+  }
+  .logo-link,.nav-side{align-self:center}
+  .logo-link picture,.logo{width:100%}
+  .logo{height:auto}
+  .links{display:none}
+  .header-socials{
+    width:100%;
+    justify-self:stretch;
+    justify-content:center;
+  }
+}
