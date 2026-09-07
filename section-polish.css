@@ -1,0 +1,4 @@
+/* Finition des sections : séparation par l'espace, sans traits ni fond de section. */
+.section{border-top:0}
+.contact-section{background:transparent}
+footer{border-top:0}
