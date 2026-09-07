@@ -1,4 +1,9 @@
-/* Finition des sections : séparation par l'espace, sans traits ni fond de section. */
-.section{border-top:0}
+/* Finition des sections : séparation par l'espace, sans traits ni panneau autour du formulaire. */
+.section,footer{border-top:0}
 .contact-section{background:transparent}
-footer{border-top:0}
+.contact-panel{padding:0;border:0;border-radius:0;background:transparent;color:var(--text);box-shadow:none}
+.contact-form label{color:var(--text)}
+.contact-form label span,.contact-notice,.contact-message-label span{color:var(--muted)}
+.contact-form input,.contact-form select,.contact-form textarea{border-color:var(--line);background:color-mix(in srgb,var(--surface) 88%,transparent);color:var(--text)}
+.contact-form option{background:var(--surface);color:var(--text)}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:var(--muted)}

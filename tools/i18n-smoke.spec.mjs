@@ -63,6 +63,10 @@ test('les huit routes publiques localisées sont rechargeables', async ({ page }
 test('le sélecteur reste utilisable sur mobile avec huit langues', async ({ page }, testInfo) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto(base+'/ja/',{waitUntil:'networkidle'});
+  await expect(page.locator('#contact')).toHaveCSS('border-top-width','0px');
+  await expect(page.locator('.contact-panel')).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
+  await expect(page.locator('.contact-panel')).toHaveCSS('border-top-width','0px');
+  await expect(page.locator('.contact-panel')).toHaveCSS('box-shadow','none');
   await page.locator('#language-toggle').click();
   await expect(page.locator('.language-option')).toHaveCount(8);
   await expect(page.locator('[data-locale="zh"]')).toBeVisible();

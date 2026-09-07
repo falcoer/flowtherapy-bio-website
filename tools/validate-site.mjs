@@ -17,7 +17,7 @@ expect(Array.isArray(config.socials) && config.socials.length > 0, 'socials doit
 for (const [index, item] of (config.socials || []).entries()) expect(isHttpUrl(item.url), `socials[${index}].url doit être une URL HTTP(S)`);
 
 const required = [
-  'index.html', 'fr/index.html', 'en/index.html', 'es/index.html', 'it/index.html', 'de/index.html', 'pt/index.html', 'zh/index.html', 'ja/index.html', 'styles.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n/es.json', 'i18n/it.json', 'i18n/de.json', 'i18n/pt.json', 'i18n/zh.json', 'i18n/ja.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'i18n-preview/es/index.html', 'i18n-preview/it/index.html', 'i18n-preview/de/index.html', 'i18n-preview/pt/index.html', 'i18n-preview/zh/index.html', 'i18n-preview/ja/index.html', 'assets-manifest.json',
+  'index.html', 'fr/index.html', 'en/index.html', 'es/index.html', 'it/index.html', 'de/index.html', 'pt/index.html', 'zh/index.html', 'ja/index.html', 'styles.css', 'section-polish.css', 'app.js', 'travel-landscapes.css', 'travel-landscapes.js', 'i18n/fr.json', 'i18n/en.json', 'i18n/es.json', 'i18n/it.json', 'i18n/de.json', 'i18n/pt.json', 'i18n/zh.json', 'i18n/ja.json', 'i18n-preview/index.html', 'i18n-preview/app.js', 'i18n-preview/preview.css', 'i18n-preview/fr/index.html', 'i18n-preview/en/index.html', 'i18n-preview/es/index.html', 'i18n-preview/it/index.html', 'i18n-preview/de/index.html', 'i18n-preview/pt/index.html', 'i18n-preview/zh/index.html', 'i18n-preview/ja/index.html', 'assets-manifest.json',
   'assets/logo.jpg', 'assets/generated/logo-transparent-320.png', 'assets/generated/logo-transparent-320.webp',
   'assets/generated/alpaga1-nu-640.avif', 'assets/generated/alpaga1-nu-768.avif', 'assets/generated/alpaga1-nu-1024.webp', 'assets/generated/alpaga1-640.avif', 'assets/generated/alpaga1-768.avif', 'assets/generated/alpaga1-1024.webp',
   'assets/generated/alpaga2-nu-640.avif', 'assets/generated/alpaga2-nu-768.avif', 'assets/generated/alpaga2-nu-1024.webp', 'assets/generated/alpaga2-640.avif', 'assets/generated/alpaga2-768.avif', 'assets/generated/alpaga2-1024.webp',
@@ -54,8 +54,8 @@ for (const file of ['assets/alpaga1-nu.png', 'assets/alpaga2-nu.png', 'assets/al
   try { await stat(fromRoot(file)); problems.push(`${file} est une source maîtresse et ne doit pas être publiée`); } catch {}
 }
 
-const [app, css, html, rootFrHtml, rootEnHtml, travelScript, qrPng, generatedManifest] = await Promise.all([
-  ...['app.js', 'styles.css', 'index.html', 'fr/index.html', 'en/index.html', 'travel-landscapes.js'].map(file => readFile(fromRoot(file), 'utf8')),
+const [app, css, sectionPolishCss, html, rootFrHtml, rootEnHtml, travelScript, qrPng, generatedManifest] = await Promise.all([
+  ...['app.js', 'styles.css', 'section-polish.css', 'index.html', 'fr/index.html', 'en/index.html', 'travel-landscapes.js'].map(file => readFile(fromRoot(file), 'utf8')),
   readFile(fromRoot('assets/decorations/flowtherapymusic-qr.png')),
   readFile(fromRoot('assets-manifest.json'), 'utf8').then(JSON.parse)
 ]);
@@ -66,6 +66,8 @@ expect(!css.includes('fonts.googleapis.com') && !css.includes('fonts.gstatic.com
 expect(!html.includes('cdn.jsdelivr.net') && !app.includes('cdn.jsdelivr.net'), 'le runtime ne doit plus dépendre du CDN QR code');
 expect(css.includes("assets/fonts/inter-variable.woff2"), 'la police Inter générée doit être référencée');
 expect(css.includes('.prose,.contact-heading .contact-intro,.media-meta p{text-align:justify') && css.includes('hyphens:auto'), 'les principaux textes éditoriaux doivent être justifiés avec césure automatique');
+expect(sectionPolishCss.includes('.section,footer{border-top:0}') && sectionPolishCss.includes('.contact-panel{padding:0;border:0;border-radius:0;background:transparent'), 'les séparateurs de section et le panneau du formulaire doivent être supprimés');
+expect(html.includes('section-polish.css?v=') && rootFrHtml.includes('href="../section-polish.css') && rootEnHtml.includes('href="../section-polish.css'), 'la finition sans cadre doit être publiée et résolue sur les routes localisées');
 expect(!css.includes('kalam-bold.woff2'), 'la variante Kalam Bold inutilisée ne doit pas être publiée');
 expect(css.includes('.language-switcher{position:relative}') && css.includes('.language-menu{position:absolute'), 'le sélecteur de langue doit être intégré aux styles publics');
 expect(html.includes('assets/decorations/flowtherapymusic-qr.png?v=') && qrPng.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) && qrPng.byteLength >= 100_000 && !app.includes('QRCode'), 'le QR code canonique doit être un PNG autonome HD, versionné et sans génération côté client');
