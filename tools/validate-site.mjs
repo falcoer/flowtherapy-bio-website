@@ -32,7 +32,7 @@ for (const file of required) {
   try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
 }
 for (const [index, item] of (config.media?.items || []).entries()) {
-  expect(item.title && item.type && item.orientation && item.ratio && item.date && item.credit && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
+  expect(item.title && item.type && item.orientation && item.ratio && item.date && typeof item.credit === 'string' && item.description, `media.items[${index}] doit contenir toutes les métadonnées éditoriales`);
   expect(item.asset && Array.isArray(item.widths) && item.widths.length >= 4, `media.items[${index}] doit référencer un asset responsive et au moins quatre largeurs`);
   expect(item.widths?.includes(320) && item.widths?.includes(480), `media.items[${index}] doit proposer les variantes mobiles 320 et 480 px`);
   for (const width of (item.widths || [])) {

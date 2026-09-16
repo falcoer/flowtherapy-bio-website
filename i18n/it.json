@@ -88,6 +88,61 @@
         "title": "Jenni alla voce",
         "type": "Ritratto",
         "description": "Jenni canta durante un concerto dei Flow Therapy."
+      },
+      "concert-outdoor-black-white": {
+        "title": "Flow Therapy outdoors",
+        "type": "Concert photo",
+        "description": "The trio performing together on an outdoor stage."
+      },
+      "betty-keys-guitar-outdoor": {
+        "title": "Betty on keys and guitar",
+        "type": "Concert photo",
+        "description": "Betty singing, surrounded by keyboards, guitar and percussion."
+      },
+      "lauris-bass-outdoor": {
+        "title": "Lauris on bass outdoors",
+        "type": "Portrait",
+        "description": "Lauris playing bass during an outdoor performance."
+      },
+      "concert-purple-stage": {
+        "title": "Flow Therapy under purple lights",
+        "type": "Concert photo",
+        "description": "The trio performing amid purple and blue stage lights."
+      },
+      "jenni-vocals-purple-stage": {
+        "title": "Jenni singing on stage",
+        "type": "Concert photo",
+        "description": "Jenni singing under purple stage lights."
+      },
+      "flow-therapy-group-selfie": {
+        "title": "Flow Therapy — group photo",
+        "type": "Concert photo",
+        "description": "Betty, Jenni and Lauris together after a performance."
+      },
+      "flow-therapy-banner-group": {
+        "title": "The trio behind their banner",
+        "type": "Portrait",
+        "description": "Flow Therapy together behind the band banner."
+      },
+      "betty-keys-black-white": {
+        "title": "Betty on keys in black and white",
+        "type": "Portrait",
+        "description": "Betty singing and playing keys, photographed in black and white."
+      },
+      "jenni-vocals-close-up": {
+        "title": "Jenni — vocal portrait",
+        "type": "Portrait",
+        "description": "A close portrait of Jenni singing during a performance."
+      },
+      "lauris-bass-vocals": {
+        "title": "Lauris — bass and vocals",
+        "type": "Concert photo",
+        "description": "Lauris singing and playing bass in front of the Flow Therapy banner."
+      },
+      "flow-therapy-rehearsal": {
+        "title": "Flow Therapy rehearsing",
+        "type": "Concert photo",
+        "description": "The trio at work during a rehearsal."
       }
     }
   },

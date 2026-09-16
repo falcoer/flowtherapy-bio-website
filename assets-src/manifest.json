@@ -238,6 +238,157 @@
       "mode": "excluded-source",
       "dimensions": "921x2048",
       "reason": "Capture d’écran de galerie mobile : demander la photographie originale avant publication."
+    },
+    {
+      "path": "medias/concert-exterieur-noir-blanc.jpeg",
+      "sha256": "682d51618c143e7acc407619121920b05e1abff7472197661289257ba8d33e50",
+      "mode": "responsive-media-ci",
+      "name": "concert-exterieur-noir-blanc",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/betty-clavier-guitare-exterieur.jpeg",
+      "sha256": "27ff0e6d86a35870b7445c80dd551a149cb617377fbd3be19d7e22113abea4af",
+      "mode": "responsive-media-ci",
+      "name": "betty-clavier-guitare-exterieur",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/lauris-basse-exterieur.jpeg",
+      "sha256": "53e8856d0b41a691b95d6662de3f1e98a9d71275e36b54c9080d39ce2375c26e",
+      "mode": "responsive-media-ci",
+      "name": "lauris-basse-exterieur",
+      "widths": [
+        320,
+        480,
+        720,
+        960
+      ],
+      "dimensions": "1068x1600"
+    },
+    {
+      "path": "medias/concert-scene-violet.jpeg",
+      "sha256": "caea3b4806accfe9ffcf579cd45f3e811e65c98feaac80e6ac6621cae6c0f3cd",
+      "mode": "responsive-media-ci",
+      "name": "concert-scene-violet",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/jenni-chant-scene-violet.jpeg",
+      "sha256": "ac06e1d5ba67b42a0538f5ff35d3d25279b1caae32db2f6298eda12e10bcb413",
+      "mode": "responsive-media-ci",
+      "name": "jenni-chant-scene-violet",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/flow-therapy-photo-groupe.jpeg",
+      "sha256": "988e43a3664486d610a2fe91dfa6fc2c866a4872e09de6c2f2b6b3d142911954",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-photo-groupe",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "2000x1500"
+    },
+    {
+      "path": "medias/flow-therapy-banniere.jpeg",
+      "sha256": "df580b0e293ea60ceb6e11b61b6387155281a1ae3d77cc395f005dac9eaeda83",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-banniere",
+      "widths": [
+        320,
+        480,
+        720,
+        960,
+        1440
+      ],
+      "dimensions": "1500x2000"
+    },
+    {
+      "path": "medias/betty-clavier-noir-blanc.jpeg",
+      "sha256": "763765b465fe725c02a559ef94bfca32fbd6d51c03d2de6a416f5bceae8fb0d8",
+      "mode": "responsive-media-ci",
+      "name": "betty-clavier-noir-blanc",
+      "widths": [
+        320,
+        480,
+        720,
+        960
+      ],
+      "dimensions": "1080x1620"
+    },
+    {
+      "path": "medias/jenni-chant-portrait.jpeg",
+      "sha256": "3537f4068eaca1714738a0fbd1b9c80e4c3a2a2120d8d84675bf677131b25fbf",
+      "mode": "responsive-media-ci",
+      "name": "jenni-chant-portrait",
+      "widths": [
+        320,
+        480,
+        720,
+        960
+      ],
+      "dimensions": "1076x1637"
+    },
+    {
+      "path": "medias/lauris-basse-chant.jpeg",
+      "sha256": "d11c9a233e80e12c9cc1c9548d52fac2d5cf5c2d0dd75dc447e02ea403972f43",
+      "mode": "responsive-media-ci",
+      "name": "lauris-basse-chant",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "2048x1389"
+    },
+    {
+      "path": "medias/repetition-flow-therapy.jpeg",
+      "sha256": "ab0c8b3f64479cf0c57543422aebfb3bca038009f4e8809ad00104e0158def97",
+      "mode": "responsive-media-ci",
+      "name": "repetition-flow-therapy",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "2048x1012"
     }
   ]
 }

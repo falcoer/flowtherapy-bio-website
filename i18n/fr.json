@@ -88,6 +88,61 @@
         "title": "Jenni au chant",
         "type": "Portrait",
         "description": "Jenni au chant lors d’un concert de Flow Therapy."
+      },
+      "concert-outdoor-black-white": {
+        "title": "Flow Therapy en plein air",
+        "type": "Photo de concert",
+        "description": "Le trio réuni sur scène lors d’une prestation en plein air."
+      },
+      "betty-keys-guitar-outdoor": {
+        "title": "Betty au clavier et à la guitare",
+        "type": "Photo de concert",
+        "description": "Betty au chant, entourée du clavier, de la guitare et des percussions."
+      },
+      "lauris-bass-outdoor": {
+        "title": "Lauris à la basse en plein air",
+        "type": "Portrait",
+        "description": "Lauris à la basse lors d’une prestation en extérieur."
+      },
+      "concert-purple-stage": {
+        "title": "Flow Therapy sous les lumières violettes",
+        "type": "Photo de concert",
+        "description": "Le trio en concert dans une ambiance de scène violette et bleue."
+      },
+      "jenni-vocals-purple-stage": {
+        "title": "Jenni au chant sur scène",
+        "type": "Photo de concert",
+        "description": "Jenni au chant sous les lumières violettes."
+      },
+      "flow-therapy-group-selfie": {
+        "title": "Flow Therapy — photo de groupe",
+        "type": "Photo de concert",
+        "description": "Betty, Jenni et Lauris réunis après une prestation."
+      },
+      "flow-therapy-banner-group": {
+        "title": "Le trio derrière sa bannière",
+        "type": "Portrait",
+        "description": "Flow Therapy réuni derrière la bannière du groupe."
+      },
+      "betty-keys-black-white": {
+        "title": "Betty au clavier en noir et blanc",
+        "type": "Portrait",
+        "description": "Betty au chant et au clavier, photographiée en noir et blanc."
+      },
+      "jenni-vocals-close-up": {
+        "title": "Jenni — portrait au chant",
+        "type": "Portrait",
+        "description": "Portrait de Jenni au chant pendant une prestation."
+      },
+      "lauris-bass-vocals": {
+        "title": "Lauris — basse et chant",
+        "type": "Photo de concert",
+        "description": "Lauris au chant et à la basse devant la bannière de Flow Therapy."
+      },
+      "flow-therapy-rehearsal": {
+        "title": "Flow Therapy en répétition",
+        "type": "Photo de concert",
+        "description": "Le trio au travail pendant une répétition."
       }
     }
   },

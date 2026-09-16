@@ -150,6 +150,201 @@
         "title": "Jenni au chant",
         "type": "Portrait",
         "description": "Jenni au chant lors d’un concert de Flow Therapy."
+      },
+      {
+        "id": "concert-outdoor-black-white",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "concert-exterieur-noir-blanc",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Flow Therapy en plein air",
+        "type": "Photo de concert",
+        "description": "Le trio réuni sur scène lors d’une prestation en plein air."
+      },
+      {
+        "id": "betty-keys-guitar-outdoor",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "betty-clavier-guitare-exterieur",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Betty au clavier et à la guitare",
+        "type": "Photo de concert",
+        "description": "Betty au chant, entourée du clavier, de la guitare et des percussions."
+      },
+      {
+        "id": "lauris-bass-outdoor",
+        "orientation": "portrait",
+        "ratio": "2:3",
+        "asset": "lauris-basse-exterieur",
+        "widths": [
+          320,
+          480,
+          720,
+          960
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Lauris à la basse en plein air",
+        "type": "Portrait",
+        "description": "Lauris à la basse lors d’une prestation en extérieur."
+      },
+      {
+        "id": "concert-purple-stage",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "concert-scene-violet",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Flow Therapy sous les lumières violettes",
+        "type": "Photo de concert",
+        "description": "Le trio en concert dans une ambiance de scène violette et bleue."
+      },
+      {
+        "id": "jenni-vocals-purple-stage",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "asset": "jenni-chant-scene-violet",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Jenni au chant sur scène",
+        "type": "Photo de concert",
+        "description": "Jenni au chant sous les lumières violettes."
+      },
+      {
+        "id": "flow-therapy-group-selfie",
+        "orientation": "landscape",
+        "ratio": "4:3",
+        "asset": "flow-therapy-photo-groupe",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "",
+        "title": "Flow Therapy — photo de groupe",
+        "type": "Photo de concert",
+        "description": "Betty, Jenni et Lauris réunis après une prestation."
+      },
+      {
+        "id": "flow-therapy-banner-group",
+        "orientation": "portrait",
+        "ratio": "3:4",
+        "asset": "flow-therapy-banniere",
+        "widths": [
+          320,
+          480,
+          720,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "",
+        "title": "Le trio derrière sa bannière",
+        "type": "Portrait",
+        "description": "Flow Therapy réuni derrière la bannière du groupe."
+      },
+      {
+        "id": "betty-keys-black-white",
+        "orientation": "portrait",
+        "ratio": "2:3",
+        "asset": "betty-clavier-noir-blanc",
+        "widths": [
+          320,
+          480,
+          720,
+          960
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Betty au clavier en noir et blanc",
+        "type": "Portrait",
+        "description": "Betty au chant et au clavier, photographiée en noir et blanc."
+      },
+      {
+        "id": "jenni-vocals-close-up",
+        "orientation": "portrait",
+        "ratio": "2:3",
+        "asset": "jenni-chant-portrait",
+        "widths": [
+          320,
+          480,
+          720,
+          960
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Jenni — portrait au chant",
+        "type": "Portrait",
+        "description": "Portrait de Jenni au chant pendant une prestation."
+      },
+      {
+        "id": "lauris-bass-vocals",
+        "orientation": "landscape",
+        "ratio": "2048:1389",
+        "asset": "lauris-basse-chant",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Lauris — basse et chant",
+        "type": "Photo de concert",
+        "description": "Lauris au chant et à la basse devant la bannière de Flow Therapy."
+      },
+      {
+        "id": "flow-therapy-rehearsal",
+        "orientation": "landscape",
+        "ratio": "512:253",
+        "asset": "repetition-flow-therapy",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-09-15",
+        "credit": "C.B.",
+        "title": "Flow Therapy en répétition",
+        "type": "Photo de concert",
+        "description": "Le trio au travail pendant une répétition."
       }
     ],
     "title": "Médias",
