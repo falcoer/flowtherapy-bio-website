@@ -122,6 +122,32 @@
     }
   ],
   "vendor": [],
+  "references": [
+    {
+      "path": "references/laprovence.png",
+      "sha256": "499c5dbd289da84086b30821109876461c14b624f714e3d1db7a1fbc63e3bb10",
+      "mode": "responsive-reference-ci",
+      "name": "laprovence",
+      "widths": [320, 480, 768, 1024, 1440],
+      "focal": [0.5, 0.5]
+    },
+    {
+      "path": "references/maritima.png",
+      "sha256": "93dde674b33c717bff0dccb672ad55c76a09cb0e6306889de000905ee1de33a5",
+      "mode": "responsive-reference-ci",
+      "name": "maritima",
+      "widths": [320, 480, 768, 1024, 1440],
+      "focal": [0.5, 0.5]
+    },
+    {
+      "path": "references/musical.png",
+      "sha256": "745fa45752a761cc9a52e58e83a1f20013179a27593b1924427e810ad2477220",
+      "mode": "responsive-reference-ci",
+      "name": "musical",
+      "widths": [320, 480, 768, 1024, 1440],
+      "focal": [0.5, 0.5]
+    }
+  ],
   "medias": [
     {
       "path": "medias/11fe83c3-d862-48b5-8123-32aa1af0f9a6.JPG",

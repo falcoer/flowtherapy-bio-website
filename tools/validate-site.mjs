@@ -42,6 +42,18 @@ for (const [index, item] of (config.media?.items || []).entries()) {
     }
   }
 }
+for (const locale of ['fr', 'en', 'es', 'it', 'de', 'pt', 'zh', 'ja']) {
+  const copy = JSON.parse(await readFile(fromRoot(`i18n/${locale}.json`), 'utf8'));
+  for (const [index, item] of (copy.references?.items || []).entries()) {
+    expect(item.asset && Array.isArray(item.widths) && item.widths.includes(320) && item.widths.includes(480), `references ${locale}[${index}] doit référencer les variantes mobiles`);
+    for (const width of (item.widths || [])) {
+      for (const extension of ['avif', 'webp', 'jpg']) {
+        const file = `assets/references/${item.asset}-${width}.${extension}`;
+        try { await stat(fromRoot(file)); } catch { problems.push(`${file} est introuvable`); }
+      }
+    }
+  }
+}
 for (const id of ['urban', 'himalaya', 'city', 'amazonia', 'caribbean']) {
   for (const width of [960, 1440, 1672]) {
     for (const extension of ['avif', 'webp', 'png']) {

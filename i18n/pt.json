@@ -188,5 +188,16 @@
   },
   "errors": {
     "content": "Não foi possível carregar o conteúdo do site."
+  },
+  "references": {
+    "eyebrow": "Publicações e parcerias",
+    "title": "As nossas referências",
+    "open": "Mostrar as publicações de {name}",
+    "empty": "As publicações associadas a esta referência serão adicionadas em breve.",
+    "items": [
+      {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "Imprensa regional", "name": "La Provence", "caption": "Notícias e vida cultural local", "publications": [{"date": "14 de julho de 2026", "title": "O grupo de Martigues Flow Therapy vence o Prémio Intergeracional Music’Al 2026", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
+      {"id": "maritima", "asset": "maritima", "widths": [320, 480, 768, 1024, 1440], "label": "Televisão e rádio", "name": "Maritima", "caption": "Encontros, vídeos e notícias locais", "publications": [{"date": "27 de setembro de 2026", "title": "Le Grand Bazar — Flow Therapy", "source": "Maritima", "url": "https://maritima.fr/tv/1633/le-grand-bazar--flow-therapy"}]},
+      {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "Concurso nacional", "name": "Tremplin Music’Al", "caption": "Prémio intergeracional 2026", "publications": [{"date": "1 de julho de 2026", "title": "Comunicado de imprensa — Tremplin Music’AL 2026", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]}
+    ]
   }
 }

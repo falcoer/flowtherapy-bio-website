@@ -98,7 +98,7 @@ def load_previous_records() -> list[dict]:
 
 
 def verify_sources(manifest: dict) -> None:
-    for category in ("images", "medias", "decorations", "fonts", "vendor"):
+    for category in ("images", "medias", "references", "decorations", "fonts", "vendor"):
         for asset in manifest[category]:
             source = SOURCE / asset["path"]
             if not source.is_file():
@@ -149,7 +149,7 @@ def prepare_dist() -> None:
         target = preview_dist / locale
         target.mkdir(exist_ok=True)
         (target / "index.html").write_text(localized, encoding="utf-8")
-    for filename in ("index.html", "app.js", "styles.css", "section-polish.css"):
+    for filename in ("index.html", "app.js", "styles.css", "section-polish.css", "travel-landscapes.css", "travel-landscapes.js"):
         shutil.copy2(ROOT / filename, DIST / filename)
     root_html = (ROOT / "index.html").read_text(encoding="utf-8")
     for locale in ("fr", "en", "es", "it", "de", "pt", "zh", "ja"):
@@ -243,6 +243,38 @@ def build_assets(manifest: dict, cache: AssetCache) -> list[dict]:
                     else:
                         resized.save(output, quality=72, speed=8)
                     records.append(cache.record(output, key, {"source": asset["path"], "source_sha256": asset["sha256"], "mode": "responsive-media-ci", "width": width, "height": height, "format": extension}))
+
+    output_references = output_assets / "references"
+    output_references.mkdir(parents=True, exist_ok=True)
+    for asset in manifest["references"]:
+        source = SOURCE / asset["path"]
+        with Image.open(source) as original:
+            normalized = ImageOps.exif_transpose(original).convert("RGB")
+            focal = tuple(asset.get("focal", [0.5, 0.5]))
+            for width in asset["widths"]:
+                height = round(width * 9 / 16)
+                pending: list[tuple[str, Path, str]] = []
+                for extension in ("avif", "webp", "jpg"):
+                    output = output_references / f"{asset['name']}-{width}.{extension}"
+                    quality = {"jpg": 86, "webp": 80, "avif": 74}[extension]
+                    recipe = {"mode": "responsive-reference-ci", "width": width, "height": height, "format": extension, "quality": quality, "focal": focal}
+                    key = build_key(asset["sha256"], recipe)
+                    cached = cache.reuse(output, key)
+                    if cached:
+                        records.append(cached)
+                    else:
+                        pending.append((extension, output, key))
+                if not pending:
+                    continue
+                cropped = ImageOps.fit(normalized, (width, height), method=Image.Resampling.LANCZOS, centering=focal)
+                for extension, output, key in pending:
+                    if extension == "jpg":
+                        cropped.save(output, format="JPEG", quality=86, optimize=True, progressive=True)
+                    elif extension == "webp":
+                        cropped.save(output, quality=80, method=6)
+                    else:
+                        cropped.save(output, quality=74, speed=8)
+                    records.append(cache.record(output, key, {"source": asset["path"], "source_sha256": asset["sha256"], "mode": "responsive-reference-ci", "width": width, "height": height, "format": extension, "focal": focal}))
 
 
     decorations = output_assets / "decorations"

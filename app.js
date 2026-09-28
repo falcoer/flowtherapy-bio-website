@@ -32,6 +32,16 @@ const responsiveMediaPicture=(item,viewer=false)=>{
   return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}media/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async"></picture>`;
 };
 
+const responsiveReferencePicture=item=>{
+  const widths=Array.isArray(item.widths)?item.widths.filter(Number.isFinite):[];
+  if(!item.asset||!widths.length)return '';
+  const name=esc(item.asset);
+  const sizes='(max-width: 520px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 38px), 31vw';
+  const srcset=extension=>widths.map(width=>`${ASSET}references/${name}-${width}.${extension} ${width}w`).join(', ');
+  const fallback=widths[widths.length-1];
+  return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}references/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="" loading="lazy" decoding="async"></picture>`;
+};
+
 function mediaVisual(item,index,viewer=false){
   const ratio=orientationClass(item);
   const ratioStyle=/^\d+:\d+$/.test(String(item.ratio))?` style="--media-ratio:${item.ratio.replace(':','/')}"`:'';
@@ -44,8 +54,9 @@ function mediaVisual(item,index,viewer=false){
 }
 
 function renderPage(config){
-  const {site,hero,navigation,socials,about,media,contact}=config;
+  const {site,hero,navigation,socials,about,references,media,contact}=config;
   const mediaItems=media?.items||[];
+  const referenceItems=references?.items||[];
   const listen=socials.find(s=>s.icon==='youtube')?.url||socials[0]?.url||'#contact';
   document.title=`${site.name} — ${hero.lines.join(' ')}`;
   document.querySelector('#app').innerHTML=`
@@ -56,6 +67,7 @@ function renderPage(config){
   <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca" data-alpaca="${n}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
 </header>
 <section id="groupe" class="section"><div class="doodle-field section-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-blue"></span><span class="doodle doodle-swoosh tone-pink"></span><span class="doodle doodle-star tone-purple"></span><span class="doodle doodle-heart tone-orange"></span></div><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
+<section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__label">${esc(item.label)}</span><span class="reference-card__caption">${esc(item.caption)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}</div><div id="references-details" class="reference-details" hidden aria-live="polite"></div></section>
 <section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
 <section id="contact" class="section contact-section" aria-labelledby="contact-title">
   <div class="contact-layout">
@@ -98,11 +110,30 @@ function renderPage(config){
   setupTheme();
   setupQr();
   setupAlpacaReveal();
+  setupReferences(referenceItems,references);
   setupMediaViewer(mediaItems);
 }
 
 function localizedConfig(config,copy){
-  return {...config,site:{...config.site,...copy.site},hero:copy.hero,navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.media,href:'#medias'}],about:copy.about,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
+  return {...config,site:{...config.site,...copy.site},hero:copy.hero,navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.media,href:'#medias'}],about:copy.about,references:copy.references,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
+}
+
+function setupReferences(items,copy){
+  const details=document.querySelector('#references-details');
+  const cards=[...document.querySelectorAll('[data-reference-index]')];
+  if(!details||!items.length)return;
+  const show=index=>{
+    const item=items[index];
+    const publications=Array.isArray(item.publications)?item.publications:[];
+    cards.forEach((card,cardIndex)=>{
+      const selected=cardIndex===index;
+      card.classList.toggle('is-active',selected);
+      card.setAttribute('aria-expanded',String(selected));
+    });
+    details.hidden=false;
+    details.innerHTML=`<div class="reference-details__inner"><p class="reference-details__brand">${esc(item.name)}</p>${publications.length?`<div class="reference-publications">${publications.map(publication=>`<article class="reference-publication"><p class="kicker">${esc(publication.date)}</p><a href="${esc(publication.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} <b aria-hidden="true">↗</b></span></a></article>`).join('')}</div>`:`<p class="reference-empty">${esc(item.empty||copy?.empty||'')}</p>`}</div>`;
+  };
+  cards.forEach(card=>card.addEventListener('click',()=>show(Number(card.dataset.referenceIndex))));
 }
 function setText(selector,value){const element=document.querySelector(selector);if(element)element.textContent=value;}
 function translateRenderedPage(copy,locale){
