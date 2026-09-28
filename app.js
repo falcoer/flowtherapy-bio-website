@@ -67,7 +67,7 @@ function renderPage(config){
   <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca" data-alpaca="${n}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
 </header>
 <section id="groupe" class="section"><div class="doodle-field section-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-blue"></span><span class="doodle doodle-swoosh tone-pink"></span><span class="doodle doodle-star tone-purple"></span><span class="doodle doodle-heart tone-orange"></span></div><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
-<section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}</div><div id="references-details" class="reference-details" hidden aria-live="polite"></div></section>
+<section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}<div id="references-details" class="reference-details" hidden aria-live="polite"></div></div></section>
 <section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
 <section id="contact" class="section contact-section" aria-labelledby="contact-title">
   <div class="contact-layout">
@@ -121,6 +121,7 @@ function localizedConfig(config,copy){
 function setupReferences(items,copy){
   const details=document.querySelector('#references-details');
   const cards=[...document.querySelectorAll('[data-reference-index]')];
+  const grid=document.querySelector('.reference-grid');
   if(!details||!items.length)return;
   const show=index=>{
     const item=items[index];
@@ -132,6 +133,8 @@ function setupReferences(items,copy){
     });
     details.hidden=false;
     details.innerHTML=`<div class="reference-details__inner"><p class="reference-details__brand">${esc(item.name)}</p>${publications.length?`<div class="reference-publications">${publications.map(publication=>`<article class="reference-publication"><p class="kicker">${esc(publication.date)}</p><a href="${esc(publication.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} <b aria-hidden="true">↗</b></span></a></article>`).join('')}</div>`:`<p class="reference-empty">${esc(item.empty||copy?.empty||'')}</p>`}</div>`;
+    if(matchMedia('(max-width: 520px)').matches)cards[index].insertAdjacentElement('afterend',details);
+    else grid?.append(details);
   };
   cards.forEach(card=>card.addEventListener('click',()=>show(Number(card.dataset.referenceIndex))));
 }
