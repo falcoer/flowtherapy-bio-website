@@ -47,6 +47,7 @@ Chaque média publié doit posséder une entrée dans `config/site.json`, sous `
 | `asset` | oui | Nom de base des variantes générées dans `assets/media/`. |
 | `widths` | oui | Trois largeurs responsives générées par la CI. |
 | `date` | oui | Date de prise de vue ou de publication. Préférer `AAAA-MM-JJ` lorsqu’elle est connue. |
+| `layout` | non | `wide` (tuile sur 2 colonnes, ratio 2/1) ou `tall` (tuile sur 2 lignes, ratio 1/2) pour mettre une photo en avant. Sans valeur : tuile carrée. |
 | `credit` | oui | Nom du photographe, du vidéaste ou du créateur du visuel. |
 | `description` | oui | Description courte affichée dans les informations de la visionneuse. |
 
@@ -102,11 +103,19 @@ L’ajout d’un fichier dans ce dossier ne suffit pas à le publier. Il faut é
 
 Aucun fichier généré ne doit être commité dans `assets-src/medias/`.
 
+## Règle de la grille
+
+La mosaïque est une grille de tuiles carrées à 5 colonnes (bureau), 3 (tablette) et 2 (mobile). Une tuile `wide` occupe 2 cases, une tuile `tall` aussi. Pour qu'il n'y ait aucune case vide aux trois largeurs, **le nombre de médias plus le nombre de médias mis en avant doit être un multiple de 30**. Le validateur (`tools/validate-site.mjs`) refuse le build sinon : à l'ajout d'une photo, ajuster les `layout` (ou en ajouter plusieurs à la fois).
+
+Les variantes ne dépassent jamais la largeur de la source : une source de 898 px produit au plus une variante de 768 px.
+
 ## Index actuel
 
-Neuf sources sont déclarées dans `assets-src/manifest.json` :
+Onze sources sont déclarées dans `assets-src/manifest.json` :
 
-- huit photographies publiées en 72 variantes responsives (AVIF, WebP et JPEG) ;
+- dix photographies publiées en responsive (AVIF, WebP et JPEG) ;
 - une capture d’écran de galerie mobile conservée et vérifiée, mais exclue de la publication en attendant la photographie originale.
+
+La mosaïque compte 20 médias dont 10 mis en avant, soit 30 cases.
 
 Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles. Les crédits photo affichés sont attribués à C.B.

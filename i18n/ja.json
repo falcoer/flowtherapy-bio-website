@@ -144,6 +144,16 @@
         "title": "Flow Therapy rehearsing",
         "type": "Concert photo",
         "description": "The trio at work during a rehearsal."
+      },
+      "trio-concert": {
+        "title": "ステージ上のトリオ、全体ショット",
+        "type": "ライブ写真",
+        "description": "ベース、ボーカル、キーボード、ギター。客席から見たライブ中のトリオ。"
+      },
+      "bass-guitars-stands": {
+        "title": "スタンドに立てたベースとギター",
+        "type": "ライブ写真",
+        "description": "スタンドに立てられたバンドのベースとギター。"
       }
     }
   },

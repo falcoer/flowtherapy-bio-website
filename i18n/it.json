@@ -144,6 +144,16 @@
         "title": "Flow Therapy rehearsing",
         "type": "Concert photo",
         "description": "The trio at work during a rehearsal."
+      },
+      "trio-concert": {
+        "title": "Il trio sul palco, vista d'insieme",
+        "type": "Foto dal vivo",
+        "description": "Basso, voce, tastiera e chitarra: il trio in concerto, visto dalla sala."
+      },
+      "bass-guitars-stands": {
+        "title": "Basso e chitarre sui loro supporti",
+        "type": "Foto dal vivo",
+        "description": "Il basso e le chitarre del gruppo sul loro supporto."
       }
     }
   },

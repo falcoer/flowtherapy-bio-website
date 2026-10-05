@@ -42,6 +42,14 @@ for (const [index, item] of (config.media?.items || []).entries()) {
     }
   }
 }
+{
+  const items = config.media?.items || [];
+  for (const [index, item] of items.entries()) {
+    expect(item.layout === undefined || ['wide', 'tall'].includes(item.layout), `media.items[${index}].layout doit valoir "wide" ou "tall"`);
+  }
+  const cells = items.length + items.filter(item => item.layout).length;
+  expect(cells % 30 === 0, `la mosaïque compte ${cells} cellules (médias + mises en avant) : ce total doit être un multiple de 30 pour ne laisser aucun vide à 5, 3 et 2 colonnes. Ajuster le champ "layout" ("wide" ou "tall") dans config/site.json`);
+}
 for (const locale of ['fr', 'en', 'es', 'it', 'de', 'pt', 'zh', 'ja']) {
   const copy = JSON.parse(await readFile(fromRoot(`i18n/${locale}.json`), 'utf8'));
   for (const [index, item] of (copy.references?.items || []).entries()) {
@@ -92,7 +100,7 @@ expect(rootEnHtml.includes('src="../app.js') && rootEnHtml.includes('href="../st
 expect(app.includes('<section id="contact"') && app.includes('href="#contact"') && app.includes('id="contact-form"'), 'le formulaire de contact doit être intégré au flux de la page et accessible depuis le bouton enveloppe');
 expect(!html.includes('contact-dialog') && !app.includes('contact-footer-open') && !css.includes('.contact-dialog'), 'le formulaire de contact ne doit plus utiliser de modale ni de raccourci dans le pied de page');
 expect(app.includes('type="image/avif"') && app.includes('type="image/webp"') && app.includes('srcset='), 'les images responsives doivent proposer AVIF, WebP et un srcset PNG');
-expect(app.includes('(max-width: 520px) calc(50vw - 12px)') && app.includes('(max-width: 900px) calc(33vw - 18px)'), 'la galerie doit annoncer au navigateur les dimensions réelles de ses colonnes mobiles');
+expect(app.includes('(max-width: 620px) calc(50vw - 12px)') && app.includes('(max-width: 1100px) calc(33vw - 18px)') && app.includes('20vw'), 'la galerie doit annoncer au navigateur les dimensions réelles de ses colonnes mobiles');
 expect(app.includes("const ASSET=new URL('assets/',SITE_ROOT).href;") && app.includes('responsivePicture(`alpaga${n}-nu`,[640,768,1024]') && app.includes('mountCostumes') && app.includes('decodeImage') && app.includes('ALPACA_NUDE_HOLD_MS=1800') && app.includes('IntersectionObserver') && app.includes('setupAlpacaReveal'), 'le hero doit révéler les alpagas nus et charger les costumes produits par la CI seulement avant la transition');
 expect(css.includes('assets/generated/fond-urbain-transparent-960.avif'), 'le watermark responsive généré en CI doit être utilisé');
 expect(css.includes('@media(max-width:790px){.watermark') && css.includes('fond-urbain-transparent-960.webp'), 'le mobile doit utiliser le filigrane CI le plus léger');
