@@ -20,7 +20,8 @@
   },
   "navigation": {
     "group": "バンド",
-    "media": "メディア"
+    "media": "メディア",
+    "agenda": "スケジュール"
   },
   "controls": {
     "language": "言語を選択",
@@ -188,6 +189,18 @@
   },
   "errors": {
     "content": "ウェブサイトの内容を読み込めませんでした。"
+  },
+  "agenda": {
+    "eyebrow": "スケジュール",
+    "title": "今後のライブ",
+    "empty": "現在発表されている日程はありません。SNSをご覧ください。",
+    "phone": "電話",
+    "modalites": {
+      "reservation_conseillee": "予約をおすすめします",
+      "sur_invitation": "招待制",
+      "entree_libre": "入場無料",
+      "billetterie": "チケット制"
+    }
   },
   "references": {
     "eyebrow": "掲載・パートナーシップ",

@@ -20,7 +20,8 @@
   },
   "navigation": {
     "group": "Die Band",
-    "media": "Medien"
+    "media": "Medien",
+    "agenda": "Termine"
   },
   "controls": {
     "language": "Sprache auswählen",
@@ -188,6 +189,18 @@
   },
   "errors": {
     "content": "Der Inhalt der Website konnte nicht geladen werden."
+  },
+  "agenda": {
+    "eyebrow": "Termine",
+    "title": "Nächste Konzerte",
+    "empty": "Derzeit sind keine Termine angekündigt. Folgt uns in den sozialen Netzwerken.",
+    "phone": "Telefon",
+    "modalites": {
+      "reservation_conseillee": "Reservierung empfohlen",
+      "sur_invitation": "Nur mit Einladung",
+      "entree_libre": "Freier Eintritt",
+      "billetterie": "Mit Ticket"
+    }
   },
   "references": {
     "eyebrow": "Veröffentlichungen & Partnerschaften",

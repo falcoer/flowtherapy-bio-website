@@ -20,7 +20,8 @@
   },
   "navigation": {
     "group": "Il gruppo",
-    "media": "Media"
+    "media": "Media",
+    "agenda": "Agenda"
   },
   "controls": {
     "language": "Scegli la lingua",
@@ -188,6 +189,18 @@
   },
   "errors": {
     "content": "Impossibile caricare il contenuto del sito."
+  },
+  "agenda": {
+    "eyebrow": "Agenda",
+    "title": "Prossimi concerti",
+    "empty": "Nessuna data annunciata per ora. Seguici sui social.",
+    "phone": "Telefono",
+    "modalites": {
+      "reservation_conseillee": "Prenotazione consigliata",
+      "sur_invitation": "Su invito",
+      "entree_libre": "Ingresso libero",
+      "billetterie": "Con biglietto"
+    }
   },
   "references": {
     "eyebrow": "Pubblicazioni e collaborazioni",

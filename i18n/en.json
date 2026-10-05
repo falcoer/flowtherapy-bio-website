@@ -20,7 +20,8 @@
   },
   "navigation": {
     "group": "The band",
-    "media": "Media"
+    "media": "Media",
+    "agenda": "Schedule"
   },
   "controls": {
     "language": "Choose language",
@@ -188,6 +189,18 @@
   },
   "errors": {
     "content": "Website content could not be loaded."
+  },
+  "agenda": {
+    "eyebrow": "Schedule",
+    "title": "Upcoming shows",
+    "empty": "No dates announced for now. Follow us on social media.",
+    "phone": "Phone",
+    "modalites": {
+      "reservation_conseillee": "Booking recommended",
+      "sur_invitation": "By invitation",
+      "entree_libre": "Free entry",
+      "billetterie": "Tickets required"
+    }
   },
   "references": {
     "eyebrow": "Press & partnerships",

@@ -20,7 +20,8 @@
   },
   "navigation": {
     "group": "乐队",
-    "media": "媒体"
+    "media": "媒体",
+    "agenda": "日程"
   },
   "controls": {
     "language": "选择语言",
@@ -188,6 +189,18 @@
   },
   "errors": {
     "content": "无法加载网站内容。"
+  },
+  "agenda": {
+    "eyebrow": "演出日程",
+    "title": "近期演出",
+    "empty": "暂无已公布的日期，请关注我们的社交媒体。",
+    "phone": "电话",
+    "modalites": {
+      "reservation_conseillee": "建议预约",
+      "sur_invitation": "凭邀请入场",
+      "entree_libre": "免费入场",
+      "billetterie": "需购票"
+    }
   },
   "references": {
     "eyebrow": "报道与合作",
