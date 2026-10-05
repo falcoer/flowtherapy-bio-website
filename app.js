@@ -37,7 +37,7 @@ const responsiveReferencePicture=item=>{
   const widths=Array.isArray(item.widths)?item.widths.filter(Number.isFinite):[];
   if(!item.asset||!widths.length)return '';
   const name=esc(item.asset);
-  const sizes='(max-width: 520px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 38px), 31vw';
+  const sizes='(max-width: 520px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 38px), 23vw';
   const srcset=extension=>widths.map(width=>`${ASSET}references/${name}-${width}.${extension} ${width}w`).join(', ');
   const fallback=widths[widths.length-1];
   return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}references/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="" loading="lazy" decoding="async"></picture>`;
