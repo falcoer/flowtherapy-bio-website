@@ -1,0 +1,32 @@
+# Agenda des concerts de Flow Therapy — source unique de l'agenda du site.
+# Le build (tools/build-site.py) valide ce fichier et le publie en config/agenda.json.
+# Pour ajouter un événement : ajouter un bloc à la liste `evenements` (ordre libre,
+# le site trie par date et masque automatiquement les dates passées).
+#
+# Champs :
+#   id             identifiant unique (AAAA-MM-JJ-court-nom)
+#   date           AAAA-MM-JJ
+#   heure          HH:MM, ou null si inconnue
+#   nom            nom de l'événement, ou "Concert" si inconnu
+#   lieu           ville
+#   etablissement  établissement organisateur
+#   modalites      reservation_conseillee | sur_invitation | entree_libre | billetterie | null
+#   telephone      numéro publié par l'organisateur, ou null
+schema: flowtherapy.agenda/v1
+evenements:
+  - id: 2026-10-09-marteguale-fete-biere
+    date: 2026-10-09
+    heure: null
+    nom: Fête de la bière
+    lieu: Martigues
+    etablissement: Restaurant La Martéguale
+    modalites: reservation_conseillee
+    telephone: null  # à renseigner : numéro publié du restaurant (non confirmé à ce jour)
+  - id: 2026-10-30-action-logement-showcase
+    date: 2026-10-30
+    heure: null
+    nom: Showcase Tremplin Music'Al
+    lieu: Paris
+    etablissement: Action Logement
+    modalites: sur_invitation
+    telephone: "0970 800 800"  # ligne générale publiée par Action Logement (lun-ven 9h-18h)

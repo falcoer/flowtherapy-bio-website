@@ -6,11 +6,12 @@ import json
 import re
 import shutil
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import date as date_type, datetime, timezone
 from pathlib import Path
 
 import fontTools
 import PIL
+import yaml
 from PIL import Image, ImageOps
 from fontTools import subset
 
@@ -120,6 +121,48 @@ def optimize_svg(source: Path, output: Path) -> None:
     optimized = re.sub(r">\s+<", "><", optimized).strip()
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(optimized + "\n", encoding="utf-8")
+
+
+AGENDA_MODALITES = {"reservation_conseillee", "sur_invitation", "entree_libre", "billetterie", None}
+
+
+def build_agenda() -> None:
+    source = ROOT / "data" / "agenda.yml"
+    agenda = yaml.safe_load(source.read_text(encoding="utf-8"))
+    if not isinstance(agenda, dict) or agenda.get("schema") != "flowtherapy.agenda/v1":
+        raise ValueError("data/agenda.yml : schéma flowtherapy.agenda/v1 attendu")
+    events = agenda.get("evenements")
+    if not isinstance(events, list):
+        raise ValueError("data/agenda.yml : `evenements` doit être une liste")
+    seen: set[str] = set()
+    output = []
+    for index, event in enumerate(events):
+        where = f"data/agenda.yml evenements[{index}]"
+        for field in ("id", "date", "nom", "lieu", "etablissement"):
+            if not event.get(field):
+                raise ValueError(f"{where} : champ obligatoire manquant : {field}")
+        if event["id"] in seen:
+            raise ValueError(f"{where} : id en double : {event['id']}")
+        seen.add(event["id"])
+        date = event["date"] if isinstance(event["date"], date_type) else datetime.strptime(str(event["date"]), "%Y-%m-%d").date()
+        heure = event.get("heure")
+        if heure is not None and not re.fullmatch(r"([01]\d|2[0-3]):[0-5]\d", str(heure)):
+            raise ValueError(f"{where} : heure invalide (HH:MM attendu) : {heure}")
+        if event.get("modalites") not in AGENDA_MODALITES:
+            raise ValueError(f"{where} : modalites inconnue : {event.get('modalites')}")
+        output.append({
+            "id": str(event["id"]),
+            "date": date.isoformat(),
+            "heure": str(heure) if heure else None,
+            "nom": str(event["nom"]),
+            "lieu": str(event["lieu"]),
+            "etablissement": str(event["etablissement"]),
+            "modalites": event.get("modalites"),
+            "telephone": str(event["telephone"]) if event.get("telephone") else None,
+        })
+    output.sort(key=lambda item: (item["date"], item["heure"] or ""))
+    target = DIST / "config" / "agenda.json"
+    target.write_text(json.dumps({"schema": agenda["schema"], "evenements": output}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def prepare_dist() -> None:
@@ -354,6 +397,7 @@ def main() -> None:
     previous_records = load_previous_records()
     cache = AssetCache(previous_records)
     prepare_dist()
+    build_agenda()
     records = build_assets(manifest, cache)
     records.extend(record for record in previous_records if record.get("mode") == "responsive-landscape-ci")
     generated = {"schema": "flowtherapy.generated-assets/v1", "built_at": datetime.now(timezone.utc).isoformat(), "fonttools": fontTools.__version__, "pillow": PIL.__version__, "assets": records}

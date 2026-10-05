@@ -20,7 +20,8 @@
   },
   "navigation": {
     "group": "O grupo",
-    "media": "Multimédia"
+    "media": "Multimédia",
+    "agenda": "Agenda"
   },
   "controls": {
     "language": "Escolher o idioma",
@@ -188,6 +189,18 @@
   },
   "errors": {
     "content": "Não foi possível carregar o conteúdo do site."
+  },
+  "agenda": {
+    "eyebrow": "Agenda",
+    "title": "Próximos concertos",
+    "empty": "Nenhuma data anunciada de momento. Siga-nos nas redes sociais.",
+    "phone": "Telefone",
+    "modalites": {
+      "reservation_conseillee": "Reserva aconselhada",
+      "sur_invitation": "Mediante convite",
+      "entree_libre": "Entrada livre",
+      "billetterie": "Com bilhete"
+    }
   },
   "references": {
     "eyebrow": "Publicações e parcerias",

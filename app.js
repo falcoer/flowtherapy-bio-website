@@ -1,6 +1,7 @@
 const SITE_ROOT=new URL('./',import.meta.url);
 const ASSET=new URL('assets/',SITE_ROOT).href;
 const CONFIG_URL=new URL('config/site.json',SITE_ROOT);
+const AGENDA_URL=new URL('config/agenda.json',SITE_ROOT);
 const BUILD_INFO_URL=new URL('assets-manifest.json',SITE_ROOT);
 const I18N_URL=locale=>new URL('i18n/'+locale+'.json',SITE_ROOT);
 const CONTACT_URL=new URL('api/contact',SITE_ROOT);
@@ -54,9 +55,10 @@ function mediaVisual(item,index,viewer=false){
 }
 
 function renderPage(config){
-  const {site,hero,navigation,socials,about,references,media,contact}=config;
+  const {site,hero,navigation,socials,about,references,media,contact,agenda}=config;
   const mediaItems=media?.items||[];
   const referenceItems=references?.items||[];
+  const agendaItems=upcomingEvents(agenda?.items);
   const listen=socials.find(s=>s.icon==='youtube')?.url||socials[0]?.url||'#contact';
   document.title=`${site.name} — ${hero.lines.join(' ')}`;
   document.querySelector('#app').innerHTML=`
@@ -67,6 +69,7 @@ function renderPage(config){
   <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca" data-alpaca="${n}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
 </header>
 <section id="groupe" class="section"><div class="doodle-field section-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-blue"></span><span class="doodle doodle-swoosh tone-pink"></span><span class="doodle doodle-star tone-purple"></span><span class="doodle doodle-heart tone-orange"></span></div><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
+<section id="agenda" class="section agenda-section" aria-labelledby="agenda-title"><p class="kicker">${esc(agenda?.eyebrow||'')}</p><h2 id="agenda-title">${esc(agenda?.title||'')}</h2>${agendaItems.length?`<ol class="agenda-list">${agendaItems.map(event=>agendaCard(event,agenda)).join('')}</ol>`:`<p class="agenda-empty">${esc(agenda?.empty||'')}</p>`}</section>
 <section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}<div id="references-details" class="reference-details" hidden aria-live="polite"></div></div></section>
 <section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
 <section id="contact" class="section contact-section" aria-labelledby="contact-title">
@@ -114,8 +117,19 @@ function renderPage(config){
   setupMediaViewer(mediaItems);
 }
 
+const todayParis=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Paris'}).format(new Date());
+const upcomingEvents=items=>(Array.isArray(items)?items:[]).filter(event=>event.date>=todayParis()).sort((a,b)=>(a.date+(a.heure||'')).localeCompare(b.date+(b.heure||'')));
+function agendaCard(event,copy){
+  const date=new Date(event.date+'T12:00:00Z');
+  const day=date.getUTCDate();
+  const month=new Intl.DateTimeFormat(activeLocale,{month:'short',timeZone:'UTC'}).format(date);
+  const full=new Intl.DateTimeFormat(activeLocale,{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(date);
+  const modality=event.modalites?copy.modalites?.[event.modalites]:'';
+  const phone=event.telephone?String(event.telephone):'';
+  return `<li class="agenda-card"><time class="agenda-date" datetime="${esc(event.date)}" aria-label="${esc(full)}"><span class="agenda-day">${day}</span><span class="agenda-month">${esc(month)}</span></time><div class="agenda-body"><h3>${esc(event.nom)}</h3><p class="agenda-place">${esc(event.etablissement)} · ${esc(event.lieu)}${event.heure?` · ${esc(event.heure.replace(':','h'))}`:''}</p>${modality?`<p class="agenda-modality">${esc(modality)}</p>`:''}${phone?`<p class="agenda-phone"><a href="tel:${esc(phone.replace(/[^\d+]/g,''))}" aria-label="${esc(copy.phone)} ${esc(phone)}">☎ ${esc(phone)}</a></p>`:''}</div></li>`;
+}
 function localizedConfig(config,copy){
-  return {...config,site:{...config.site,...copy.site},hero:copy.hero,navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.media,href:'#medias'}],about:copy.about,references:copy.references,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
+  return {...config,site:{...config.site,...copy.site},hero:copy.hero,navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.agenda,href:'#agenda'},{label:copy.navigation.media,href:'#medias'}],agenda:{...copy.agenda,items:config.agenda?.evenements||[]},about:copy.about,references:copy.references,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
 }
 
 function setupReferences(items,copy){
@@ -341,6 +355,6 @@ async function setLocale(locale,{historyMode='none'}={}){
   if(!LOCALES[locale]||!siteConfig)return;const response=await fetch(I18N_URL(locale),{cache:'no-store'});if(!response.ok)throw new Error('Traduction indisponible ('+response.status+')');const copy=await response.json();
   if(historyMode!=='none')window.history[historyMode==='replace'?'replaceState':'pushState']({locale},'',localePath(locale)+location.search+location.hash);render(siteConfig,copy,locale);
 }
-async function boot(){const response=await fetch(CONFIG_URL,{cache:'no-store'});if(!response.ok)throw new Error('Configuration indisponible ('+response.status+')');siteConfig=await response.json();const locale=resolveLocale();await setLocale(locale,{historyMode:localeFromUrl()?'none':'replace'});}
+async function boot(){const response=await fetch(CONFIG_URL,{cache:'no-store'});if(!response.ok)throw new Error('Configuration indisponible ('+response.status+')');siteConfig=await response.json();siteConfig.agenda=await fetch(AGENDA_URL,{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null);const locale=resolveLocale();await setLocale(locale,{historyMode:localeFromUrl()?'none':'replace'});}
 window.addEventListener('popstate',()=>{const locale=localeFromUrl()||resolveLocale();if(locale!==activeLocale)setLocale(locale);});
 boot().catch(error=>{console.error(error);document.querySelector('#app').innerHTML='<p class="error">Le contenu de la préversion ne peut pas être chargé.</p>';});
