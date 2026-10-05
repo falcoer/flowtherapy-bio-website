@@ -149,7 +149,7 @@
     },
     {
       "path": "references/reflets.png",
-      "sha256": "23f7ae649cb6e587cd54c22b1c47f93cad72575ca8df6651060d420f00e59ce3",
+      "sha256": "490fc7aa0106cbb882b9d4b230e798d718c052f7d1f050ec0c74e47a729572fd",
       "mode": "responsive-reference-ci",
       "name": "reflets",
       "widths": [320, 480, 768, 1024, 1440],
