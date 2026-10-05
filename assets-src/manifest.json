@@ -146,6 +146,14 @@
       "name": "musical",
       "widths": [320, 480, 768, 1024, 1440],
       "focal": [0.5, 0.5]
+    },
+    {
+      "path": "references/reflets.png",
+      "sha256": "490fc7aa0106cbb882b9d4b230e798d718c052f7d1f050ec0c74e47a729572fd",
+      "mode": "responsive-reference-ci",
+      "name": "reflets",
+      "widths": [320, 480, 768, 1024, 1440],
+      "focal": [0.5, 0.5]
     }
   ],
   "medias": [

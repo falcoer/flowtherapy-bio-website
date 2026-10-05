@@ -210,7 +210,8 @@
     "items": [
       {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "地区媒体", "name": "La Provence", "caption": "当地新闻与文化生活", "publications": [{"date": "2026年7月14日", "title": "马蒂格乐队 Flow Therapy 荣获 2026 Music’Al 跨世代奖", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
       {"id": "maritima", "asset": "maritima", "widths": [320, 480, 768, 1024, 1440], "label": "电视与电台", "name": "Maritima", "caption": "访谈、视频和当地新闻", "publications": [{"date": "2026年9月27日", "title": "Le Grand Bazar — Flow Therapy", "source": "Maritima", "url": "https://maritima.fr/tv/1633/le-grand-bazar--flow-therapy"}]},
-      {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "全国比赛", "name": "Tremplin Music’Al", "caption": "2026 跨世代奖", "publications": [{"date": "2026年7月1日", "title": "新闻稿 — 2026 Tremplin Music’AL 音乐新秀赛", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]}
+      {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "全国比赛", "name": "Tremplin Music’Al", "caption": "2026 跨世代奖", "publications": [{"date": "2026年7月1日", "title": "新闻稿 — 2026 Tremplin Music’AL 音乐新秀赛", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]},
+      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "市政杂志", "name": "Reflets", "caption": "马蒂格市政杂志", "publications": [{"date": "2026年10月1日", "title": "Reflets 第123期：关于 Flow Therapy 的文章，第33页", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/information-transversale/publications/reflets-le-magazine-de-la-ville-de-martigues-n123-octobre-2026-41477"}]}
     ]
   }
 }
