@@ -50,6 +50,7 @@
         "id": "live-black-white",
         "orientation": "landscape",
         "ratio": "3:2",
+        "layout": "wide",
         "asset": "flow-therapy-live-noir-blanc",
         "widths": [
           320,
@@ -104,6 +105,7 @@
         "id": "lauris-bass",
         "orientation": "portrait",
         "ratio": "2:3",
+        "layout": "tall",
         "asset": "lauris-basse-noir-blanc",
         "widths": [
           320,
@@ -118,9 +120,29 @@
         "description": "Lauris à la basse, photographié en noir et blanc."
       },
       {
+        "id": "trio-concert",
+        "orientation": "landscape",
+        "ratio": "3:2",
+        "layout": "wide",
+        "asset": "flow-therapy-trio-concert",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1440
+        ],
+        "date": "2026-10-05",
+        "credit": "",
+        "title": "Le trio sur scène, vue d'ensemble",
+        "type": "Photo de concert",
+        "description": "Basse, chant, clavier et guitare : le trio en concert, vu depuis la salle."
+      },
+      {
         "id": "betty-guitar-vocals",
         "orientation": "portrait",
         "ratio": "9:16",
+        "layout": "tall",
         "asset": "betty-guitare-chant",
         "widths": [
           320,
@@ -138,6 +160,7 @@
         "id": "jenni-vocals",
         "orientation": "portrait",
         "ratio": "2:3",
+        "layout": "tall",
         "asset": "jenni-chant",
         "widths": [
           320,
@@ -191,6 +214,7 @@
         "id": "lauris-bass-outdoor",
         "orientation": "portrait",
         "ratio": "2:3",
+        "layout": "tall",
         "asset": "lauris-basse-exterieur",
         "widths": [
           320,
@@ -208,6 +232,7 @@
         "id": "concert-purple-stage",
         "orientation": "landscape",
         "ratio": "3:2",
+        "layout": "wide",
         "asset": "concert-scene-violet",
         "widths": [
           320,
@@ -294,9 +319,28 @@
         "description": "Betty au chant et au clavier, photographiée en noir et blanc."
       },
       {
+        "id": "bass-guitars-stands",
+        "orientation": "portrait",
+        "ratio": "9:16",
+        "layout": "tall",
+        "asset": "basse-guitares-supports",
+        "widths": [
+          320,
+          480,
+          640,
+          768
+        ],
+        "date": "2026-10-05",
+        "credit": "",
+        "title": "Basse et guitares sur leurs pieds",
+        "type": "Photo de concert",
+        "description": "La basse et les guitares du groupe sur leur support."
+      },
+      {
         "id": "jenni-vocals-close-up",
         "orientation": "portrait",
         "ratio": "2:3",
+        "layout": "tall",
         "asset": "jenni-chant-portrait",
         "widths": [
           320,
@@ -332,6 +376,7 @@
         "id": "flow-therapy-rehearsal",
         "orientation": "landscape",
         "ratio": "512:253",
+        "layout": "wide",
         "asset": "repetition-flow-therapy",
         "widths": [
           320,

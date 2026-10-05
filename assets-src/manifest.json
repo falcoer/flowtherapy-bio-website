@@ -423,6 +423,33 @@
         1440
       ],
       "dimensions": "2048x1012"
+    },
+    {
+      "path": "medias/flow-therapy-trio-concert.jpeg",
+      "sha256": "5718b2b70a83ca9de3bc9e4ec0717fae9b39f3824bb888e2848a4fa818218e3d",
+      "mode": "responsive-media-ci",
+      "name": "flow-therapy-trio-concert",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1440
+      ],
+      "dimensions": "1600x1068"
+    },
+    {
+      "path": "medias/basse-guitares-supports.jpeg",
+      "sha256": "db04c34599262b927b4e75c6df35e5c77d8ab35f2a8ae6247227bd2e99c30966",
+      "mode": "responsive-media-ci",
+      "name": "basse-guitares-supports",
+      "widths": [
+        320,
+        480,
+        640,
+        768
+      ],
+      "dimensions": "898x1600"
     }
   ]
 }

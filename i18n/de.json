@@ -144,6 +144,16 @@
         "title": "Flow Therapy rehearsing",
         "type": "Concert photo",
         "description": "The trio at work during a rehearsal."
+      },
+      "trio-concert": {
+        "title": "Das Trio auf der Bühne, Gesamtansicht",
+        "type": "Konzertfoto",
+        "description": "Bass, Gesang, Keyboard und Gitarre: das Trio live, aus dem Publikum gesehen."
+      },
+      "bass-guitars-stands": {
+        "title": "Bass und Gitarren auf ihren Ständern",
+        "type": "Konzertfoto",
+        "description": "Der Bass und die Gitarren der Band auf ihrem Ständer."
       }
     }
   },

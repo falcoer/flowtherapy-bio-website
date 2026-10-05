@@ -144,6 +144,16 @@
         "title": "Flow Therapy rehearsing",
         "type": "Concert photo",
         "description": "The trio at work during a rehearsal."
+      },
+      "trio-concert": {
+        "title": "舞台上的三人组，全景",
+        "type": "现场照片",
+        "description": "贝斯、人声、键盘与吉他：现场演出中的三人组，观众席视角。"
+      },
+      "bass-guitars-stands": {
+        "title": "琴架上的贝斯与吉他",
+        "type": "现场照片",
+        "description": "乐队的贝斯和吉他放在琴架上。"
       }
     }
   },

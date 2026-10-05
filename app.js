@@ -27,7 +27,7 @@ const responsiveMediaPicture=(item,viewer=false)=>{
   const widths=Array.isArray(item.widths)?item.widths.filter(Number.isFinite):[];
   if(!item.asset||!widths.length)return '';
   const name=esc(item.asset);
-  const sizes=viewer?'min(92vw, 1280px)':'(max-width: 520px) calc(50vw - 12px), (max-width: 900px) calc(33vw - 18px), 25vw';
+  const sizes=viewer?'min(92vw, 1280px)':'(max-width: 620px) calc(50vw - 12px), (max-width: 1100px) calc(33vw - 18px), 20vw';
   const srcset=extension=>widths.map(width=>`${ASSET}media/${name}-${width}.${extension} ${width}w`).join(', ');
   const fallback=widths[widths.length-1];
   return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}media/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="${esc(item.title)}" ${viewer?'':'loading="lazy"'} decoding="async"></picture>`;
@@ -70,7 +70,7 @@ function renderPage(config){
 <section id="groupe" class="section"><div class="doodle-field section-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-blue"></span><span class="doodle doodle-swoosh tone-pink"></span><span class="doodle doodle-star tone-purple"></span><span class="doodle doodle-heart tone-orange"></span></div><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
 <section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}<div id="references-details" class="reference-details" hidden aria-live="polite"></div></div></section>
 <section id="agenda" class="section agenda-section" aria-labelledby="agenda-title"><p class="kicker">${esc(agenda?.eyebrow||'')}</p><h2 id="agenda-title">${esc(agenda?.title||'')}</h2>${agendaItems.length?`<ol class="agenda-list">${agendaItems.map(event=>agendaCard(event,agenda)).join('')}</ol>`:`<p class="agenda-empty">${esc(agenda?.empty||'')}</p>`}</section>
-<section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}" aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
+<section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}"${item.layout?` data-media-layout="${esc(item.layout)}"`:''} aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
 <section id="contact" class="section contact-section" aria-labelledby="contact-title">
   <div class="contact-layout">
     <header class="contact-heading">

@@ -144,6 +144,16 @@
         "title": "Flow Therapy en répétition",
         "type": "Photo de concert",
         "description": "Le trio au travail pendant une répétition."
+      },
+      "trio-concert": {
+        "title": "Le trio sur scène, vue d'ensemble",
+        "type": "Photo de concert",
+        "description": "Basse, chant, clavier et guitare : le trio en concert, vu depuis la salle."
+      },
+      "bass-guitars-stands": {
+        "title": "Basse et guitares sur leurs pieds",
+        "type": "Photo de concert",
+        "description": "La basse et les guitares du groupe sur leur support."
       }
     }
   },
