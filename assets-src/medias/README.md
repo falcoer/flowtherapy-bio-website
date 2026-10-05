@@ -118,4 +118,4 @@ Onze sources sont déclarées dans `assets-src/manifest.json` :
 
 La mosaïque compte 20 médias dont 10 mis en avant, soit 30 cases.
 
-Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles. Les crédits photo affichés sont attribués à C.B., sauf les deux dernières photos dont le crédit est à renseigner.
+Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles. Les crédits photo affichés sont attribués à C.B..
