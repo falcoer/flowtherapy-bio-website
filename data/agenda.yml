@@ -23,8 +23,8 @@ evenements:
     etablissement: Restaurant La Martéguale
     modalites: reservation_conseillee
     telephone: "06 80 27 58 47"  # numéro publié du restaurant (obligatoire en cas de réservation)
-  - id: 2026-10-30-action-logement-showcase
-    date: 2026-10-30
+  - id: 2026-10-29-action-logement-showcase
+    date: 2026-10-29
     heure: null
     nom: Showcase Tremplin Music'Al
     lieu: Paris
