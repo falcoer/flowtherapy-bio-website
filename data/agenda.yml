@@ -11,7 +11,8 @@
 #   lieu           ville
 #   etablissement  établissement organisateur
 #   modalites      reservation_conseillee | sur_invitation | entree_libre | billetterie | null
-#   telephone      numéro publié par l'organisateur, ou null
+#   telephone      numéro publié par l'organisateur. Obligatoire si modalites = reservation_conseillee,
+#                  interdit (null) si modalites = sur_invitation
 schema: flowtherapy.agenda/v1
 evenements:
   - id: 2026-10-09-marteguale-fete-biere
@@ -21,7 +22,7 @@ evenements:
     lieu: Martigues
     etablissement: Restaurant La Martéguale
     modalites: reservation_conseillee
-    telephone: null  # à renseigner : numéro publié du restaurant (non confirmé à ce jour)
+    telephone: "06 80 27 58 47"  # numéro publié du restaurant (obligatoire en cas de réservation)
   - id: 2026-10-30-action-logement-showcase
     date: 2026-10-30
     heure: null
@@ -29,4 +30,4 @@ evenements:
     lieu: Paris
     etablissement: Action Logement
     modalites: sur_invitation
-    telephone: "0970 800 800"  # ligne générale publiée par Action Logement (lun-ven 9h-18h)
+    telephone: null  # jamais de numéro pour un événement sur invitation

@@ -150,6 +150,12 @@ def build_agenda() -> None:
             raise ValueError(f"{where} : heure invalide (HH:MM attendu) : {heure}")
         if event.get("modalites") not in AGENDA_MODALITES:
             raise ValueError(f"{where} : modalites inconnue : {event.get('modalites')}")
+        modalites = event.get("modalites")
+        telephone = str(event["telephone"]).strip() if event.get("telephone") else None
+        if modalites == "reservation_conseillee" and not telephone:
+            raise ValueError(f"{where} : un téléphone est obligatoire quand la réservation est conseillée")
+        if modalites == "sur_invitation" and telephone:
+            raise ValueError(f"{where} : pas de téléphone pour un événement sur invitation")
         output.append({
             "id": str(event["id"]),
             "date": date.isoformat(),
@@ -158,7 +164,7 @@ def build_agenda() -> None:
             "lieu": str(event["lieu"]),
             "etablissement": str(event["etablissement"]),
             "modalites": event.get("modalites"),
-            "telephone": str(event["telephone"]) if event.get("telephone") else None,
+            "telephone": telephone,
         })
     output.sort(key=lambda item: (item["date"], item["heure"] or ""))
     target = DIST / "config" / "agenda.json"
