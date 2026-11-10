@@ -145,7 +145,7 @@ function setupReferences(items,copy){
       card.setAttribute('aria-expanded',String(selected));
     });
     details.hidden=false;
-    details.innerHTML=`<div class="reference-details__inner"><p class="reference-details__brand">${esc(item.name)}</p>${publications.length?`<div class="reference-publications">${publications.map(publication=>`<article class="reference-publication"><p class="kicker">${esc(publication.date)}</p><a href="${esc(publication.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} <b aria-hidden="true">↗</b></span></a></article>`).join('')}</div>`:`<p class="reference-empty">${esc(item.empty||copy?.empty||'')}</p>`}</div>`;
+    details.innerHTML=`<div class="reference-details__inner"><p class="reference-details__brand">${esc(item.name)}</p>${publications.length?`<div class="reference-publications">${publications.map(publication=>`<article class="reference-publication"><p class="kicker">${esc(publication.date)}</p>${publication.url?`<a href="${esc(publication.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} <b aria-hidden="true">↗</b></span></a>`:`<div class="reference-publication__pending"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} · ${esc(copy?.pending||'')}</span></div>`}</article>`).join('')}</div>`:`<p class="reference-empty">${esc(item.empty||copy?.empty||'')}</p>`}</div>`;
     if(matchMedia('(max-width: 520px)').matches)cards[index].insertAdjacentElement('afterend',details);
     else grid?.append(details);
   };

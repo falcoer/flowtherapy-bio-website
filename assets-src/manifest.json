@@ -154,6 +154,14 @@
       "name": "reflets",
       "widths": [320, 480, 768, 1024, 1440],
       "focal": [0.5, 0.5]
+    },
+    {
+      "path": "references/sudradio.png",
+      "sha256": "047bed7e8a18281ccc364679fde0ba309c64aee19781277178a0bba8961d636e",
+      "mode": "responsive-reference-ci",
+      "name": "sudradio",
+      "widths": [320, 480, 768, 1024, 1440],
+      "focal": [0.5, 0.5]
     }
   ],
   "medias": [
