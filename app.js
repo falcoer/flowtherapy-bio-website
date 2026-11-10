@@ -305,6 +305,15 @@ function setupAlpacaBios(hero){
   const text=panel.querySelector('.alpaca-bio__text');
   let pinned=null;
   let hideTimer;
+  // Sur mobile, la carte peut dépasser le bas de l'en-tête (coupé par overflow:hidden) : on réserve la place manquante.
+  const fit=()=>{
+    if(!art)return;
+    art.style.marginBottom='';
+    const home=art.closest('.home');
+    if(!home||panel.hidden)return;
+    const overflow=panel.getBoundingClientRect().bottom-home.getBoundingClientRect().bottom+16;
+    if(overflow>0)art.style.marginBottom=`${Math.ceil(overflow)}px`;
+  };
   const show=button=>{
     window.clearTimeout(hideTimer);
     const member=(hero.members||[]).find(item=>item.id===button.dataset.member);
@@ -313,6 +322,7 @@ function setupAlpacaBios(hero){
     text.textContent=member.description;
     panel.hidden=false;
     panel.dataset.member=member.id;
+    fit();
     requestAnimationFrame(()=>panel.classList.add('is-visible'));
     art?.classList.add('has-bio');
     buttons.forEach(item=>{
@@ -325,6 +335,7 @@ function setupAlpacaBios(hero){
     pinned=null;
     panel.classList.remove('is-visible');
     art?.classList.remove('has-bio');
+    if(art)art.style.marginBottom='';
     buttons.forEach(item=>{item.classList.remove('is-active');item.setAttribute('aria-expanded','false')});
     hideTimer=window.setTimeout(()=>{if(!panel.classList.contains('is-visible'))panel.hidden=true},260);
   };
