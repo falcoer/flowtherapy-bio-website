@@ -16,7 +16,14 @@
     ],
     "signature": "音楽 · エネルギー · 感動",
     "listen": "▶ 聴く",
-    "media": "メディア"
+    "media": "メディア",
+    "membersTitle": "メンバー紹介",
+    "membersOpen": "{name}について",
+    "members": {
+      "jenni": "繊細な感性を声にのせるボーカリスト。詩情とエモーションを魅力たっぷりに届けます。",
+      "betty": "キーボード、ギター、ボーカル、カズー……それだけでは足りず、両足でリズムを刻み、いつも全力で音楽の旅を前へと押し進めます。コードネームは「タコ」。",
+      "lauris": "ひとつの繊細な心の弦、ふたつの声帯、そして4本、5本……あるいは6本のスチール弦。いつでも効果的なグルーヴを繰り出し、決して流れを見失いません。"
+    }
   },
   "navigation": {
     "group": "バンド",
@@ -43,10 +50,12 @@
   "about": {
     "title": "バンド",
     "paragraphs": [
-      "Betty、Jenni、Laurisの出会いから生まれたFlow Therapyは、フランス・マルティーグを拠点とするトリオです。「旅へ誘い、人をつなぎ、心を動かす音楽を作りたい」という共通の思いで結ばれています。",
+      "2024年、Betty、Jenni、Laurisの出会いから生まれたFlow Therapyは、フランス・マルティーグを拠点とするトリオです。「旅へ誘い、人をつなぎ、心を動かす音楽を作りたい」という共通の思いで結ばれています。",
       "時代を超えて愛される名曲を独自の感性で再解釈したのち、3人は自然とオリジナル曲の制作へ進みました。そこで描く普遍的なテーマは、美しさ、試練、儚さ、喜びをすべて含む「人生」です。",
-      "共感と繊細さに満ちた楽曲を通して、3人は力強いエネルギーとともに、鮮烈で素晴らしく、ときに心を揺さぶる世界へのまなざしを届けます。",
-      "2026年、オリジナル曲「Toi mon frère」が、フランス全国Music’alコンテストで最優秀世代間交流ソング賞を受賞しました。同大会はBruno Bénabarが後援し、Les Francofolies会長のGérard Pontが審査委員長を務めました。この評価を追い風に、トリオは初のEP制作を進めています。"
+      "共感と繊細さに満ちた楽曲を通して、3人は力強いエネルギーとともに、鮮烈で素晴らしく、ときに心を揺さぶる世界へのまなざしを届けます。その世界観を、地元のステージでのコンサートや、祝祭・チャリティーイベントで観客に届けています。",
+      "2026年、オリジナル曲「Toi mon frère」が、フランス全国Music’Alコンテストで最優秀世代間交流ソング賞を受賞しました。同大会はBruno Bénabarが後援し、Les Francofolies会長であり、Printemps de Bourgesの中心人物でもあるGérard Pontが審査委員長を務めました。",
+      "この受賞をきっかけに、Action Logementのパリ本社でショーケースを行い、審査員や同団体の幹部の前で演奏しました。心に残るひとときであり、大きな評価でもあるこの経験を追い風に、トリオは初のEPの完成に向けて準備を整えています。",
+      "いま彼らが目指すのは、象徴的なステージで歌声を響かせ、自分たちの音楽をより多くの人に届けることです。"
     ]
   },
   "media": {
@@ -217,11 +226,13 @@
     "title": "掲載実績",
     "open": "{name} の掲載情報を表示",
     "empty": "この掲載実績に関する記事はまもなく追加されます。",
+    "pending": "リンクは近日公開",
     "items": [
       {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "地域紙", "name": "La Provence", "caption": "地域のニュースと文化情報", "publications": [{"date": "2026年7月14日", "title": "マルティーグのFlow Therapyが2026年Music’Al世代間交流賞を受賞", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
       {"id": "maritima", "asset": "maritima", "widths": [320, 480, 768, 1024, 1440], "label": "テレビ・ラジオ", "name": "Maritima", "caption": "出会い、映像、地域ニュース", "publications": [{"date": "2026年9月27日", "title": "Le Grand Bazar — Flow Therapy", "source": "Maritima", "url": "https://maritima.fr/tv/1633/le-grand-bazar--flow-therapy"}]},
       {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "全国コンテスト", "name": "Tremplin Music’Al", "caption": "2026年 世代間交流賞", "publications": [{"date": "2026年7月1日", "title": "プレスリリース — Tremplin Music’AL 2026", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]},
-      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "市の広報誌", "name": "Reflets", "caption": "マルティーグ市の広報誌", "publications": [{"date": "2026年10月1日", "title": "Reflets 第123号：Flow Therapy の記事（33ページ）", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/information-transversale/publications/reflets-le-magazine-de-la-ville-de-martigues-n123-octobre-2026-41477"}]}
+      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "市の広報誌", "name": "Reflets", "caption": "マルティーグ市の広報誌", "publications": [{"date": "2026年10月1日", "title": "Reflets 第123号：Flow Therapy の記事（33ページ）", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/fileadmin/Documents_martigues_bouge/A_voir_A_lire/Reflets/Reflets_123-Oct26.pdf"}]},
+      {"id": "sudradio", "asset": "sudradio", "widths": [320, 480, 768, 1024, 1440], "label": "全国ラジオ", "name": "Sud Radio", "caption": "番組「Loft Music」", "publications": [{"date": "2026年11月15日", "title": "番組「Loft Music」：2026年11月15日放送（16:00〜17:00）", "source": "Sud Radio"}]}
     ]
   }
 }

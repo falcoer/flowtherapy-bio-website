@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Flow Therapy — Musique, énergie, émotion",
-    "description": "Flow Therapy, trio musical martégual. Musique originale, actualités, galerie média et réseaux sociaux."
+    "description": "Flow Therapy, trio musical martégal. Musique originale, actualités, galerie média et réseaux sociaux."
   },
   "site": {
     "tagline": "Trio musical aux compositions et reprises qui font voyager, rassemblent et touchent.",
@@ -16,7 +16,14 @@
     ],
     "signature": "Musique · Énergie · Émotion",
     "listen": "▶ ÉCOUTER",
-    "media": "MÉDIAS"
+    "media": "MÉDIAS",
+    "membersTitle": "Les musiciens",
+    "membersOpen": "Découvrir {name}",
+    "members": {
+      "jenni": "Vocaliste sensible à fleur de voix, elle porte avec charme la poésie et l'émotion.",
+      "betty": "Au clavier, à la guitare, au chant, au kazoo… Et comme cela ne suffit pas, elle bat aussi le rythme des pieds, toujours à fond pour propulser les voyages musicaux. Son nom de code : le poulpe.",
+      "lauris": "Une corde sensible, deux cordes vocales, quatre, cinq ou… six cordes d'acier : il est toujours prêt à lancer des grooves efficaces sans jamais perdre le fil."
+    }
   },
   "navigation": {
     "group": "Le groupe",
@@ -43,10 +50,12 @@
   "about": {
     "title": "Le groupe",
     "paragraphs": [
-      "Né de la rencontre entre Betty, Jenni et Lauris, le groupe martégual Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
+      "Né en 2024 de la rencontre entre Betty, Jenni et Lauris, le groupe martégal Flow Therapy s'est construit autour d'une envie commune : créer une musique qui fait voyager, rassemble et touche.",
       "Après avoir revisité avec originalité des classiques intemporels, le trio s'est naturellement tourné vers la composition afin d'explorer un thème universel : la vie, dans toute sa beauté, ses épreuves, sa fragilité et ses joies.",
-      "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant.",
-      "En 2026, leur composition originale « Toi mon frère » est récompensée par le titre de meilleure chanson intergénérationnelle au Tremplin national Music’al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies. Une belle reconnaissance qui donne des ailes au trio qui prépare son premier EP."
+      "À travers des chansons empreintes d'empathie et de sensibilité, les trois artistes partagent avec force et énergie leur regard sur un monde à la fois intense, merveilleux et parfois bouleversant. Un univers qu'ils font découvrir à leur public lors de concerts sur les scènes locales, à l'occasion d'événements festifs et caritatifs.",
+      "En 2026, leur composition originale « Toi mon frère » est récompensée par le prix de la meilleure chanson intergénérationnelle au Tremplin national Music’Al, parrainé par Bruno Bénabar et présidé par Gérard Pont, président des Francofolies et figure majeure du Printemps de Bourges.",
+      "Cette consécration leur a permis de se produire lors d'un showcase dans les locaux parisiens d'Action Logement, en présence des membres du jury et des responsables de la structure. Un moment fort et une belle marque de reconnaissance qui donnent des ailes au trio, désormais prêt à finaliser son premier EP.",
+      "Aujourd'hui, leur ambition est de faire connaître leur musique en portant leurs voix sur des scènes emblématiques."
     ]
   },
   "media": {
@@ -217,11 +226,13 @@
     "title": "Nos références",
     "open": "Afficher les publications de {name}",
     "empty": "Les publications associées à cette référence seront ajoutées prochainement.",
+    "pending": "Lien à venir",
     "items": [
       {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "Presse régionale", "name": "La Provence", "caption": "Actualités et vie culturelle locale", "publications": [{"date": "14 juillet 2026", "title": "Le groupe martégal Flow Therapy remporte le prix intergénérationnel du Tremplin Music’Al 2026", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
       {"id": "maritima", "asset": "maritima", "widths": [320, 480, 768, 1024, 1440], "label": "Télévision & radio", "name": "Maritima", "caption": "Rencontres, vidéos et actualités du territoire", "publications": [{"date": "27 septembre 2026", "title": "Le Grand Bazar — Flow Therapy", "source": "Maritima", "url": "https://maritima.fr/tv/1633/le-grand-bazar--flow-therapy"}]},
       {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "Tremplin national", "name": "Tremplin Music’Al", "caption": "Prix intergénérationnel 2026", "publications": [{"date": "1er juillet 2026", "title": "Communiqué de presse — Tremplin Music’AL 2026", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]},
-      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "Presse municipale", "name": "Reflets", "caption": "Le magazine de la ville de Martigues", "publications": [{"date": "1er octobre 2026", "title": "Reflets n°123 : article sur Flow Therapy, page 33", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/information-transversale/publications/reflets-le-magazine-de-la-ville-de-martigues-n123-octobre-2026-41477"}]}
+      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "Presse municipale", "name": "Reflets", "caption": "Le magazine de la ville de Martigues", "publications": [{"date": "1er octobre 2026", "title": "Reflets n°123 : article sur Flow Therapy, page 33", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/fileadmin/Documents_martigues_bouge/A_voir_A_lire/Reflets/Reflets_123-Oct26.pdf"}]},
+      {"id": "sudradio", "asset": "sudradio", "widths": [320, 480, 768, 1024, 1440], "label": "Radio nationale", "name": "Sud Radio", "caption": "Émission Loft Music", "publications": [{"date": "15 novembre 2026", "title": "Émission Loft Music : diffusion le 15 novembre 2026 (16h-17h)", "source": "Sud Radio"}]}
     ]
   }
 }

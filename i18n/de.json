@@ -16,7 +16,14 @@
     ],
     "signature": "Musik · Energie · Emotion",
     "listen": "▶ ANHÖREN",
-    "media": "MEDIEN"
+    "media": "MEDIEN",
+    "membersTitle": "Die Musiker",
+    "membersOpen": "{name} kennenlernen",
+    "members": {
+      "jenni": "Eine feinfühlige Sängerin, in deren Stimme das Gefühl mitschwingt: Mit Charme trägt sie Poesie und Emotion.",
+      "betty": "An Keyboard, Gitarre, Gesang, Kazoo … Und als wäre das nicht genug, gibt sie auch noch mit den Füßen den Rhythmus vor, immer mit vollem Einsatz, um die musikalischen Reisen anzutreiben. Ihr Codename: der Oktopus.",
+      "lauris": "Eine empfindsame Saite, zwei Stimmbänder, vier, fünf oder … sechs Stahlsaiten: Er ist immer bereit, treibende Grooves zu liefern, ohne je den Faden zu verlieren."
+    }
   },
   "navigation": {
     "group": "Die Band",
@@ -43,10 +50,12 @@
   "about": {
     "title": "Die Band",
     "paragraphs": [
-      "Flow Therapy entstand aus der Begegnung von Betty, Jenni und Lauris. Das Trio aus Martigues verbindet ein gemeinsamer Wunsch: Musik zu schaffen, die auf Reisen mitnimmt, Menschen zusammenbringt und berührt.",
+      "Flow Therapy entstand 2024 aus der Begegnung von Betty, Jenni und Lauris. Das Trio aus Martigues verbindet ein gemeinsamer Wunsch: Musik zu schaffen, die auf Reisen mitnimmt, Menschen zusammenbringt und berührt.",
       "Nachdem das Trio zeitlosen Klassikern eine eigene Note verliehen hatte, wandte es sich ganz natürlich dem Songwriting zu, um ein universelles Thema zu erkunden: das Leben mit all seiner Schönheit, seinen Prüfungen, seiner Zerbrechlichkeit und seinen Freuden.",
-      "Mit Liedern voller Empathie und Sensibilität teilen die drei Künstler kraftvoll und energiegeladen ihren Blick auf eine Welt, die zugleich intensiv, wunderbar und manchmal bewegend ist.",
-      "2026 wurde ihre Eigenkomposition „Toi mon frère“ beim nationalen Music’al-Wettbewerb als bester generationsübergreifender Song ausgezeichnet. Schirmherr war Bruno Bénabar, den Vorsitz führte Gérard Pont, Präsident von Les Francofolies. Diese Anerkennung beflügelt das Trio bei der Arbeit an seiner ersten EP."
+      "Mit Liedern voller Empathie und Sensibilität teilen die drei Künstler kraftvoll und energiegeladen ihren Blick auf eine Welt, die zugleich intensiv, wunderbar und manchmal bewegend ist. Diese Welt bringen sie ihrem Publikum bei Konzerten auf lokalen Bühnen sowie bei festlichen und wohltätigen Veranstaltungen nahe.",
+      "2026 wurde ihre Eigenkomposition „Toi mon frère“ beim nationalen Music’Al-Wettbewerb als bester generationsübergreifender Song ausgezeichnet. Schirmherr war Bruno Bénabar, den Vorsitz führte Gérard Pont, Präsident von Les Francofolies und prägende Figur des Printemps de Bourges.",
+      "Diese Auszeichnung ermöglichte ihnen einen Showcase in den Pariser Räumen von Action Logement, vor den Jurymitgliedern und der Leitung der Organisation. Ein starker Moment und eine schöne Anerkennung, die dem Trio Flügel verleiht – nun bereit, seine erste EP fertigzustellen.",
+      "Heute ist es ihr Ziel, ihre Musik bekannt zu machen und ihre Stimmen auf bedeutende Bühnen zu tragen."
     ]
   },
   "media": {
@@ -217,11 +226,13 @@
     "title": "Unsere Referenzen",
     "open": "Veröffentlichungen von {name} anzeigen",
     "empty": "Zu dieser Referenz gehörende Veröffentlichungen werden demnächst ergänzt.",
+    "pending": "Link folgt",
     "items": [
       {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "Regionale Presse", "name": "La Provence", "caption": "Lokale Nachrichten und Kulturleben", "publications": [{"date": "14. Juli 2026", "title": "Die Band Flow Therapy aus Martigues gewinnt den Music’Al-Generationenpreis 2026", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
       {"id": "maritima", "asset": "maritima", "widths": [320, 480, 768, 1024, 1440], "label": "Fernsehen & Radio", "name": "Maritima", "caption": "Begegnungen, Videos und lokale Nachrichten", "publications": [{"date": "27. September 2026", "title": "Le Grand Bazar — Flow Therapy", "source": "Maritima", "url": "https://maritima.fr/tv/1633/le-grand-bazar--flow-therapy"}]},
       {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "Nationaler Wettbewerb", "name": "Tremplin Music’Al", "caption": "Generationenpreis 2026", "publications": [{"date": "1. Juli 2026", "title": "Pressemitteilung — Tremplin Music’AL 2026", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]},
-      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "Stadtmagazin", "name": "Reflets", "caption": "Das Magazin der Stadt Martigues", "publications": [{"date": "1. Oktober 2026", "title": "Reflets Nr. 123: Artikel über Flow Therapy, Seite 33", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/information-transversale/publications/reflets-le-magazine-de-la-ville-de-martigues-n123-octobre-2026-41477"}]}
+      {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "Stadtmagazin", "name": "Reflets", "caption": "Das Magazin der Stadt Martigues", "publications": [{"date": "1. Oktober 2026", "title": "Reflets Nr. 123: Artikel über Flow Therapy, Seite 33", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/fileadmin/Documents_martigues_bouge/A_voir_A_lire/Reflets/Reflets_123-Oct26.pdf"}]},
+      {"id": "sudradio", "asset": "sudradio", "widths": [320, 480, 768, 1024, 1440], "label": "Nationales Radio", "name": "Sud Radio", "caption": "Sendung Loft Music", "publications": [{"date": "15. November 2026", "title": "Sendung Loft Music: Ausstrahlung am 15. November 2026 (16–17 Uhr)", "source": "Sud Radio"}]}
     ]
   }
 }

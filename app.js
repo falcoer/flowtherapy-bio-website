@@ -20,6 +20,7 @@ const icons={
 };
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const alpacaMember=(hero,n)=>(hero?.members||[]).find(member=>Number(member.alpaca)===n&&member.description);
 const orientationClass=item=>item.orientation==='portrait'?'ratio-portrait':'ratio-landscape';
 const responsivePicture=(name,widths,className,alt='')=>`<picture><source type="image/avif" srcset="${widths.map(width=>`${ASSET}generated/${name}-${width}.avif ${width}w`).join(', ')}"><source type="image/webp" srcset="${widths.map(width=>`${ASSET}generated/${name}-${width}.webp ${width}w`).join(', ')}"><img class="${className}" src="${ASSET}generated/${name}-${widths[0]}.png" srcset="${widths.map(width=>`${ASSET}generated/${name}-${width}.png ${width}w`).join(', ')}" sizes="${className==='logo'?'(max-width: 790px) 200px, 240px':'(max-width: 790px) 52vw, 640px'}" width="${widths[0]}" height="${Math.round(widths[0]*2/3)}" alt="${esc(alt)}" decoding="async"></picture>`;
 
@@ -65,7 +66,7 @@ function renderPage(config){
   <nav class="nav" aria-label="Navigation principale"><a class="logo-link" href="#accueil" aria-label="Retour en haut de la page">${responsivePicture('logo-transparent',[320,480],'logo','Flow Therapy')}</a><div class="socials header-socials" aria-label="Réseaux sociaux">${socials.map(s=>`<a class="social ${s.icon}" href="${s.url}" target="_blank" rel="noopener" aria-label="${esc(s.label)}">${icons[s.icon]||esc(s.label[0])}</a>`).join('')}<button id="qr-open" class="social qr-social" type="button" aria-label="Partager par QR code">${icons.qr}</button><a class="social contact-social" href="#contact" aria-label="Nous contacter" title="Nous contacter">${icons.contact}</a></div><div class="nav-side"><div class="links">${navigation.map(n=>`<a href="${n.href}">${esc(n.label)}</a>`).join('')}</div><div class="tools"><button id="theme" class="theme" type="button" aria-label="Activer le thème sombre" aria-pressed="false"><span aria-hidden="true">☀</span><span aria-hidden="true">☾</span></button></div></div></nav>
   <div class="doodle-field hero-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-pink"></span><span class="doodle doodle-star tone-orange"></span><span class="doodle doodle-spark tone-blue"></span><span class="doodle doodle-heart tone-pink"></span><span class="doodle doodle-arrow tone-blue"></span><span class="doodle doodle-underline tone-purple"></span></div>
   <div class="hero-grid"><div class="copy"><h1>${hero.lines.map((l,i)=>`<span class="line l${i+1}">${esc(l)}</span>`).join('')}</h1><p>${esc(site.tagline)}</p><div class="actions"><a class="primary" href="#agenda">AGENDA</a><a class="secondary" href="#medias">MÉDIAS</a></div></div>
-  <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas" aria-hidden="true">${[1,2,3].map(n=>`<div class="alpaca" data-alpaca="${n}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`).join('')}</div><div class="brush">${esc(hero.signature)}</div></div></div>
+  <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas">${[1,2,3].map(n=>{const member=alpacaMember(hero,n);return member?`<button class="alpaca" type="button" data-alpaca="${n}" data-member="${esc(member.id)}" aria-expanded="false" aria-controls="alpaca-bio" aria-label="${esc((hero.membersOpen||'{name}').replace('{name}',member.name))}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</button>`:`<div class="alpaca" data-alpaca="${n}" aria-hidden="true">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`}).join('')}</div><div class="brush">${esc(hero.signature)}</div><div id="alpaca-bio" class="alpaca-bio" role="region" aria-live="polite" aria-label="${esc(hero.membersTitle||'')}" hidden><p class="alpaca-bio__name"></p><p class="alpaca-bio__text"></p></div></div></div>
 </header>
 <section id="groupe" class="section"><div class="doodle-field section-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-blue"></span><span class="doodle doodle-swoosh tone-pink"></span><span class="doodle doodle-star tone-purple"></span><span class="doodle doodle-heart tone-orange"></span></div><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
 <section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}<div id="references-details" class="reference-details" hidden aria-live="polite"></div></div></section>
@@ -112,6 +113,7 @@ function renderPage(config){
   setupTheme();
   setupQr();
   setupAlpacaReveal();
+  setupAlpacaBios(hero);
   setupReferences(referenceItems,references);
   setupMediaViewer(mediaItems);
 }
@@ -128,7 +130,7 @@ function agendaCard(event,copy){
   return `<li class="agenda-card"><time class="agenda-date" datetime="${esc(event.date)}" aria-label="${esc(full)}"><span class="agenda-day">${day}</span><span class="agenda-month">${esc(month)}</span></time><div class="agenda-body"><h3>${esc(event.nom)}</h3><p class="agenda-place">${esc(event.etablissement)} · ${esc(event.lieu)}${event.heure?` · ${esc(event.heure.replace(':','h'))}`:''}</p>${modality?`<p class="agenda-modality">${esc(modality)}</p>`:''}${phone?`<p class="agenda-phone"><a href="tel:${esc(phone.replace(/[^\d+]/g,''))}" aria-label="${esc(copy.phone)} ${esc(phone)}">☎ ${esc(phone)}</a></p>`:''}</div></li>`;
 }
 function localizedConfig(config,copy){
-  return {...config,site:{...config.site,...copy.site},hero:copy.hero,navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.agenda,href:'#agenda'},{label:copy.navigation.media,href:'#medias'}],agenda:{...copy.agenda,items:config.agenda?.evenements||[]},about:copy.about,references:copy.references,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
+  return {...config,site:{...config.site,...copy.site},hero:{...copy.hero,members:(config.hero?.members||[]).map(member=>({...member,description:copy.hero?.members?.[member.id]||''}))},navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.agenda,href:'#agenda'},{label:copy.navigation.media,href:'#medias'}],agenda:{...copy.agenda,items:config.agenda?.evenements||[]},about:copy.about,references:copy.references,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
 }
 
 function setupReferences(items,copy){
@@ -145,7 +147,7 @@ function setupReferences(items,copy){
       card.setAttribute('aria-expanded',String(selected));
     });
     details.hidden=false;
-    details.innerHTML=`<div class="reference-details__inner"><p class="reference-details__brand">${esc(item.name)}</p>${publications.length?`<div class="reference-publications">${publications.map(publication=>`<article class="reference-publication"><p class="kicker">${esc(publication.date)}</p><a href="${esc(publication.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} <b aria-hidden="true">↗</b></span></a></article>`).join('')}</div>`:`<p class="reference-empty">${esc(item.empty||copy?.empty||'')}</p>`}</div>`;
+    details.innerHTML=`<div class="reference-details__inner"><p class="reference-details__brand">${esc(item.name)}</p>${publications.length?`<div class="reference-publications">${publications.map(publication=>`<article class="reference-publication"><p class="kicker">${esc(publication.date)}</p>${publication.url?`<a href="${esc(publication.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} <b aria-hidden="true">↗</b></span></a>`:`<div class="reference-publication__pending"><span>${esc(publication.title)}</span><span class="reference-publication__source">${esc(publication.source)} · ${esc(copy?.pending||'')}</span></div>`}</article>`).join('')}</div>`:`<p class="reference-empty">${esc(item.empty||copy?.empty||'')}</p>`}</div>`;
     if(matchMedia('(max-width: 520px)').matches)cards[index].insertAdjacentElement('afterend',details);
     else grid?.append(details);
   };
@@ -292,6 +294,67 @@ function setupAlpacaReveal(){
     }
   },{threshold:[0,.35],rootMargin:'0px 0px -8% 0px'});
   observer.observe(group);
+}
+function setupAlpacaBios(hero){
+  const group=document.querySelector('.alpacas');
+  const panel=document.querySelector('#alpaca-bio');
+  const buttons=[...document.querySelectorAll('.alpaca[data-member]')];
+  if(!group||!panel||!buttons.length)return;
+  const art=group.closest('.art');
+  const name=panel.querySelector('.alpaca-bio__name');
+  const text=panel.querySelector('.alpaca-bio__text');
+  let pinned=null;
+  let hideTimer;
+  // Sur mobile, la carte peut dépasser le bas de l'en-tête (coupé par overflow:hidden) : on réserve la place manquante.
+  const fit=()=>{
+    if(!art)return;
+    art.style.marginBottom='';
+    const home=art.closest('.home');
+    if(!home||panel.hidden)return;
+    const overflow=panel.getBoundingClientRect().bottom-home.getBoundingClientRect().bottom+16;
+    if(overflow>0)art.style.marginBottom=`${Math.ceil(overflow)}px`;
+  };
+  const show=button=>{
+    window.clearTimeout(hideTimer);
+    const member=(hero.members||[]).find(item=>item.id===button.dataset.member);
+    if(!member)return;
+    name.textContent=member.name;
+    text.textContent=member.description;
+    panel.hidden=false;
+    panel.dataset.member=member.id;
+    fit();
+    requestAnimationFrame(()=>panel.classList.add('is-visible'));
+    art?.classList.add('has-bio');
+    buttons.forEach(item=>{
+      const active=item===button;
+      item.classList.toggle('is-active',active);
+      item.setAttribute('aria-expanded',String(active));
+    });
+  };
+  const hide=()=>{
+    pinned=null;
+    panel.classList.remove('is-visible');
+    art?.classList.remove('has-bio');
+    if(art)art.style.marginBottom='';
+    buttons.forEach(item=>{item.classList.remove('is-active');item.setAttribute('aria-expanded','false')});
+    hideTimer=window.setTimeout(()=>{if(!panel.classList.contains('is-visible'))panel.hidden=true},260);
+  };
+  const restore=()=>pinned?show(pinned):hide();
+  buttons.forEach(button=>{
+    button.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse')show(button)});
+    button.addEventListener('pointerleave',event=>{if(event.pointerType==='mouse')restore()});
+    button.addEventListener('focus',()=>{if(button.matches(':focus-visible'))show(button)});
+    button.addEventListener('blur',()=>{if(!pinned)restore()});
+    button.addEventListener('click',()=>{
+      if(pinned===button){hide();return}
+      pinned=button;
+      show(button);
+    });
+  });
+  group.addEventListener('keydown',event=>{if(event.key==='Escape'&&!panel.hidden){hide();event.target.blur?.()}});
+  if(document.alpacaBioOutside)document.removeEventListener('pointerdown',document.alpacaBioOutside);
+  document.alpacaBioOutside=event=>{if(pinned&&!event.target.closest('.alpaca[data-member], #alpaca-bio'))hide()};
+  document.addEventListener('pointerdown',document.alpacaBioOutside);
 }
 function setupTheme(){const button=document.querySelector('#theme'),meta=document.querySelector('meta[name="theme-color"]');const labels=activeCopy?.controls||{themeDark:'Activer le thème sombre',themeLight:'Activer le thème clair'};let theme=localStorage.getItem('ft-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const apply=()=>{document.documentElement.dataset.theme=theme;button.setAttribute('aria-pressed',String(theme==='dark'));button.setAttribute('aria-label',theme==='dark'?labels.themeLight:labels.themeDark);meta.content=theme==='dark'?'#07101d':'#fbf8f2'};apply();button.onclick=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('ft-theme',theme);apply()}}
 function setupQr(){const d=document.querySelector('#qr-dialog'),o=document.querySelector('#qr-open'),c=document.querySelector('#qr-close');const close=()=>{d.classList.remove('is-open');setTimeout(()=>{if(d.open)d.close()},180)};o.onclick=()=>{d.showModal();requestAnimationFrame(()=>d.classList.add('is-open'));c.focus()};c.onclick=close;d.onclick=e=>{if(e.target===d)close()};d.addEventListener('cancel',e=>{e.preventDefault();close()})}
