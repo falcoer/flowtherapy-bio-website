@@ -458,6 +458,47 @@
         768
       ],
       "dimensions": "898x1600"
+    },
+    {
+      "path": "medias/tremplin-musical-remise-prix.jpeg",
+      "sha256": "3d93134d405a17be4b2e1add6162deec380a1502ab1c09561a4220df5589b063",
+      "mode": "responsive-media-ci",
+      "name": "tremplin-musical-remise-prix",
+      "widths": [
+        320,
+        480,
+        640,
+        960,
+        1320
+      ],
+      "dimensions": "1320x1108"
+    },
+    {
+      "path": "medias/sud-radio-groupe-studio.jpeg",
+      "sha256": "e04dd291edc38a40d331b37ee86cea2d6ddf5ea2ba0bd9eca50624dbe1fafd69",
+      "mode": "responsive-media-ci",
+      "name": "sud-radio-groupe-studio",
+      "widths": [
+        320,
+        400,
+        480,
+        586
+      ],
+      "dimensions": "586x780"
+    },
+    {
+      "path": "medias/selfie-le-grand-bazar-maritima.jpeg",
+      "sha256": "681eeb0a4b895b95ddfbc4206021b6829fbe92c10f71ad85323bff4531468371",
+      "mode": "responsive-media-ci",
+      "name": "selfie-le-grand-bazar-maritima",
+      "widths": [
+        320,
+        480,
+        720,
+        960,
+        1200
+      ],
+      "dimensions": "1200x1600"
     }
   ]
 }

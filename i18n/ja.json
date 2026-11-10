@@ -69,6 +69,11 @@
         "type": "グループ写真",
         "description": "ステージライトの下に集うBetty、Jenni、Lauris。"
       },
+      "tremplin-musical-award": {
+        "title": "Tremplin Music’Al 授賞式",
+        "type": "グループ写真",
+        "description": "「Toi mon frère」で最優秀世代間ソング賞を受け取るBetty、Jenni、Lauris。Bénabar、Yvan Cujious と共に。"
+      },
       "live-black-white": {
         "title": "Flow Therapy ライブ",
         "type": "ライブ写真",
@@ -129,6 +134,11 @@
         "type": "Concert photo",
         "description": "Betty, Jenni and Lauris together after a performance."
       },
+      "le-grand-bazar-selfie": {
+        "title": "「Le Grand Bazar」のセットで自撮り",
+        "type": "舞台裏",
+        "description": "Maritima の番組「Le Grand Bazar」のセットで、Gilles Fenech と一緒に。"
+      },
       "flow-therapy-banner-group": {
         "title": "The trio behind their banner",
         "type": "Portrait",
@@ -158,6 +168,11 @@
         "title": "ステージ上のトリオ、全体ショット",
         "type": "ライブ写真",
         "description": "ベース、ボーカル、キーボード、ギター。客席から見たライブ中のトリオ。"
+      },
+      "sud-radio-studio": {
+        "title": "Sud Radio のスタジオにて",
+        "type": "グループ写真",
+        "description": "Sud Radio のスタジオで、Aurélia Leroux、Gérard Pont と一緒に。"
       },
       "bass-guitars-stands": {
         "title": "スタンドに立てたベースとギター",

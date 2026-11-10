@@ -69,6 +69,11 @@
         "type": "Fotografia de grupo",
         "description": "Betty, Jenni e Lauris juntos sob as luzes do palco."
       },
+      "tremplin-musical-award": {
+        "title": "Entrega do prémio no Tremplin Music’Al",
+        "type": "Fotografia de grupo",
+        "description": "Betty, Jenni e Lauris recebem o prémio de melhor canção intergeracional por «Toi mon frère», ao lado de Bénabar e Yvan Cujious."
+      },
       "live-black-white": {
         "title": "Flow Therapy ao vivo",
         "type": "Fotografia de concerto",
@@ -129,6 +134,11 @@
         "type": "Concert photo",
         "description": "Betty, Jenni and Lauris together after a performance."
       },
+      "le-grand-bazar-selfie": {
+        "title": "Selfie no estúdio de Le Grand Bazar",
+        "type": "Bastidores",
+        "description": "O trio com Gilles Fenech no estúdio do programa Le Grand Bazar, na Maritima."
+      },
       "flow-therapy-banner-group": {
         "title": "The trio behind their banner",
         "type": "Portrait",
@@ -158,6 +168,11 @@
         "title": "O trio em palco, vista geral",
         "type": "Fotografia de concerto",
         "description": "Baixo, voz, teclado e guitarra: o trio em concerto, visto da plateia."
+      },
+      "sud-radio-studio": {
+        "title": "Flow Therapy nos estúdios da Sud Radio",
+        "type": "Fotografia de grupo",
+        "description": "O trio com Aurélia Leroux e Gérard Pont nos estúdios da Sud Radio."
       },
       "bass-guitars-stands": {
         "title": "Baixo e guitarras nos seus suportes",
