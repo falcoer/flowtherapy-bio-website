@@ -47,6 +47,24 @@
         "description": "Betty, Jenni et Lauris réunis sous les lumières de la scène."
       },
       {
+        "id": "tremplin-musical-award",
+        "orientation": "landscape",
+        "ratio": "330:277",
+        "asset": "tremplin-musical-remise-prix",
+        "widths": [
+          320,
+          480,
+          640,
+          960,
+          1320
+        ],
+        "date": "2026-10-29",
+        "credit": "",
+        "title": "Remise du prix au Tremplin Music’Al",
+        "type": "Photo de groupe",
+        "description": "Betty, Jenni et Lauris reçoivent le prix de la meilleure chanson intergénérationnelle pour « Toi mon frère », aux côtés de Bénabar et d’Yvan Cujious."
+      },
+      {
         "id": "live-black-white",
         "orientation": "landscape",
         "ratio": "3:2",
@@ -139,6 +157,23 @@
         "description": "Basse, chant, clavier et guitare : le trio en concert, vu depuis la salle."
       },
       {
+        "id": "sud-radio-studio",
+        "orientation": "portrait",
+        "ratio": "293:390",
+        "asset": "sud-radio-groupe-studio",
+        "widths": [
+          320,
+          400,
+          480,
+          586
+        ],
+        "date": "2026-11",
+        "credit": "",
+        "title": "Flow Therapy dans les studios de Sud Radio",
+        "type": "Photo de groupe",
+        "description": "Le trio avec Aurélia Leroux et Gérard Pont dans les studios de Sud Radio."
+      },
+      {
         "id": "betty-guitar-vocals",
         "orientation": "portrait",
         "ratio": "9:16",
@@ -214,7 +249,6 @@
         "id": "lauris-bass-outdoor",
         "orientation": "portrait",
         "ratio": "2:3",
-        "layout": "tall",
         "asset": "lauris-basse-exterieur",
         "widths": [
           320,
@@ -284,6 +318,24 @@
         "description": "Betty, Jenni et Lauris réunis après une prestation."
       },
       {
+        "id": "le-grand-bazar-selfie",
+        "orientation": "portrait",
+        "ratio": "3:4",
+        "asset": "selfie-le-grand-bazar-maritima",
+        "widths": [
+          320,
+          480,
+          720,
+          960,
+          1200
+        ],
+        "date": "2026-09-27",
+        "credit": "",
+        "title": "Selfie sur le plateau du Grand Bazar",
+        "type": "Coulisses",
+        "description": "Le trio avec Gilles Fenech sur le plateau de l’émission Le Grand Bazar, sur Maritima."
+      },
+      {
         "id": "flow-therapy-banner-group",
         "orientation": "portrait",
         "ratio": "3:4",
@@ -322,7 +374,6 @@
         "id": "bass-guitars-stands",
         "orientation": "portrait",
         "ratio": "9:16",
-        "layout": "tall",
         "asset": "basse-guitares-supports",
         "widths": [
           320,
@@ -340,7 +391,6 @@
         "id": "jenni-vocals-close-up",
         "orientation": "portrait",
         "ratio": "2:3",
-        "layout": "tall",
         "asset": "jenni-chant-portrait",
         "widths": [
           320,

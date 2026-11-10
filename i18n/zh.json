@@ -69,6 +69,11 @@
         "type": "团体照片",
         "description": "Betty、Jenni 和 Lauris 在舞台灯光下同框。"
       },
+      "tremplin-musical-award": {
+        "title": "Tremplin Music’Al 颁奖现场",
+        "type": "团体照片",
+        "description": "Betty、Jenni 和 Lauris 凭《Toi mon frère》获得最佳跨代歌曲奖，与 Bénabar 和 Yvan Cujious 同台。"
+      },
       "live-black-white": {
         "title": "Flow Therapy 现场演出",
         "type": "现场照片",
@@ -129,6 +134,11 @@
         "type": "Concert photo",
         "description": "Betty, Jenni and Lauris together after a performance."
       },
+      "le-grand-bazar-selfie": {
+        "title": "Le Grand Bazar 节目现场自拍",
+        "type": "幕后花絮",
+        "description": "三人组与 Gilles Fenech 在 Maritima 电视台 Le Grand Bazar 节目现场。"
+      },
       "flow-therapy-banner-group": {
         "title": "The trio behind their banner",
         "type": "Portrait",
@@ -158,6 +168,11 @@
         "title": "舞台上的三人组，全景",
         "type": "现场照片",
         "description": "贝斯、人声、键盘与吉他：现场演出中的三人组，观众席视角。"
+      },
+      "sud-radio-studio": {
+        "title": "Flow Therapy 在 Sud Radio 录音室",
+        "type": "团体照片",
+        "description": "三人组与 Aurélia Leroux 和 Gérard Pont 在 Sud Radio 录音室合影。"
       },
       "bass-guitars-stands": {
         "title": "琴架上的贝斯与吉他",
