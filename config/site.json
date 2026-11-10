@@ -403,7 +403,12 @@
     ],
     "signature": "Musique · Énergie · Émotion",
     "listen": "▶ ÉCOUTER",
-    "media": "MÉDIAS"
+    "media": "MÉDIAS",
+    "members": [
+      {"id": "lauris", "name": "Lauris", "alpaca": 1},
+      {"id": "jenni", "name": "Jenni", "alpaca": 2},
+      {"id": "betty", "name": "Betty", "alpaca": 3}
+    ]
   },
   "navigation": [
     {

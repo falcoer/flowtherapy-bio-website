@@ -16,7 +16,14 @@
     ],
     "signature": "Musique · Énergie · Émotion",
     "listen": "▶ ÉCOUTER",
-    "media": "MÉDIAS"
+    "media": "MÉDIAS",
+    "membersTitle": "Les musiciens",
+    "membersOpen": "Découvrir {name}",
+    "members": {
+      "jenni": "Vocaliste sensible à fleur de voix, elle porte avec charme la poésie et l'émotion.",
+      "betty": "Au clavier, à la guitare, au chant, au kazoo… elle bat aussi le rythme du pied pour propulser nos voyages musicaux, sans jamais perdre le tempo. Son nom de code : le poulpe.",
+      "lauris": "Une corde sensible, deux cordes vocales, quatre, cinq ou… six cordes d'acier : il est toujours prêt à lancer des grooves efficaces sans jamais perdre le fil."
+    }
   },
   "navigation": {
     "group": "Le groupe",

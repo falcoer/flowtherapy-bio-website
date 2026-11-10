@@ -16,7 +16,14 @@
     ],
     "signature": "Musica · Energia · Emozione",
     "listen": "▶ ASCOLTA",
-    "media": "MEDIA"
+    "media": "MEDIA",
+    "membersTitle": "I musicisti",
+    "membersOpen": "Scopri {name}",
+    "members": {
+      "jenni": "Voce sensibile, con l'anima a fior di labbra, porta con fascino la poesia e l'emozione.",
+      "betty": "Alle tastiere, alla chitarra, alla voce, al kazoo… batte anche il ritmo con il piede per spingere i nostri viaggi musicali, senza mai perdere il tempo. Il suo nome in codice: il polpo.",
+      "lauris": "Una corda sensibile, due corde vocali, quattro, cinque o… sei corde d'acciaio: è sempre pronto a lanciare groove efficaci senza mai perdere il filo."
+    }
   },
   "navigation": {
     "group": "Il gruppo",

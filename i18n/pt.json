@@ -16,7 +16,14 @@
     ],
     "signature": "Música · Energia · Emoção",
     "listen": "▶ OUVIR",
-    "media": "MULTIMÉDIA"
+    "media": "MULTIMÉDIA",
+    "membersTitle": "Os músicos",
+    "membersOpen": "Conhecer {name}",
+    "members": {
+      "jenni": "Vocalista sensível, com a alma à flor da voz, transmite com encanto a poesia e a emoção.",
+      "betty": "Nos teclados, na guitarra, na voz, no kazoo… ela ainda marca o ritmo com o pé para impulsionar as nossas viagens musicais, sem nunca perder o tempo. O seu nome de código: o polvo.",
+      "lauris": "Uma corda sensível, duas cordas vocais, quatro, cinco ou… seis cordas de aço: está sempre pronto para lançar grooves eficazes sem nunca perder o fio."
+    }
   },
   "navigation": {
     "group": "O grupo",
