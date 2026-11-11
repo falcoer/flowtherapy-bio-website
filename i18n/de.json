@@ -238,7 +238,8 @@
   },
   "references": {
     "eyebrow": "Veröffentlichungen & Partnerschaften",
-    "title": "Unsere Referenzen",
+    "title": "Sie sprechen über uns...",
+    "video": {"kicker": "Video", "title": "Unser Showcase", "cta": "Auf YouTube ansehen", "label": "Showcase-Video auf YouTube ansehen (neuer Tab)"},
     "open": "Veröffentlichungen von {name} anzeigen",
     "empty": "Zu dieser Referenz gehörende Veröffentlichungen werden demnächst ergänzt.",
     "pending": "Link folgt",

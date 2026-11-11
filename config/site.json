@@ -22,10 +22,14 @@
     },
     {
       "label": "Facebook",
-      "url": "https://www.facebook.com/reel/1030974076268187",
+      "url": "https://www.facebook.com/profile.php?id=61593900305853",
       "icon": "facebook"
     }
   ],
+  "showcase": {
+    "youtubeId": "6AtW23ASwPs",
+    "url": "https://youtu.be/6AtW23ASwPs"
+  },
   "media": {
     "items": [
       {
