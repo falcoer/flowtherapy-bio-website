@@ -47,7 +47,27 @@ const responsiveReferencePicture=item=>{
 function showcaseVideo(references){
   const video=references?.showcase,copy=references?.video||{};
   if(!video?.url||!/^[\w-]{11}$/.test(String(video.youtubeId)))return '';
-  return `<a class="showcase-video" href="${esc(video.url)}" target="_blank" rel="noopener" aria-label="${esc(copy.label||copy.title||'YouTube')}"><span class="showcase-video__thumb"><img src="https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="showcase-video__play" aria-hidden="true">${icons.youtube}</span></span><span class="showcase-video__text"><span class="kicker">${esc(copy.kicker||'')}</span><span class="showcase-video__title">${esc(copy.title||'')}</span><span class="showcase-video__cta">${esc(copy.cta||'')} <span aria-hidden="true">↗</span></span></span></a>`;
+  return `<div class="showcase-video"><a class="showcase-video__thumb" href="${esc(video.url)}" target="_blank" rel="noopener" data-youtube-id="${video.youtubeId}" data-title="${esc(copy.title||'YouTube')}" aria-label="${esc(copy.play||copy.title||'YouTube')}"><img src="https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="showcase-video__play" aria-hidden="true">${icons.youtube}</span></a><div class="showcase-video__text"><p class="kicker">${esc(copy.kicker||'')}</p><p class="showcase-video__title">${esc(copy.title||'')}</p><a class="showcase-video__cta" href="${esc(video.url)}" target="_blank" rel="noopener" aria-label="${esc(copy.label||copy.cta||'')}">${esc(copy.cta||'')} <span aria-hidden="true">↗</span></a></div></div>`;
+}
+
+function setupShowcase(){
+  const thumb=document.querySelector('.showcase-video__thumb[data-youtube-id]');
+  if(!thumb)return;
+  thumb.addEventListener('click',event=>{
+    if(event.metaKey||event.ctrlKey||event.shiftKey||event.button!==0)return;
+    event.preventDefault();
+    const frame=document.createElement('div');
+    frame.className='showcase-video__thumb is-playing';
+    const iframe=document.createElement('iframe');
+    iframe.src=`https://www.youtube-nocookie.com/embed/${thumb.dataset.youtubeId}?autoplay=1&rel=0&playsinline=1`;
+    iframe.title=thumb.dataset.title||'YouTube';
+    iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+    iframe.allowFullscreen=true;
+    iframe.referrerPolicy='strict-origin-when-cross-origin';
+    frame.append(iframe);
+    thumb.replaceWith(frame);
+    iframe.focus();
+  });
 }
 
 function mediaVisual(item,index,viewer=false){
@@ -121,6 +141,7 @@ function renderPage(config){
   setupAlpacaReveal();
   setupAlpacaBios(hero);
   setupReferences(referenceItems,references);
+  setupShowcase();
   setupMediaViewer(mediaItems);
 }
 

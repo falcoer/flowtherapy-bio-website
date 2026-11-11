@@ -239,7 +239,7 @@
   "references": {
     "eyebrow": "报道与合作",
     "title": "他们在谈论我们……",
-    "video": {"kicker": "视频", "title": "我们的现场展演", "cta": "在 YouTube 上观看", "label": "在 YouTube 上观看现场展演视频（新标签页）"},
+    "video": {"play": "播放现场展演视频", "kicker": "视频", "title": "我们的现场展演", "cta": "在 YouTube 上观看", "label": "在 YouTube 上观看现场展演视频（新标签页）"},
     "open": "显示 {name} 的相关报道",
     "empty": "与此合作伙伴相关的报道将很快补充。",
     "pending": "链接即将发布",

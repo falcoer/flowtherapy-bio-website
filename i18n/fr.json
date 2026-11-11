@@ -239,7 +239,7 @@
   "references": {
     "eyebrow": "Publications & partenariats",
     "title": "Ils parlent de nous...",
-    "video": {"kicker": "Vidéo", "title": "Notre showcase", "cta": "Regarder sur YouTube", "label": "Regarder la vidéo du showcase sur YouTube (nouvel onglet)"},
+    "video": {"play": "Lire la vidéo du showcase", "kicker": "Vidéo", "title": "Notre showcase", "cta": "Regarder sur YouTube", "label": "Regarder la vidéo du showcase sur YouTube (nouvel onglet)"},
     "open": "Afficher les publications de {name}",
     "empty": "Les publications associées à cette référence seront ajoutées prochainement.",
     "pending": "Lien à venir",

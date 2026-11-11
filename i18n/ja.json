@@ -239,7 +239,7 @@
   "references": {
     "eyebrow": "掲載・パートナーシップ",
     "title": "私たちについて語られています…",
-    "video": {"kicker": "動画", "title": "ショーケース", "cta": "YouTubeで見る", "label": "ショーケースの動画をYouTubeで見る（新しいタブ）"},
+    "video": {"play": "ショーケースの動画を再生", "kicker": "動画", "title": "ショーケース", "cta": "YouTubeで見る", "label": "ショーケースの動画をYouTubeで見る（新しいタブ）"},
     "open": "{name} の掲載情報を表示",
     "empty": "この掲載実績に関する記事はまもなく追加されます。",
     "pending": "リンクは近日公開",
