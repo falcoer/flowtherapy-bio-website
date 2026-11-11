@@ -119,4 +119,4 @@ Vingt-cinq sources sont déclarées dans `assets-src/manifest.json` :
 
 La mosaïque compte 23 médias dont 7 mis en avant, soit 30 cases.
 
-Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles ou, à défaut, de la date de l’événement. Les crédits photo affichés sont attribués à C.B. ; les photos de presse et de coulisses (Sud Radio, Maritima, Tremplin Music’Al) n’ont pas de crédit renseigné.
+Les dates présentes dans la galerie proviennent des métadonnées EXIF disponibles ou, à défaut, de la date de l’événement. Les crédits photo affichés sont attribués à C.B. ; les photos de presse et de coulisses (Sud Radio, Maritima, Tremplin Music’AL) n’ont pas de crédit renseigné.

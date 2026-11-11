@@ -53,7 +53,7 @@
       "Nato nel 2024 dall’incontro tra Betty, Jenni e Lauris, Flow Therapy è un trio di Martigues unito da un desiderio comune: creare una musica che faccia viaggiare, avvicini le persone ed emozioni.",
       "Dopo aver reinterpretato con originalità classici senza tempo, il trio si è naturalmente rivolto alla composizione per esplorare un tema universale: la vita, con tutta la sua bellezza, le sue prove, la sua fragilità e le sue gioie.",
       "Attraverso brani ricchi di empatia e sensibilità, i tre artisti condividono con forza ed energia il loro sguardo su un mondo intenso, meraviglioso e talvolta sconvolgente. Un universo che fanno scoprire al pubblico nei concerti sui palchi locali, in occasione di eventi festivi e di beneficenza.",
-      "Nel 2026, il loro brano originale «Toi mon frère» ha ricevuto il premio per la migliore canzone intergenerazionale al concorso nazionale Music’Al, patrocinato da Bruno Bénabar e presieduto da Gérard Pont, presidente di Les Francofolies e figura di spicco del Printemps de Bourges.",
+      "Nel 2026, il loro brano originale «Toi mon frère» ha ricevuto il premio per la migliore canzone intergenerazionale al concorso nazionale Music’AL, patrocinato da Bruno Bénabar e presieduto da Gérard Pont, presidente di Les Francofolies e figura di spicco del Printemps de Bourges.",
       "Questo riconoscimento ha permesso loro di esibirsi in uno showcase nella sede parigina di Action Logement, alla presenza dei membri della giuria e dei responsabili dell’ente. Un momento intenso e un bel segno di stima che dà le ali al trio, ormai pronto a completare il suo primo EP.",
       "Oggi la loro ambizione è far conoscere la propria musica portando le loro voci su palchi emblematici."
     ]
@@ -70,7 +70,7 @@
         "description": "Betty, Jenni e Lauris insieme sotto le luci del palco."
       },
       "tremplin-musical-award": {
-        "title": "Premiazione al Tremplin Music’Al",
+        "title": "Premiazione al Tremplin Music’AL",
         "type": "Foto di gruppo",
         "description": "Betty, Jenni e Lauris ricevono il premio per la migliore canzone intergenerazionale per «Toi mon frère», accanto a Bénabar e Yvan Cujious."
       },
@@ -243,9 +243,9 @@
     "empty": "Le pubblicazioni associate a questa referenza saranno aggiunte prossimamente.",
     "pending": "Link in arrivo",
     "items": [
-      {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "Stampa regionale", "name": "La Provence", "caption": "Notizie e vita culturale locale", "publications": [{"date": "14 luglio 2026", "title": "Il gruppo di Martigues Flow Therapy vince il premio intergenerazionale Music’Al 2026", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
+      {"id": "provence", "asset": "laprovence", "widths": [320, 480, 768, 1024, 1440], "label": "Stampa regionale", "name": "La Provence", "caption": "Notizie e vita culturale locale", "publications": [{"date": "14 luglio 2026", "title": "Il gruppo di Martigues Flow Therapy vince il premio intergenerazionale Music’AL 2026", "source": "La Provence", "url": "https://www.laprovence.com/article/region/7058295854844514/le-groupe-martegal-flow-therapy-remporte-le-prix-intergenerationnel-du-tremplin-music-al-2026"}]},
       {"id": "maritima", "asset": "maritima", "widths": [320, 480, 768, 1024, 1440], "label": "Televisione e radio", "name": "Maritima", "caption": "Incontri, video e notizie locali", "publications": [{"date": "27 settembre 2026", "title": "Le Grand Bazar — Flow Therapy", "source": "Maritima", "url": "https://maritima.fr/tv/1633/le-grand-bazar--flow-therapy"}]},
-      {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "Concorso nazionale", "name": "Tremplin Music’Al", "caption": "Premio intergenerazionale 2026", "publications": [{"date": "1 luglio 2026", "title": "Comunicato stampa — Tremplin Music’AL 2026", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]},
+      {"id": "musical", "asset": "musical", "widths": [320, 480, 768, 1024, 1440], "label": "Concorso nazionale", "name": "Tremplin Music’AL", "caption": "Premio intergenerazionale 2026", "publications": [{"date": "1 luglio 2026", "title": "Comunicato stampa — Tremplin Music’AL 2026", "source": "Énéal", "url": "https://www.eneal.fr/sites/default/files/2026-07/CP_Tremplin%20Music%27AL%202026_VF.pdf"}]},
       {"id": "reflets", "asset": "reflets", "widths": [320, 480, 768, 1024, 1440], "label": "Rivista comunale", "name": "Reflets", "caption": "La rivista della città di Martigues", "publications": [{"date": "1 ottobre 2026", "title": "Reflets n. 123: articolo su Flow Therapy, pagina 33", "source": "Ville de Martigues", "url": "https://www.ville-martigues.fr/fileadmin/Documents_martigues_bouge/A_voir_A_lire/Reflets/Reflets_123-Oct26.pdf"}]},
       {"id": "sudradio", "asset": "sudradio", "widths": [320, 480, 768, 1024, 1440], "label": "Radio nazionale", "name": "Sud Radio", "caption": "Trasmissione Loft Music", "publications": [{"date": "15 novembre 2026", "title": "Trasmissione Loft Music: in onda il 15 novembre 2026 (16-17)", "source": "Sud Radio"}]}
     ]
