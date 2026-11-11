@@ -44,6 +44,32 @@ const responsiveReferencePicture=item=>{
   return `<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="${sizes}"><source type="image/webp" srcset="${srcset('webp')}" sizes="${sizes}"><img src="${ASSET}references/${name}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="${sizes}" alt="" loading="lazy" decoding="async"></picture>`;
 };
 
+function showcaseVideo(references){
+  const video=references?.showcase,copy=references?.video||{};
+  if(!video?.url||!/^[\w-]{11}$/.test(String(video.youtubeId)))return '';
+  return `<div class="showcase-video"><a class="showcase-video__thumb" href="${esc(video.url)}" target="_blank" rel="noopener" data-youtube-id="${video.youtubeId}" data-title="${esc(copy.title||'YouTube')}" aria-label="${esc(copy.play||copy.title||'YouTube')}"><img src="https://i.ytimg.com/vi/${video.youtubeId}/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.remove()"><span class="showcase-video__play" aria-hidden="true">${icons.youtube}</span></a><div class="showcase-video__text"><p class="kicker">${esc(copy.kicker||'')}</p><p class="showcase-video__title">${esc(copy.title||'')}</p><a class="showcase-video__cta" href="${esc(video.url)}" target="_blank" rel="noopener" aria-label="${esc(copy.label||copy.cta||'')}">${esc(copy.cta||'')} <span aria-hidden="true">↗</span></a></div></div>`;
+}
+
+function setupShowcase(){
+  const thumb=document.querySelector('.showcase-video__thumb[data-youtube-id]');
+  if(!thumb)return;
+  thumb.addEventListener('click',event=>{
+    if(event.metaKey||event.ctrlKey||event.shiftKey||event.button!==0)return;
+    event.preventDefault();
+    const frame=document.createElement('div');
+    frame.className='showcase-video__thumb is-playing';
+    const iframe=document.createElement('iframe');
+    iframe.src=`https://www.youtube-nocookie.com/embed/${thumb.dataset.youtubeId}?autoplay=1&rel=0&playsinline=1`;
+    iframe.title=thumb.dataset.title||'YouTube';
+    iframe.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+    iframe.allowFullscreen=true;
+    iframe.referrerPolicy='strict-origin-when-cross-origin';
+    frame.append(iframe);
+    thumb.replaceWith(frame);
+    iframe.focus();
+  });
+}
+
 function mediaVisual(item,index,viewer=false){
   const ratio=orientationClass(item);
   const ratioStyle=/^\d+:\d+$/.test(String(item.ratio))?` style="--media-ratio:${item.ratio.replace(':','/')}"`:'';
@@ -69,7 +95,7 @@ function renderPage(config){
   <div class="art" aria-label="Composition graphique Flow Therapy"><div class="watermark" aria-hidden="true"></div><div class="alpacas">${[1,2,3].map(n=>{const member=alpacaMember(hero,n);return member?`<button class="alpaca" type="button" data-alpaca="${n}" data-member="${esc(member.id)}" aria-expanded="false" aria-controls="alpaca-bio" aria-label="${esc((hero.membersOpen||'{name}').replace('{name}',member.name))}">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</button>`:`<div class="alpaca" data-alpaca="${n}" aria-hidden="true">${responsivePicture(`alpaga${n}-nu`,[640,768,1024],'alpaca-nude')}</div>`}).join('')}</div><div class="brush">${esc(hero.signature)}</div><div id="alpaca-bio" class="alpaca-bio" role="region" aria-live="polite" aria-label="${esc(hero.membersTitle||'')}" hidden><p class="alpaca-bio__name"></p><p class="alpaca-bio__text"></p></div></div></div>
 </header>
 <section id="groupe" class="section"><div class="doodle-field section-doodles" aria-hidden="true"><span class="doodle doodle-paint tone-blue"></span><span class="doodle doodle-swoosh tone-pink"></span><span class="doodle doodle-star tone-purple"></span><span class="doodle doodle-heart tone-orange"></span></div><p class="kicker">${esc(site.location)}</p><h2>${esc(about.title)}</h2><div class="prose">${about.paragraphs.map(p=>`<p>${esc(p)}</p>`).join('')}</div></section>
-<section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}<div id="references-details" class="reference-details" hidden aria-live="polite"></div></div></section>
+<section id="references" class="section references-section" aria-labelledby="references-title"><p class="kicker">${esc(references?.eyebrow||'')}</p><h2 id="references-title">${esc(references?.title||'')}</h2><div class="reference-grid">${referenceItems.map((item,index)=>`<button class="reference-card reference-card--${esc(item.id)}" type="button" data-reference-index="${index}" aria-expanded="false" aria-controls="references-details" aria-label="${esc((references?.open||'Afficher les publications de {name}').replace('{name}',item.name))}"><span class="reference-card__visual" aria-hidden="true">${responsiveReferencePicture(item)}</span><span class="reference-card__more" aria-hidden="true">•••</span></button>`).join('')}<div id="references-details" class="reference-details" hidden aria-live="polite"></div></div>${showcaseVideo(references)}</section>
 <section id="agenda" class="section agenda-section" aria-labelledby="agenda-title"><p class="kicker">${esc(agenda?.eyebrow||'')}</p><h2 id="agenda-title">${esc(agenda?.title||'')}</h2>${agendaItems.length?`<ol class="agenda-list">${agendaItems.map(event=>agendaCard(event,agenda)).join('')}</ol>`:`<p class="agenda-empty">${esc(agenda?.empty||'')}</p>`}</section>
 <section id="medias" class="section media-section" aria-label="Médias"><div class="media-grid">${mediaItems.map((item,index)=>`<button class="media-card ${orientationClass(item)}" type="button" data-media-index="${index}"${item.layout?` data-media-layout="${esc(item.layout)}"`:''} aria-label="Ouvrir ${esc(item.title)} dans la galerie">${mediaVisual(item,index)}</button>`).join('')}</div></section>
 <section id="contact" class="section contact-section" aria-labelledby="contact-title">
@@ -115,6 +141,7 @@ function renderPage(config){
   setupAlpacaReveal();
   setupAlpacaBios(hero);
   setupReferences(referenceItems,references);
+  setupShowcase();
   setupMediaViewer(mediaItems);
 }
 
@@ -130,7 +157,7 @@ function agendaCard(event,copy){
   return `<li class="agenda-card"><time class="agenda-date" datetime="${esc(event.date)}" aria-label="${esc(full)}"><span class="agenda-day">${day}</span><span class="agenda-month">${esc(month)}</span></time><div class="agenda-body"><h3>${esc(event.nom)}</h3><p class="agenda-place">${esc(event.etablissement)} · ${esc(event.lieu)}${event.heure?` · ${esc(event.heure.replace(':','h'))}`:''}</p>${modality?`<p class="agenda-modality">${esc(modality)}</p>`:''}${phone?`<p class="agenda-phone"><a href="tel:${esc(phone.replace(/[^\d+]/g,''))}" aria-label="${esc(copy.phone)} ${esc(phone)}">☎ ${esc(phone)}</a></p>`:''}</div></li>`;
 }
 function localizedConfig(config,copy){
-  return {...config,site:{...config.site,...copy.site},hero:{...copy.hero,members:(config.hero?.members||[]).map(member=>({...member,description:copy.hero?.members?.[member.id]||''}))},navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.agenda,href:'#agenda'},{label:copy.navigation.media,href:'#medias'}],agenda:{...copy.agenda,items:config.agenda?.evenements||[]},about:copy.about,references:copy.references,media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
+  return {...config,site:{...config.site,...copy.site},hero:{...copy.hero,members:(config.hero?.members||[]).map(member=>({...member,description:copy.hero?.members?.[member.id]||''}))},navigation:[{label:copy.navigation.group,href:'#groupe'},{label:copy.navigation.agenda,href:'#agenda'},{label:copy.navigation.media,href:'#medias'}],agenda:{...copy.agenda,items:config.agenda?.evenements||[]},about:copy.about,references:{...copy.references,showcase:config.showcase},media:{...config.media,title:copy.media.title,intro:copy.media.intro,items:(config.media?.items||[]).map(item=>({...item,...(copy.media.items[item.id]||{})}))}};
 }
 
 function setupReferences(items,copy){

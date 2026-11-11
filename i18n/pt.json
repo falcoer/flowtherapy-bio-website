@@ -238,7 +238,8 @@
   },
   "references": {
     "eyebrow": "Publicações e parcerias",
-    "title": "As nossas referências",
+    "title": "Falam de nós...",
+    "video": {"play": "Reproduzir o vídeo do showcase", "kicker": "Vídeo", "title": "O nosso showcase", "cta": "Ver no YouTube", "label": "Ver o vídeo do showcase no YouTube (novo separador)"},
     "open": "Mostrar as publicações de {name}",
     "empty": "As publicações associadas a esta referência serão adicionadas em breve.",
     "pending": "Link em breve",

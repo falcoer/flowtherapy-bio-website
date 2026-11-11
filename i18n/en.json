@@ -238,7 +238,8 @@
   },
   "references": {
     "eyebrow": "Press & partnerships",
-    "title": "Our references",
+    "title": "They talk about us...",
+    "video": {"play": "Play the showcase video", "kicker": "Video", "title": "Our showcase", "cta": "Watch on YouTube", "label": "Watch the showcase video on YouTube (new tab)"},
     "open": "Show publications from {name}",
     "empty": "Publications associated with this reference will be added soon.",
     "pending": "Link coming soon",
