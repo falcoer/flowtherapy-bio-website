@@ -63,7 +63,7 @@
 .logo-frame{position:absolute;z-index:1;left:4%;right:4%;top:var(--frame-top);bottom:var(--frame-bottom);border:var(--bw) solid var(--frame-line);border-radius:clamp(30px,3.6vw,54px);box-shadow:0 0 0 clamp(3px,.35vw,5px) var(--frame-ring),var(--shadow);overflow:hidden;background:var(--surface)}
 .logo-backdrop{position:absolute;inset:0;background:url('assets/generated/landscape-urban-1440.webp') 50% 22%/175% auto no-repeat;opacity:.9;filter:saturate(1.15)}
 :root[data-theme=dark] .logo-backdrop{opacity:.75;filter:saturate(1.3) brightness(.7)}
-.logo-stage .alpacas{bottom:var(--ab);height:70%;width:min(560px,74%);z-index:2;clip-path:inset(-80% -80% max(0px, calc(var(--frame-bottom) + var(--bw) - var(--ab))) -80%)}
+.logo-stage .alpacas{bottom:var(--ab);height:70%;width:74%;z-index:2;clip-path:inset(-80% -80% max(0px, calc(var(--frame-bottom) + var(--bw) - var(--ab))) -80%)}
 .logo-stage .alpaca{transform:translateY(190%);transition:transform 1.1s cubic-bezier(.2,1.25,.4,1),translate .35s ease,filter .35s ease}
 .logo-stage .alpaca.is-out{transform:none}
 .logo-stage .alpaca img{transition:none!important}
@@ -81,3 +81,9 @@ footer{flex-direction:column;justify-content:center;text-align:center;gap:14px}
 @media(max-width:900px){.logo-stage{order:-1;margin-top:0;margin-bottom:-40px}.copy{padding-top:8px}}
 @media(max-width:790px){.logo-frame{left:3%;right:3%}.logo-stage .alpacas{width:min(620px,92%)}}
 @media(max-width:520px){.logo-stage{height:340px;--frame-top:26cqh;--bw:7px;--name-width:88cqw}.logo-stage .alpacas{height:76%;width:min(420px,86%)}.logo-frame{border-radius:26px}}
+/* Grand écran : le bloc logo garde les proportions validées et grandit avec l'écran (largeur et hauteur disponibles). */
+@media(min-width:901px){
+  .hero-grid{grid-template-columns:minmax(340px,.72fr) minmax(580px,1.45fr);align-items:center}
+  .art.logo-stage{height:auto;aspect-ratio:760/650;width:min(100%,calc((100svh - 120px) * 1.169));justify-self:center;align-self:center}
+}
+@media(min-width:1800px){.page{max-width:min(90vw,2000px)}}
