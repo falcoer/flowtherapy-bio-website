@@ -200,7 +200,7 @@ def prepare_dist() -> None:
         target = preview_dist / locale
         target.mkdir(exist_ok=True)
         (target / "index.html").write_text(localized, encoding="utf-8")
-    for filename in ("index.html", "app.js", "styles.css", "section-polish.css", "travel-landscapes.css", "travel-landscapes.js"):
+    for filename in ("index.html", "app.js", "styles.css", "section-polish.css", "travel-landscapes.css", "travel-landscapes.js", "google47e4b91c030c0b56.html"):
         shutil.copy2(ROOT / filename, DIST / filename)
     root_html = (ROOT / "index.html").read_text(encoding="utf-8")
     for locale in ("fr", "en", "es", "it", "de", "pt", "zh", "ja"):
