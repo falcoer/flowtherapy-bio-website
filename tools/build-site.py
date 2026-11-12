@@ -15,6 +15,8 @@ import yaml
 from PIL import Image, ImageOps
 from fontTools import subset
 
+import seo_pages
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "assets-src"
@@ -405,6 +407,7 @@ def main() -> None:
     prepare_dist()
     build_agenda()
     records = build_assets(manifest, cache)
+    seo_pages.build(ROOT, DIST)
     records.extend(record for record in previous_records if record.get("mode") == "responsive-landscape-ci")
     generated = {"schema": "flowtherapy.generated-assets/v1", "built_at": datetime.now(timezone.utc).isoformat(), "fonttools": fontTools.__version__, "pillow": PIL.__version__, "assets": records}
     (DIST / "assets-manifest.json").write_text(json.dumps(generated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
