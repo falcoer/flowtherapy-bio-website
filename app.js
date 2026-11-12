@@ -342,8 +342,9 @@ function setupAlpacaBios(hero){
     art.style.marginBottom='';
     const home=art.closest('.home');
     if(!home||panel.hidden)return;
-    const limit=matchMedia('(max-width: 900px)').matches?art:home;
-    const overflow=panel.getBoundingClientRect().bottom-limit.getBoundingClientRect().bottom+16;
+    // Sur ordinateur, la bulle se superpose sans décaler la mise en page ; sur mobile, on réserve sa place sous le logo.
+    if(!matchMedia('(max-width: 900px)').matches)return;
+    const overflow=panel.getBoundingClientRect().bottom-art.getBoundingClientRect().bottom+16;
     if(overflow>0)art.style.marginBottom=`${Math.ceil(overflow)}px`;
   };
   const show=button=>{
