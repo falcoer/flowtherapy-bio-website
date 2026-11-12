@@ -70,7 +70,7 @@
 @media(prefers-reduced-motion:reduce){.logo-stage .alpaca{transition:none}}
 .logo-name{position:absolute;z-index:4;left:50%;bottom:var(--name-bottom);width:var(--name-width);height:auto;transform:translateX(-50%);overflow:visible;pointer-events:none}
 .logo-name path{fill:var(--name-fill);stroke:var(--name-halo);stroke-width:30;stroke-linejoin:round;paint-order:stroke fill;fill-rule:evenodd}
-.logo-stage .alpaca-bio{top:calc(100% - 10px);bottom:auto}
+.logo-stage .alpaca-bio{top:calc(100% - var(--nb) + .5cqh);bottom:auto;width:min(620px,74cqw);padding:10px 20px 12px}
 /* Petit logo centré en pied de page, nav sans logo. */
 footer{flex-direction:column;justify-content:center;text-align:center;gap:14px}
 .footer-logo{margin:0!important;display:block;width:150px}
@@ -87,3 +87,4 @@ footer{flex-direction:column;justify-content:center;text-align:center;gap:14px}
   .art.logo-stage{height:auto;aspect-ratio:760/650;width:min(100%,calc((100svh - 120px) * 1.169));justify-self:center;align-self:center}
 }
 @media(min-width:1800px){.page{max-width:min(90vw,2000px)}}
+@media(max-width:790px){.logo-stage .alpaca-bio{width:94cqw}}
