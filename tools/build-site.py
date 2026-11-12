@@ -15,6 +15,8 @@ import yaml
 from PIL import Image, ImageOps
 from fontTools import subset
 
+import seo_pages
+
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "assets-src"
@@ -198,7 +200,7 @@ def prepare_dist() -> None:
         target = preview_dist / locale
         target.mkdir(exist_ok=True)
         (target / "index.html").write_text(localized, encoding="utf-8")
-    for filename in ("index.html", "app.js", "styles.css", "section-polish.css", "travel-landscapes.css", "travel-landscapes.js"):
+    for filename in ("index.html", "app.js", "styles.css", "section-polish.css", "travel-landscapes.css", "travel-landscapes.js", "google47e4b91c030c0b56.html"):
         shutil.copy2(ROOT / filename, DIST / filename)
     root_html = (ROOT / "index.html").read_text(encoding="utf-8")
     for locale in ("fr", "en", "es", "it", "de", "pt", "zh", "ja"):
@@ -405,6 +407,7 @@ def main() -> None:
     prepare_dist()
     build_agenda()
     records = build_assets(manifest, cache)
+    seo_pages.build(ROOT, DIST)
     records.extend(record for record in previous_records if record.get("mode") == "responsive-landscape-ci")
     generated = {"schema": "flowtherapy.generated-assets/v1", "built_at": datetime.now(timezone.utc).isoformat(), "fonttools": fontTools.__version__, "pillow": PIL.__version__, "assets": records}
     (DIST / "assets-manifest.json").write_text(json.dumps(generated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
