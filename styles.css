@@ -152,6 +152,11 @@ footer{justify-content:center;text-align:center}
 .contact-social{margin:0;padding:0;border:0;background:linear-gradient(135deg,var(--blue),var(--purple) 58%,var(--pink));cursor:pointer;-webkit-appearance:none;appearance:none}
 .contact-social:hover,.contact-social:focus-visible{transform:translateY(-2px);box-shadow:0 9px 22px #0004}
 .contact-social:focus-visible,.contact-form :focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+/* Survol commun à tous les boutons ronds du bandeau (réseaux, QR, contact). */
+.social{transition:transform .2s ease,box-shadow .2s ease}
+.social:hover,.social:focus-visible{transform:translateY(-2px);box-shadow:0 9px 22px #0004}
+a.social:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.social{transition:none}}
 .contact-section{scroll-margin-top:24px;background:linear-gradient(145deg,#168ad50d,#7130c812 54%,#e72f880d)}
 .contact-layout{display:grid;grid-template-columns:minmax(260px,.8fr) minmax(380px,1fr);align-items:start;gap:clamp(34px,6vw,88px);max-width:1180px;margin:auto}
 .contact-heading{display:flex;align-items:flex-start;gap:18px;padding-top:clamp(6px,2vw,22px)}
