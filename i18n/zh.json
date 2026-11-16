@@ -241,6 +241,7 @@
     "eyebrow": "报道与合作",
     "title": "他们在谈论我们……",
     "video": {"play": "播放现场展演视频", "kicker": "视频", "title": "我们的现场展演", "cta": "在 YouTube 上观看", "label": "在 YouTube 上观看现场展演视频（新标签页）"},
+    "replay": {"kicker": "视频 · Sud Radio", "title": "Loft Music：Tremplin 特别节目", "text": "2026年11月15日节目，嘉宾 Yvan Cujious、Bénabar、Seili、Lys 与 Flow Therapy。", "cta": "在 Sud Radio 观看", "label": "在 Sud Radio 观看 Loft Music 视频（新标签页）"},
     "open": "显示 {name} 的相关报道",
     "empty": "与此合作伙伴相关的报道将很快补充。",
     "pending": "链接即将发布",

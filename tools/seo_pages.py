@@ -129,6 +129,10 @@ def static_body(config: dict, copy: dict, agenda: dict, locale: str, base: str) 
     parts.append(f'<section id="agenda"><h2>{e(agenda_copy["title"])}</h2>' + (f"<ul>{items}</ul>" if items else f'<p>{e(agenda_copy["empty"])}</p>') + "</section>")
     showcase = config.get("showcase") or {}
     media_links = f'<p><a href="{e(showcase["url"])}" rel="noopener">{e(copy["references"]["video"]["title"])}</a></p>' if showcase.get("url") else ""
+    replay = config.get("replay") or {}
+    replay_copy = copy["references"].get("replay") or {}
+    if replay.get("url") and replay_copy.get("title"):
+        media_links += f'<p><a href="{e(replay["url"])}" rel="noopener">{e(replay_copy["title"])}</a></p>'
     parts.append(f'<section id="medias"><h2>{e(copy["media"]["title"])}</h2><p>{e(copy["media"]["intro"])}</p>{media_links}</section>')
     refs = []
     for item in copy["references"].get("items", []):
