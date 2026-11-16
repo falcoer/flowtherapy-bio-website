@@ -241,6 +241,7 @@
     "eyebrow": "Press & partnerships",
     "title": "They talk about us...",
     "video": {"play": "Play the showcase video", "kicker": "Video", "title": "Our showcase", "cta": "Watch on YouTube", "label": "Watch the showcase video on YouTube (new tab)"},
+    "replay": {"kicker": "Video · Sud Radio", "title": "Loft Music: Tremplin special", "text": "The 15 November 2026 show with Yvan Cujious, Bénabar, Seili, Lys and Flow Therapy.", "cta": "Watch on Sud Radio", "label": "Watch the Loft Music video on Sud Radio (new tab)"},
     "open": "Show publications from {name}",
     "empty": "Publications associated with this reference will be added soon.",
     "pending": "Link coming soon",
