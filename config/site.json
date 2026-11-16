@@ -38,7 +38,9 @@
     "url": "https://youtu.be/6AtW23ASwPs"
   },
   "replay": {
-    "url": "https://www.sudradio.fr/emission/loft-music-131",
+    "youtubeId": "A4_PLr7rWOo",
+    "url": "https://www.youtube.com/watch?v=A4_PLr7rWOo",
+    "pageUrl": "https://www.sudradio.fr/emission/loft-music-131",
     "asset": "sud-radio-groupe-studio",
     "widths": [
       320,
