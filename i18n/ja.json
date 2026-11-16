@@ -241,7 +241,7 @@
     "eyebrow": "掲載・パートナーシップ",
     "title": "私たちについて語られています…",
     "video": {"play": "ショーケースの動画を再生", "kicker": "動画", "title": "ショーケース", "cta": "YouTubeで見る", "label": "ショーケースの動画をYouTubeで見る（新しいタブ）"},
-    "replay": {"kicker": "動画 · Sud Radio", "title": "Loft Music：Tremplin スペシャル", "text": "2026年11月15日放送。Yvan Cujious、Bénabar、Seili、Lys、Flow Therapy が出演。", "cta": "Sud Radio で見る", "label": "Sud Radio で Loft Music の動画を見る（新しいタブ）"},
+    "replay": {"play": "Loft Music の動画を再生", "kicker": "動画 · Sud Radio", "title": "Loft Music：Tremplin スペシャル", "text": "2026年11月15日放送。Yvan Cujious、Bénabar、Seili、Lys、Flow Therapy が出演。", "cta": "YouTube で見る", "label": "YouTube で Loft Music の動画を見る（新しいタブ）"},
     "open": "{name} の掲載情報を表示",
     "empty": "この掲載実績に関する記事はまもなく追加されます。",
     "pending": "リンクは近日公開",

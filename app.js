@@ -55,16 +55,16 @@ function showcaseVideo(references){
 function replayVideo(references){
   const video=references?.replay,copy=references?.replayCopy||{};
   if(!video?.url||!copy.title)return '';
+  const youtubeId=/^[\w-]{11}$/.test(String(video.youtubeId))?video.youtubeId:'';
   const widths=video.widths||[],fallback=widths[widths.length-1];
   const srcset=extension=>widths.map(width=>`${ASSET}media/${video.asset}-${width}.${extension} ${width}w`).join(', ');
   const picture=video.asset&&fallback?`<picture><source type="image/avif" srcset="${srcset('avif')}" sizes="(max-width: 700px) 92vw, 520px"><source type="image/webp" srcset="${srcset('webp')}" sizes="(max-width: 700px) 92vw, 520px"><img src="${ASSET}media/${video.asset}-${fallback}.jpg" srcset="${srcset('jpg')}" sizes="(max-width: 700px) 92vw, 520px" alt="" loading="lazy" decoding="async"></picture>`:'';
-  return `<div class="showcase-video showcase-video--replay"><a class="showcase-video__thumb" href="${esc(video.url)}" target="_blank" rel="noopener" aria-label="${esc(copy.label||copy.title)}">${picture}<span class="showcase-video__play showcase-video__play--replay" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"></circle><path d="M9.5 7.5v9l7-4.5z"></path></svg></span></a><div class="showcase-video__text"><p class="kicker">${esc(copy.kicker||'')}</p><p class="showcase-video__title">${esc(copy.title)}</p>${copy.text?`<p class="showcase-video__desc">${esc(copy.text)}</p>`:''}<a class="showcase-video__cta" href="${esc(video.url)}" target="_blank" rel="noopener" aria-label="${esc(copy.label||copy.cta||'')}">${esc(copy.cta||'')} <span aria-hidden="true">↗</span></a></div></div>`;
+  const play=youtubeId?icons.youtube:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11"></circle><path d="M9.5 7.5v9l7-4.5z"></path></svg>';
+  return `<div class="showcase-video showcase-video--replay"><a class="showcase-video__thumb" href="${esc(video.url)}" target="_blank" rel="noopener"${youtubeId?` data-youtube-id="${youtubeId}" data-title="${esc(copy.title)}"`:''} aria-label="${esc((youtubeId&&copy.play)||copy.label||copy.title)}">${picture}<span class="showcase-video__play${youtubeId?'':' showcase-video__play--replay'}" aria-hidden="true">${play}</span></a><div class="showcase-video__text"><p class="kicker">${esc(copy.kicker||'')}</p><p class="showcase-video__title">${esc(copy.title)}</p>${copy.text?`<p class="showcase-video__desc">${esc(copy.text)}</p>`:''}<a class="showcase-video__cta" href="${esc(video.url)}" target="_blank" rel="noopener" aria-label="${esc(copy.label||copy.cta||'')}">${esc(copy.cta||'')} <span aria-hidden="true">↗</span></a></div></div>`;
 }
 
 function setupShowcase(){
-  const thumb=document.querySelector('.showcase-video__thumb[data-youtube-id]');
-  if(!thumb)return;
-  thumb.addEventListener('click',event=>{
+  document.querySelectorAll('.showcase-video__thumb[data-youtube-id]').forEach(thumb=>thumb.addEventListener('click',event=>{
     if(event.metaKey||event.ctrlKey||event.shiftKey||event.button!==0)return;
     event.preventDefault();
     const frame=document.createElement('div');
@@ -78,7 +78,7 @@ function setupShowcase(){
     frame.append(iframe);
     thumb.replaceWith(frame);
     iframe.focus();
-  });
+  }));
 }
 
 function mediaVisual(item,index,viewer=false){
